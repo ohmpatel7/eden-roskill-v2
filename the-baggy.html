@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Baggy | Eden Roskill Cricket Club</title>
+<meta name="description" content="The Premier baggy at Eden Roskill, the highest honour in the club. Worn only by those who have earned their place.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; cursor: none !important; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body { font-family: 'DM Sans', sans-serif; background: #fff; color: #0D1220; -webkit-font-smoothing: antialiased; }
+a { text-decoration: none; color: inherit; }
+ul { list-style: none; }
+img { display: block; max-width: 100%; }
+
+:root {
+  --blue:       #2B3FA0;
+  --blue-light: #3D52B8;
+  --blue-dark:  #1A2870;
+  --blue-mid:   #4A90E2;
+  --blue-pale:  #EEF1FB;
+  --off-white:  #F7F8FC;
+  --text:       #0D1220;
+  --text-mid:   #3A4560;
+  --text-muted: #7A85A3;
+  --border:     rgba(0,0,0,0.08);
+  --ease:       cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* CURSOR */
+.cursor-dot { position: fixed; top: 0; left: 0; width: 4px; height: 4px; background: #E02020; border-radius: 50%; pointer-events: none; z-index: 99999; transform: translate(-50%,-50%); transition: width .2s, height .2s, background .2s; }
+.cursor-ring { position: fixed; top: 0; left: 0; width: 26px; height: 26px; border: 1.5px solid rgba(224,32,32,.5); border-radius: 50%; pointer-events: none; z-index: 99998; transform: translate(-50%,-50%); transition: width .25s, height .25s, border-color .2s; }
+.cursor-dot.hov { width: 8px; height: 8px; background: #E02020; }
+.cursor-ring.hov { width: 40px; height: 40px; border-color: #E02020; }
+.cursor-dot.on-dark       { background: #fff; }
+.cursor-ring.on-dark      { border-color: rgba(255,255,255,0.5); }
+.cursor-dot.on-dark.hov   { background: #fff; }
+.cursor-ring.on-dark.hov  { border-color: #fff; }
+
+/* NAV */
+#navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; height: 64px; display: flex; align-items: center; padding: 0 3rem; background: rgba(255,255,255,0.96); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); }
+.nav-inner { width: 100%; display: flex; align-items: center; justify-content: space-between; }
+.nav-brand { display: flex; align-items: center; gap: .75rem; }
+.nav-logo { width: 36px; height: 36px; object-fit: contain; }
+.nav-brand-name { font-family: 'Bebas Neue', sans-serif; font-size: 1.05rem; letter-spacing: .08em; color: var(--blue); }
+.nav-links { display: flex; align-items: center; gap: .1rem; margin-left: auto; }
+.nav-links > li { position: relative; list-style: none; }
+.nav-links > li > a { font-size: .72rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; padding: .5rem .85rem; border-radius: 6px; color: var(--text-mid); display: flex; align-items: center; gap: .3rem; transition: color .2s, background .2s; white-space: nowrap; }
+.nav-links > li > a:hover { color: var(--blue); background: var(--blue-pale); }
+.nav-links > li > a.active { color: var(--blue); }
+.nav-has-dropdown > a::after { content: ''; display: inline-block; width: 5px; height: 5px; border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; transform: rotate(45deg) translateY(-2px); transition: transform .2s; }
+.nav-has-dropdown:hover > a::after { transform: rotate(225deg) translateY(-2px); }
+.nav-dropdown { position: absolute; top: calc(100% + 8px); left: 0; min-width: 190px; background: #fff; border: 1px solid var(--border); border-radius: 10px; padding: .4rem; box-shadow: 0 8px 32px rgba(0,0,0,.1); opacity: 0; visibility: hidden; transform: translateY(6px); transition: opacity .2s var(--ease), transform .2s var(--ease), visibility .2s; z-index: 200; list-style: none; }
+.nav-has-dropdown:hover .nav-dropdown, .nav-has-dropdown:focus-within .nav-dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+.nav-dropdown li a { display: block; padding: .55rem 1rem; font-size: .73rem; font-weight: 600; letter-spacing: .07em; text-transform: uppercase; color: var(--text-mid); border-radius: 6px; transition: color .18s, background .18s; }
+.nav-dropdown li a:hover { color: var(--blue); background: var(--blue-pale); }
+.nav-dropdown::before { content: ''; position: absolute; top: -1px; left: 14px; right: 14px; height: 2px; background: #fff; border-radius: 2px; }
+.nav-actions { display: flex; align-items: center; gap: .75rem; margin-left: 1rem; }
+.btn-register { font-size: .72rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; padding: .6rem 1.4rem; border-radius: 6px; background: var(--blue); color: #fff; border: 2px solid var(--blue); transition: background .2s, transform .15s; }
+.btn-register:hover { background: var(--blue-dark); border-color: var(--blue-dark); transform: translateY(-1px); }
+.hamburger { display: none; flex-direction: column; gap: 5px; width: 36px; height: 36px; align-items: center; justify-content: center; background: transparent; border: 1px solid var(--border); border-radius: 6px; }
+.hamburger span { display: block; width: 18px; height: 1.5px; background: var(--text); border-radius: 2px; transition: all .3s; }
+.hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(4.5px,4.5px); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(4.5px,-4.5px); }
+.mobile-menu { display: none; position: fixed; top: 64px; left: 0; right: 0; background: rgba(255,255,255,.98); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); padding: 1rem 2rem 1.5rem; z-index: 999; flex-direction: column; gap: .1rem; }
+.mobile-menu.open { display: flex; }
+.mobile-menu a { padding: .8rem 0; font-size: .9rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--text-mid); border-bottom: 1px solid var(--border); transition: color .2s; }
+.mobile-menu a:hover { color: var(--blue); }
+.mobile-accordion-btn { width: 100%; display: flex; align-items: center; justify-content: space-between; padding: .8rem 0; font-size: .9rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--text-mid); background: none; border: none; border-bottom: 1px solid var(--border); transition: color .2s; }
+.mobile-accordion-btn:hover { color: var(--blue); }
+.mobile-accordion-chevron { width: 6px; height: 6px; border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; transform: rotate(45deg); transition: transform .25s; }
+.mobile-accordion-btn[aria-expanded="true"] .mobile-accordion-chevron { transform: rotate(225deg); }
+.mobile-accordion-body { display: none; flex-direction: column; padding: .25rem 0 .25rem 1rem; }
+.mobile-accordion-body.open { display: flex; }
+.mobile-sub-link { padding: .55rem 0 !important; font-size: .8rem !important; color: var(--text-muted) !important; border-bottom: none !important; }
+.mobile-sub-link:hover { color: var(--blue) !important; }
+@media (max-width: 1000px) { .nav-links { display: none; } .nav-actions .btn-register { display: none; } .hamburger { display: flex; } }
+
+/* REVEAL */
+.reveal { opacity: 0; transform: translateY(40px); transition: opacity .9s var(--ease), transform .9s var(--ease); }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-delay-1 { transition-delay: .12s; }
+.reveal-delay-2 { transition-delay: .24s; }
+.reveal-delay-3 { transition-delay: .36s; }
+.reveal-delay-4 { transition-delay: .48s; }
+.reveal-left { opacity: 0; transform: translateX(-40px); transition: opacity .9s var(--ease), transform .9s var(--ease); }
+.reveal-left.visible { opacity: 1; transform: translateX(0); }
+.reveal-right { opacity: 0; transform: translateX(40px); transition: opacity .9s var(--ease), transform .9s var(--ease); }
+.reveal-right.visible { opacity: 1; transform: translateX(0); }
+
+/* ============================================================
+   HERO, full-bleed dark with layered typography
+   ============================================================ */
+.baggy-hero {
+  min-height: 100dvh;
+  background: var(--blue);
+  display: flex;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 0;
+  padding: 6rem 3rem 4rem;
+}
+
+/* Subtle radial glow behind content */
+.baggy-hero::before {
+  content: '';
+  position: absolute;
+  bottom: -100px; left: -100px;
+  width: 700px; height: 700px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,255,255,.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+/* Dot-grid texture */
+.baggy-hero::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='40' cy='40' r='1' fill='rgba(255,255,255,0.06)'/%3E%3C/svg%3E");
+  pointer-events: none;
+}
+
+.baggy-hero-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  align-items: center;
+}
+
+.baggy-hero-label {
+  font-size: .68rem; font-weight: 700; letter-spacing: .22em; text-transform: uppercase;
+  color: rgba(255,255,255,.6); margin-bottom: .85rem; display: block;
+}
+.baggy-hero-heading {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(5rem, 12vw, 11rem);
+  line-height: .85;
+  letter-spacing: .01em;
+  color: #fff;
+  margin-bottom: 2rem;
+}
+.baggy-hero-heading .dim { color: rgba(255,255,255,.2); }
+
+.baggy-hero-quote {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(1.8rem, 3.5vw, 3rem);
+  line-height: 1.1;
+  letter-spacing: .02em;
+  color: rgba(255,255,255,.9);
+  border-left: 3px solid rgba(255,255,255,.4);
+  padding-left: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.baggy-hero-body {
+  font-size: 1rem; line-height: 1.8;
+  color: rgba(255,255,255,.5);
+  max-width: 46ch;
+  margin-bottom: 2rem;
+}
+
+.baggy-hero-crest {
+  width: 100%;
+  max-width: 560px;
+  margin: 0 auto;
+  display: block;
+  border-radius: 16px;
+  object-fit: cover;
+  box-shadow: 0 24px 60px rgba(0,0,0,0.25);
+}
+
+/* SCROLL HINT */
+.baggy-scroll-hint {
+  position: absolute;
+  bottom: 3rem; right: 3rem;
+  display: flex; flex-direction: column;
+  align-items: center; gap: .5rem;
+  z-index: 2;
+}
+.baggy-scroll-hint span { font-size: .55rem; letter-spacing: .22em; text-transform: uppercase; color: rgba(255,255,255,.25); writing-mode: vertical-rl; transform: rotate(180deg); }
+.scroll-line { width: 1px; height: 44px; background: rgba(255,255,255,.12); position: relative; overflow: hidden; border-radius: 1px; }
+.scroll-line::after { content: ''; position: absolute; top: -100%; left: 0; right: 0; height: 100%; background: rgba(255,255,255,.5); animation: scroll-drop 2s ease-in-out infinite; }
+@keyframes scroll-drop { 0% { top: -100%; } 100% { top: 200%; } }
+
+/* ============================================================
+   WHAT IS THE BAGGY
+   ============================================================ */
+.what-section {
+  background: #fff;
+  padding: 4rem 3rem;
+  border-top: 1px solid var(--border);
+  position: relative;
+  z-index: 1;
+}
+.what-inner {
+  max-width: 1200px; margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6rem;
+  align-items: start;
+}
+.what-label { font-size: .68rem; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; color: var(--blue); margin-bottom: .85rem; display: block; }
+.what-heading { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.5rem, 5vw, 4.5rem); line-height: .92; letter-spacing: .02em; color: var(--text); margin-bottom: 1.75rem; }
+.what-body { font-size: .97rem; line-height: 1.85; color: var(--text-mid); margin-bottom: 1.25rem; }
+.what-body strong { color: var(--text); font-weight: 600; }
+
+/* Stat items */
+.baggy-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: 14px;
+  overflow: hidden;
+}
+.baggy-stat-row {
+  padding: 2rem 2.25rem;
+  border-bottom: 1px solid rgba(0,0,0,0.08);
+  display: flex;
+  align-items: flex-end;
+  gap: 1rem;
+  transition: background .2s;
+}
+.baggy-stat-row:last-child { border-bottom: none; }
+.baggy-stat-row:hover { background: var(--blue-pale); }
+.baggy-stat-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(3rem, 5vw, 4.5rem);
+  line-height: 1;
+  color: var(--text);
+  letter-spacing: .02em;
+  flex-shrink: 0;
+}
+.baggy-stat-label {
+  font-size: .75rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--text-muted);
+  padding-bottom: .35rem;
+}
+
+/* ============================================================
+   HOW IT'S EARNED
+   ============================================================ */
+.earned-section {
+  background: var(--blue);
+  padding: 4rem 3rem;
+  position: relative;
+  z-index: 1;
+  position: relative;
+  overflow: hidden;
+}
+.earned-section::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='40' cy='40' r='1' fill='rgba(255,255,255,0.06)'/%3E%3C/svg%3E");
+  pointer-events: none;
+}
+.earned-inner { max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; }
+.earned-label { font-size: .68rem; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; color: rgba(255,255,255,.5); margin-bottom: .85rem; display: block; }
+.earned-heading { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.5rem, 5vw, 4.5rem); line-height: .92; letter-spacing: .02em; color: #fff; margin-bottom: 1rem; }
+.earned-sub { font-size: .97rem; line-height: 1.8; color: rgba(255,255,255,.6); max-width: 52ch; margin-bottom: 4rem; }
+
+.earned-pillars {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+.earned-pillar {
+  background: rgba(255,255,255,.07);
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 14px;
+  padding: 2.5rem 2rem;
+  transition: background .2s, transform .25s var(--ease);
+}
+.earned-pillar:hover { background: rgba(255,255,255,.11); transform: translateY(-4px); }
+.earned-pillar-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 3.5rem;
+  color: rgba(255,255,255,.9);
+  font-weight: 700;
+  line-height: 1;
+  margin-bottom: .75rem;
+  letter-spacing: .04em;
+}
+.earned-pillar-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; letter-spacing: .04em; color: #fff; margin-bottom: .6rem; }
+.earned-pillar-desc { font-size: .87rem; line-height: 1.75; color: rgba(255,255,255,.6); }
+
+/* ============================================================
+   LEGACY + CTA, split section
+   ============================================================ */
+.legacy-cta-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  position: relative;
+  z-index: 1;
+  background: #fff;
+  border-top: 1px solid rgba(0,0,0,0.08);
+}
+.legacy-half {
+  background: #fff;
+  padding: 7rem 5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-right: 1px solid rgba(0,0,0,0.08);
+}
+.cta-half {
+  background: #fff;
+  padding: 7rem 5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.legacy-quote {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(1.8rem, 3vw, 3.2rem);
+  line-height: 1.1;
+  letter-spacing: .02em;
+  color: var(--text);
+  margin-bottom: 1.75rem;
+}
+.legacy-quote .accent { color: var(--blue); }
+.legacy-attribution {
+  font-size: .78rem; font-weight: 600; letter-spacing: .18em; text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* ============================================================
+   BAGGY HISTORY TIMELINE
+   ============================================================ */
+.history-section {
+  background: #fff;
+  padding: 4rem 3rem;
+  position: relative;
+  z-index: 1;
+}
+.history-inner { max-width: 1200px; margin: 0 auto; }
+.history-label { font-size: .68rem; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; color: var(--blue); margin-bottom: .85rem; display: block; }
+.history-heading { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.5rem, 5vw, 4.5rem); line-height: .92; letter-spacing: .02em; color: var(--text); margin-bottom: 3.5rem; }
+
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  position: relative;
+}
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 5.5rem; top: 0; bottom: 0;
+  width: 1px;
+  background: rgba(0,0,0,0.08);
+}
+.timeline-item {
+  display: grid;
+  grid-template-columns: 6rem 1fr;
+  gap: 2.5rem;
+  padding: 2rem 0;
+  border-bottom: 1px solid rgba(0,0,0,0.08);
+  position: relative;
+}
+.timeline-item:last-child { border-bottom: none; }
+.timeline-year {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.5rem;
+  letter-spacing: .04em;
+  color: var(--text-muted);
+  text-align: right;
+  padding-top: .1rem;
+  position: relative;
+}
+.timeline-year::after {
+  display: none;
+}
+.timeline-content h4 { font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; letter-spacing: .04em; color: var(--text); margin-bottom: .4rem; }
+.timeline-content p { font-size: .88rem; line-height: 1.75; color: var(--text-mid); }
+
+/* ============================================================
+   CTA (inside split section)
+   ============================================================ */
+.cta-heading { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.5rem, 3.5vw, 4rem); color: var(--text); letter-spacing: .03em; margin-bottom: 1.25rem; }
+.cta-sub { font-size: .95rem; color: var(--text-mid); line-height: 1.75; margin-bottom: 2.5rem; }
+.btn-primary { display: inline-flex; align-items: center; gap: .5rem; font-size: .8rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; padding: 1rem 2.5rem; border-radius: 6px; background: var(--blue); color: #fff; transition: background .2s, transform .15s; }
+.btn-primary:hover { background: var(--blue-light, #3a52c4); transform: translateY(-2px); }
+
+/* SIDE NAV */
+#side-nav { position: fixed; right: 20px; top: 50%; transform: translateY(-50%); z-index: 900; display: flex; flex-direction: column; align-items: center; height: 200px; }
+#side-nav-track { position: absolute; top: 0; bottom: 0; left: 50%; transform: translateX(-50%); width: 1px; background: rgba(0,0,0,0.12); border-radius: 1px; }
+#side-nav-thumb { position: absolute; left: 50%; transform: translate(-50%,-50%); width: 8px; height: 8px; border-radius: 50%; background: var(--blue); box-shadow: 0 0 8px rgba(43,63,160,.6); transition: top .4s cubic-bezier(.22,1,.36,1); top: 0%; pointer-events: none; }
+.side-nav-item { position: absolute; left: 50%; transform: translate(-50%,-50%); width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; }
+.side-nav-item:hover .side-nav-label { opacity: 1; transform: translateX(0); }
+.side-nav-label { position: absolute; right: 20px; font-size: .62rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--text); background: rgba(255,255,255,.95); border: 1px solid var(--border); padding: .2rem .55rem; border-radius: 4px; white-space: nowrap; opacity: 0; transform: translateX(6px); transition: opacity .2s, transform .2s; pointer-events: none; box-shadow: 0 2px 8px rgba(0,0,0,.08); }
+.side-nav-dot { display: block; width: 4px; height: 4px; border-radius: 50%; background: rgba(0,0,0,.2); transition: background .2s; }
+.side-nav-item:hover .side-nav-dot { background: var(--blue); }
+@media (max-width: 900px) { #side-nav { display: none; } }
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+#footer { position: relative; z-index: 1; background: #0D1220; padding: 4rem 2.5rem 2rem; color: rgba(255,255,255,0.55); }
+.footer-inner { max-width: 1200px; margin: 0 auto; }
+.footer-top { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 3rem; padding-bottom: 3rem; border-bottom: 1px solid rgba(255,255,255,0.08); }
+.footer-brand { display: flex; flex-direction: column; gap: 1rem; }
+.footer-logo { width: 48px; }
+.footer-club-name { font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem; letter-spacing: 0.1em; color: #fff; }
+.footer-tagline { font-size: 0.78rem; line-height: 1.6; color: rgba(255,255,255,0.4); }
+.footer-col h4 { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 1rem; }
+.footer-col ul { display: flex; flex-direction: column; gap: 0.6rem; }
+.footer-col ul a { font-size: 0.82rem; font-weight: 500; color: rgba(255,255,255,0.55); transition: color 0.2s; }
+.footer-col ul a:hover { color: #fff; }
+.footer-contact-line { font-size: 0.82rem; margin-bottom: 0.5rem; }
+.footer-bottom { padding-top: 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem; }
+.footer-copy { font-size: 0.75rem; color: rgba(255,255,255,0.25); }
+.footer-credit { font-size: 0.75rem; color: rgba(255,255,255,0.25); }
+.footer-credit a { color: rgba(255,255,255,0.4); }
+.footer-credit a:hover { color: #fff; }
+.footer-social { display: flex; gap: 0.75rem; }
+.footer-social a { width: 34px; height: 34px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.15); display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.5); transition: border-color 0.2s, color 0.2s, background 0.2s; }
+.footer-social a:hover { border-color: #fff; color: #fff; background: rgba(255,255,255,0.08); }
+@media (max-width: 768px) { .footer-top { grid-template-columns: 1fr 1fr; gap: 2rem; } }
+@media (max-width: 480px) { .footer-top { grid-template-columns: 1fr; } .footer-bottom { flex-direction: column; text-align: center; } }
+</style>
+</head>
+<body>
+
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- SIDE NAV -->
+<nav id="side-nav">
+  <div id="side-nav-track"></div>
+  <div id="side-nav-thumb"></div>
+  <div class="side-nav-item" data-section="baggy-hero"><a href="#baggy-hero" class="side-nav-dot"></a><span class="side-nav-label">The Baggy</span></div>
+  <div class="side-nav-item" data-section="what-section"><a href="#what-section" class="side-nav-dot"></a><span class="side-nav-label">What Is It</span></div>
+  <div class="side-nav-item" data-section="earned-section"><a href="#earned-section" class="side-nav-dot"></a><span class="side-nav-label">How Earned</span></div>
+  <div class="side-nav-item" data-section="history-section"><a href="#history-section" class="side-nav-dot"></a><span class="side-nav-label">History</span></div>
+  <div class="side-nav-item" data-section="cta-strip"><a href="#cta-strip" class="side-nav-dot"></a><span class="side-nav-label">Join</span></div>
+</nav>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand">
+      <img src="crest.png" alt="Eden Roskill CC" class="nav-logo">
+      <span class="nav-brand-name">Eden Roskill CC</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="about.html">About</a></li>
+      <li class="nav-has-dropdown">
+        <a href="programs.html">Play Cricket</a>
+        <ul class="nav-dropdown">
+          <li><a href="teams.html">Teams</a></li>
+          <li><a href="programs.html">Programs</a></li>
+          <li><a href="programs.html#junior">Junior Cricket</a></li>
+          <li><a href="programs.html#senior">Senior Cricket</a></li>
+        </ul>
+      </li>
+      <li><a href="the-baggy.html" class="active">The Baggy</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a href="https://www.playhq.com/new-zealand-cricket/org/eden-roskill-cricket-club/0c54ceb4" target="_blank" class="btn-register">Register</a>
+      <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html" class="mobile-link">Home</a>
+  <a href="about.html" class="mobile-link">About</a>
+  <div class="mobile-accordion">
+    <button class="mobile-accordion-btn" aria-expanded="false">Play Cricket <span class="mobile-accordion-chevron"></span></button>
+    <div class="mobile-accordion-body">
+      <a href="teams.html" class="mobile-sub-link">Teams</a>
+      <a href="programs.html" class="mobile-sub-link">Programs</a>
+    </div>
+  </div>
+  <a href="the-baggy.html" class="mobile-link">The Baggy</a>
+  <a href="contact.html" class="mobile-link">Contact</a>
+  <a href="https://www.playhq.com/new-zealand-cricket/org/eden-roskill-cricket-club/0c54ceb4" target="_blank" class="btn-register" style="display:block;text-align:center;margin-top:1rem;">Register</a>
+</div>
+
+<!-- ============================================================
+     HERO
+     ============================================================ -->
+<section id="baggy-hero" class="baggy-hero">
+  <div class="baggy-hero-inner">
+    <div>
+      <span class="baggy-hero-label reveal">The Premier Baggy</span>
+      <h1 class="baggy-hero-heading reveal reveal-delay-1">
+        <span class="dim">The</span><br>Baggy.
+      </h1>
+      <blockquote class="baggy-hero-quote reveal reveal-delay-2">
+        "Worn only by those<br>who have earned<br>their place."
+      </blockquote>
+      <p class="baggy-hero-body reveal reveal-delay-3">The highest honour at Eden Roskill Cricket Club. It is not given at registration. It is not handed out at the start of a season. It is earned through years of dedication, sacrifice, and loyalty to the club.</p>
+    </div>
+    <div>
+      <img src="photo-baggy.jpg" alt="The Eden Roskill Baggy" class="baggy-hero-crest reveal reveal-delay-2">
+    </div>
+  </div>
+
+  <div class="baggy-scroll-hint">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ============================================================
+     WHAT IS THE BAGGY
+     ============================================================ -->
+<section id="what-section" class="what-section">
+  <div class="what-inner">
+    <div>
+      <span class="what-label reveal">What Is It?</span>
+      <h2 class="what-heading reveal reveal-delay-1">More than a cap.</h2>
+      <p class="what-body reveal reveal-delay-2">The baggy blue is the <strong>Premier cap of Eden Roskill Cricket Club</strong>. It is the symbol of having reached the top grade, Premier Men's cricket in the Auckland Cricket Association, and of everything it takes to get there.</p>
+      <p class="what-body reveal reveal-delay-2">At clubs around the world, a baggy cap holds special meaning. At Eden Roskill, it holds even more. Our multicultural community brings together players from dozens of backgrounds, and the baggy represents the shared values that unite them: <strong>hard work, commitment, loyalty, and respect.</strong></p>
+      <p class="what-body reveal reveal-delay-3">When a player pulls on the baggy for the first time, they join a brotherhood of cricketers stretching back to <strong>1903</strong>. They carry the legacy of everyone who wore it before them.</p>
+    </div>
+    <div>
+      <div class="baggy-stats reveal reveal-delay-1">
+        <div class="baggy-stat-row">
+          <span class="baggy-stat-num">1903</span>
+          <span class="baggy-stat-label">Year the club was established</span>
+        </div>
+        <div class="baggy-stat-row">
+          <span class="baggy-stat-num">120+</span>
+          <span class="baggy-stat-label">Years of Premier cricket history</span>
+        </div>
+        <div class="baggy-stat-row">
+          <span class="baggy-stat-num">1</span>
+          <span class="baggy-stat-label">Highest honour at the club</span>
+        </div>
+        <div class="baggy-stat-row">
+          <span class="baggy-stat-num">∞</span>
+          <span class="baggy-stat-label">Pride of those who wear it</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     HISTORY TIMELINE
+     ============================================================ -->
+<section id="history-section" class="history-section">
+  <div class="history-inner">
+    <span class="history-label reveal">Our History</span>
+    <h2 class="history-heading reveal reveal-delay-1">A club built over<br>a century.</h2>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-year" data-year="1903">1903</div>
+        <div class="timeline-content">
+          <h4>Eden Cricket Club founded</h4>
+          <p>The Eden Cricket Club is established in Auckland, beginning what would become one of the city's most enduring sporting institutions. The first players take the field in their blue, a tradition that continues to this day.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year" data-year="1952">1952</div>
+        <div class="timeline-content">
+          <h4>Eden and Roskill merge</h4>
+          <p>Two proud clubs unite to form Eden Roskill District Cricket Club. The merger brings together two strong cricketing communities under one crest and one set of colours, strengthening the club's presence in Auckland cricket.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year" data-year="1970s">1970s</div>
+        <div class="timeline-content">
+          <h4>Premier grade era begins</h4>
+          <p>Eden Roskill establishes itself as a fixture in Auckland Premier cricket. The baggy becomes the most coveted honour within the club: earned, never given. The culture that defines the club today is set in this era.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year" data-year="2000s">2000s</div>
+        <div class="timeline-content">
+          <h4>A multicultural identity</h4>
+          <p>The club's diverse identity flourishes as players from dozens of nationalities and cultural backgrounds make Eden Roskill home. The baggy becomes a symbol of unity: proof that cricket belongs to everyone, and that hard work is the only currency that matters.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year" data-year="Today">Today</div>
+        <div class="timeline-content">
+          <h4>One crest. Still earning it.</h4>
+          <p>Eden Roskill continues to field teams across all grades at Keith Hay Park, Mt Roskill. The baggy is still awarded the same way it always has been, to those who have proven, beyond doubt, that they deserve to wear it. The wait makes it mean everything.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     HOW IT'S EARNED
+     ============================================================ -->
+<section id="earned-section" class="earned-section">
+  <div class="earned-inner">
+    <span class="earned-label reveal">How It's Earned</span>
+    <h2 class="earned-heading reveal reveal-delay-1">Three things. No shortcuts.</h2>
+    <p class="earned-sub reveal reveal-delay-2">The baggy is awarded by the club when a player has demonstrated, over time, that they embody what Eden Roskill stands for. There is no fast track. You earn it.</p>
+    <div class="earned-pillars">
+      <div class="earned-pillar reveal reveal-delay-1">
+        <div class="earned-pillar-num">01</div>
+        <div class="earned-pillar-title">Hard Work</div>
+        <p class="earned-pillar-desc">Every training session. Every early morning. Every net in the off-season when nobody is watching. The baggy is built one session at a time, long before match day arrives.</p>
+      </div>
+      <div class="earned-pillar reveal reveal-delay-2">
+        <div class="earned-pillar-num">02</div>
+        <div class="earned-pillar-title">Commitment</div>
+        <p class="earned-pillar-desc">To the team above yourself. Showing up when it's hard. Putting in when you'd rather not. The baggy belongs to players who give everything to the club and ask for nothing in return.</p>
+      </div>
+      <div class="earned-pillar reveal reveal-delay-3">
+        <div class="earned-pillar-num">03</div>
+        <div class="earned-pillar-title">Loyalty</div>
+        <p class="earned-pillar-desc">To the crest. To your teammates. To the culture that was built before you arrived and will continue long after you leave. Loyalty is what turns a good cricketer into an Eden Roskill cricketer.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     LEGACY QUOTE + CTA, split
+     ============================================================ -->
+<section class="legacy-cta-split">
+  <div class="legacy-half reveal">
+    <blockquote class="legacy-quote">
+      "You don't play for the baggy.<br>
+      You play well enough<br>
+      <span class="accent">that the baggy finds you.</span>"
+    </blockquote>
+    <p class="legacy-attribution">, Eden Roskill Cricket Club</p>
+  </div>
+  <div class="cta-half reveal reveal-delay-1">
+    <h2 class="cta-heading">Start your journey.</h2>
+    <p class="cta-sub">The baggy starts with showing up. Register for the 2025/26 season, join the club, and begin writing your own chapter in Eden Roskill history.</p>
+    <a href="https://www.playhq.com/new-zealand-cricket/org/eden-roskill-cricket-club/0c54ceb4" target="_blank" class="btn-primary">Register to Play ↗</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img src="crest.png" alt="Eden Roskill CC" class="footer-logo">
+        <div class="footer-club-name">Eden Roskill CC</div>
+        <p class="footer-tagline">Auckland cricket since 1903.<br>Keith Hay Park, Mt Roskill.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Club</h4>
+        <ul>
+          <li><a href="about.html">About</a></li>
+          <li><a href="the-baggy.html">The Baggy</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Play</h4>
+        <ul>
+          <li><a href="teams.html">Teams</a></li>
+          <li><a href="programs.html">Programs</a></li>
+          <li><a href="https://www.playhq.com/new-zealand-cricket/org/eden-roskill-cricket-club/0c54ceb4" target="_blank">Register</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <p class="footer-contact-line">13 Noton Road<br>Mt Roskill, Auckland 1041</p>
+        <p class="footer-contact-line"><a href="mailto:erdcc.cricket@gmail.com" style="color:inherit;">erdcc.cricket@gmail.com</a></p>
+        <p class="footer-contact-line"><a href="tel:0276259932" style="color:inherit;">027 625 9932</a></p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">&copy; 2026 Eden Roskill Cricket Club. Established 1903.</span>
+      <div class="footer-social">
+        <a href="https://www.instagram.com/roskillcricket/" target="_blank" aria-label="Instagram">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+            <circle cx="12" cy="12" r="4"/>
+            <circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/>
+          </svg>
+        </a>
+        <a href="https://www.facebook.com/EdenRoskilPrems" target="_blank" aria-label="Facebook">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+          </svg>
+        </a>
+      </div>
+      <span class="footer-credit">Website by <a href="https://webtag.co.nz" target="_blank">webtag.co.nz</a></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  /* CURSOR */
+  const dot = document.getElementById('cursorDot');
+  const ring = document.getElementById('cursorRing');
+  let mx = -100, my = -100, rx = -100, ry = -100;
+  function getCursorBg(x, y) {
+    dot.style.visibility = 'hidden'; ring.style.visibility = 'hidden';
+    const el = document.elementFromPoint(x, y);
+    dot.style.visibility = ''; ring.style.visibility = '';
+    let node = el;
+    while (node && node !== document.documentElement) {
+      const bg = getComputedStyle(node).backgroundColor;
+      if (bg && bg !== 'rgba(0, 0, 0, 0)' && bg !== 'transparent') return bg;
+      node = node.parentElement;
+    }
+    return getComputedStyle(document.body).backgroundColor;
+  }
+  function isDark(rgb) {
+    const m = rgb.match(/\d+/g);
+    if (!m) return false;
+    return (0.299 * +m[0] + 0.587 * +m[1] + 0.114 * +m[2]) / 255 < 0.45;
+  }
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    const dark = isDark(getCursorBg(e.clientX, e.clientY));
+    dot.classList.toggle('on-dark', dark);
+    ring.classList.toggle('on-dark', dark);
+  });
+  (function anim() { dot.style.left = mx+'px'; dot.style.top = my+'px'; rx += (mx-rx)*0.12; ry += (my-ry)*0.12; ring.style.left = rx+'px'; ring.style.top = ry+'px'; requestAnimationFrame(anim); })();
+  document.querySelectorAll('a,button').forEach(el => {
+    el.addEventListener('mouseenter', () => { dot.classList.add('hov'); ring.classList.add('hov'); });
+    el.addEventListener('mouseleave', () => { dot.classList.remove('hov'); ring.classList.remove('hov'); });
+  });
+
+  /* 3D TILT BUTTONS */
+  (function(){function tilt3D(s){document.querySelectorAll(s).forEach(el=>{let tx=0,ty=0,cx=0,cy=0,raf;el.style.willChange='transform';el.addEventListener('mousemove',e=>{const r=el.getBoundingClientRect();tx=((e.clientY-r.top)/r.height-0.5)*-22;ty=((e.clientX-r.left)/r.width-0.5)*22;cancelAnimationFrame(raf);(function sp(){cx+=(tx-cx)*0.18;cy+=(ty-cy)*0.18;el.style.transform=`perspective(700px) rotateX(${cx}deg) rotateY(${cy}deg) translateZ(18px)`;if(Math.abs(tx-cx)>0.05||Math.abs(ty-cy)>0.05)raf=requestAnimationFrame(sp);})();});el.addEventListener('mouseleave',()=>{tx=0;ty=0;cancelAnimationFrame(raf);(function bk(){cx+=(0-cx)*0.12;cy+=(0-cy)*0.12;el.style.transform=`perspective(700px) rotateX(${cx}deg) rotateY(${cy}deg) translateZ(${Math.abs(cx)+Math.abs(cy)>0.05?18:0}px)`;if(Math.abs(cx)>0.05||Math.abs(cy)>0.05)raf=requestAnimationFrame(bk);else el.style.transform='';})();});});}tilt3D('.btn-primary, .btn-register');})();
+
+  /* HAMBURGER */
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => {
+    const open = mobileMenu.classList.toggle('open');
+    hamburger.classList.toggle('open', open);
+    hamburger.setAttribute('aria-expanded', String(open));
+  });
+  document.querySelectorAll('.mobile-link, .mobile-sub-link').forEach(el =>
+    el.addEventListener('click', () => { mobileMenu.classList.remove('open'); hamburger.classList.remove('open'); hamburger.setAttribute('aria-expanded','false'); })
+  );
+  document.querySelectorAll('.mobile-accordion-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const exp = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!exp));
+      btn.nextElementSibling.classList.toggle('open', !exp);
+    });
+  });
+
+  /* REVEAL */
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+  }, { threshold: 0.05 });
+  document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => obs.observe(el));
+
+  /* SIDE NAV */
+  const sideItems = Array.from(document.querySelectorAll('.side-nav-item'));
+  const sideThumb = document.getElementById('side-nav-thumb');
+  const count = sideItems.length;
+  sideItems.forEach((item, i) => { item.style.top = (count===1?50:(i/(count-1))*100)+'%'; });
+  function setThumb(i) { sideThumb.style.top = (count===1?50:(i/(count-1))*100)+'%'; }
+  setThumb(0);
+  const sections = Array.from(document.querySelectorAll('section[id]'));
+  function updateNav() {
+    const mid = window.scrollY + window.innerHeight * 0.4;
+    let best = 0;
+    sections.forEach((s, i) => { if (s.offsetTop <= mid) best = i; });
+    const si = sideItems.findIndex(el => el.dataset.section === sections[best]?.id);
+    if (si !== -1) setThumb(si);
+  }
+  window.addEventListener('scroll', updateNav, { passive: true });
+  updateNav();
+})();
+</script>
+
+<!-- Timeline year text-rotate animation -->
+<script>
+(function() {
+  const style = document.createElement('style');
+  style.textContent = `
+    .timeline-year { overflow: hidden; }
+    .timeline-year .char {
+      display: inline-block;
+      transform: translateY(110%);
+      opacity: 0;
+      transition: transform 0.5s cubic-bezier(0.22,1,0.36,1), opacity 0.4s ease;
+    }
+    .timeline-year.yr-visible .char {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  `;
+  document.head.appendChild(style);
+
+  document.querySelectorAll('.timeline-year').forEach(el => {
+    const text = el.textContent.trim();
+    el.innerHTML = text.split('').map((ch, i) =>
+      `<span class="char" style="transition-delay:${i * 0.04}s">${ch}</span>`
+    ).join('');
+  });
+
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.querySelector('.timeline-year').classList.add('yr-visible');
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.3 });
+
+  document.querySelectorAll('.timeline-item').forEach(item => obs.observe(item));
+})();
+</script>
+</body>
+</html>

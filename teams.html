@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Teams | Eden Roskill Cricket Club</title>
+<meta name="description" content="Eden Roskill Cricket Club teams, Premier Men, Club Grade, Women's, T20, and Junior sides competing in Auckland Cricket Association.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; cursor: none !important; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body { font-family: 'DM Sans', sans-serif; background: #fff; color: #0D1220; -webkit-font-smoothing: antialiased; }
+a { text-decoration: none; color: inherit; }
+ul { list-style: none; }
+img { display: block; max-width: 100%; }
+
+:root {
+  --blue:       #2B3FA0;
+  --blue-light: #3D52B8;
+  --blue-dark:  #1A2870;
+  --blue-pale:  #EEF1FB;
+  --blue-mid:   #4A90E2;
+  --off-white:  #F7F8FC;
+  --text:       #0D1220;
+  --text-mid:   #3A4560;
+  --text-muted: #7A85A3;
+  --border:     rgba(0,0,0,0.08);
+  --ease:       cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* CURSOR */
+.cursor-dot { position: fixed; top: 0; left: 0; width: 4px; height: 4px; background: #E02020; border-radius: 50%; pointer-events: none; z-index: 99999; transform: translate(-50%,-50%); transition: width .2s, height .2s, background .2s; }
+.cursor-ring { position: fixed; top: 0; left: 0; width: 26px; height: 26px; border: 1.5px solid rgba(224,32,32,0.5); border-radius: 50%; pointer-events: none; z-index: 99998; transform: translate(-50%,-50%); transition: width .25s, height .25s, border-color .2s; }
+.cursor-dot.hov { width: 8px; height: 8px; background: #E02020; }
+.cursor-ring.hov { width: 40px; height: 40px; border-color: #E02020; }
+.cursor-dot.on-dark       { background: #fff; }
+.cursor-ring.on-dark      { border-color: rgba(255,255,255,0.5); }
+.cursor-dot.on-dark.hov   { background: #fff; }
+.cursor-ring.on-dark.hov  { border-color: #fff; }
+
+/* NAV */
+#navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; height: 64px; display: flex; align-items: center; padding: 0 3rem; background: rgba(255,255,255,0.96); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); }
+.nav-inner { width: 100%; display: flex; align-items: center; justify-content: space-between; }
+.nav-brand { display: flex; align-items: center; gap: .75rem; flex-shrink: 0; }
+.nav-logo { width: 36px; height: 36px; object-fit: contain; }
+.nav-brand-name { font-family: 'Bebas Neue', sans-serif; font-size: 1.05rem; letter-spacing: .08em; color: var(--blue); }
+.nav-links { display: flex; align-items: center; gap: .1rem; margin-left: auto; }
+.nav-links > li { position: relative; list-style: none; }
+.nav-links > li > a { font-size: .72rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; padding: .5rem .85rem; border-radius: 6px; color: var(--text-mid); display: flex; align-items: center; gap: .3rem; transition: color .2s, background .2s; white-space: nowrap; }
+.nav-links > li > a:hover { color: var(--blue); background: var(--blue-pale); }
+.nav-links > li > a.active { color: var(--blue); }
+.nav-has-dropdown > a::after { content: ''; display: inline-block; width: 5px; height: 5px; border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; transform: rotate(45deg) translateY(-2px); transition: transform .2s; }
+.nav-has-dropdown:hover > a::after { transform: rotate(225deg) translateY(-2px); }
+.nav-dropdown { position: absolute; top: calc(100% + 8px); left: 0; min-width: 190px; background: #fff; border: 1px solid var(--border); border-radius: 10px; padding: .4rem; box-shadow: 0 8px 32px rgba(0,0,0,.1); opacity: 0; visibility: hidden; transform: translateY(6px); transition: opacity .2s var(--ease), transform .2s var(--ease), visibility .2s; z-index: 200; list-style: none; }
+.nav-has-dropdown:hover .nav-dropdown, .nav-has-dropdown:focus-within .nav-dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+.nav-dropdown li a { display: block; padding: .55rem 1rem; font-size: .73rem; font-weight: 600; letter-spacing: .07em; text-transform: uppercase; color: var(--text-mid); border-radius: 6px; transition: color .18s, background .18s; }
+.nav-dropdown li a:hover { color: var(--blue); background: var(--blue-pale); }
+.nav-dropdown::before { content: ''; position: absolute; top: -1px; left: 14px; right: 14px; height: 2px; background: #fff; border-radius: 2px; }
+.nav-actions { display: flex; align-items: center; gap: .75rem; margin-left: 1rem; }
+.btn-register { font-size: .72rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; padding: .6rem 1.4rem; border-radius: 6px; background: var(--blue); color: #fff; border: 2px solid var(--blue); transition: background .2s, transform .15s; }
+.btn-register:hover { background: var(--blue-dark); border-color: var(--blue-dark); transform: translateY(-1px); }
+.hamburger { display: none; flex-direction: column; gap: 5px; width: 36px; height: 36px; align-items: center; justify-content: center; background: transparent; border: 1px solid var(--border); border-radius: 6px; }
+.hamburger span { display: block; width: 18px; height: 1.5px; background: var(--text); border-radius: 2px; transition: all .3s; }
+.hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(4.5px,4.5px); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(4.5px,-4.5px); }
+.mobile-menu { display: none; position: fixed; top: 64px; left: 0; right: 0; background: rgba(255,255,255,.98); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); padding: 1rem 2rem 1.5rem; z-index: 999; flex-direction: column; gap: .1rem; }
+.mobile-menu.open { display: flex; }
+.mobile-menu a { padding: .8rem 0; font-size: .9rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--text-mid); border-bottom: 1px solid var(--border); transition: color .2s; }
+.mobile-menu a:hover { color: var(--blue); }
+.mobile-accordion-btn { width: 100%; display: flex; align-items: center; justify-content: space-between; padding: .8rem 0; font-size: .9rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--text-mid); background: none; border: none; border-bottom: 1px solid var(--border); transition: color .2s; }
+.mobile-accordion-btn:hover { color: var(--blue); }
+.mobile-accordion-chevron { width: 6px; height: 6px; border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; transform: rotate(45deg); transition: transform .25s; }
+.mobile-accordion-btn[aria-expanded="true"] .mobile-accordion-chevron { transform: rotate(225deg); }
+.mobile-accordion-body { display: none; flex-direction: column; padding: .25rem 0 .25rem 1rem; }
+.mobile-accordion-body.open { display: flex; }
+.mobile-sub-link { padding: .55rem 0 !important; font-size: .8rem !important; color: var(--text-muted) !important; border-bottom: none !important; }
+.mobile-sub-link:hover { color: var(--blue) !important; }
+.mobile-menu .btn-register { margin-top: 1rem; text-align: center; width: 100%; display: block; }
+@media (max-width: 1000px) { .nav-links { display: none; } .nav-actions .btn-register { display: none; } .hamburger { display: flex; } }
+
+/* REVEAL */
+.reveal { opacity: 0; transform: translateY(40px); transition: opacity .9s var(--ease), transform .9s var(--ease); }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-delay-1 { transition-delay: .1s; }
+.reveal-delay-2 { transition-delay: .2s; }
+.reveal-delay-3 { transition-delay: .3s; }
+.reveal-delay-4 { transition-delay: .4s; }
+.reveal-left { opacity: 0; transform: translateX(-40px); transition: opacity .9s var(--ease), transform .9s var(--ease); }
+.reveal-left.visible { opacity: 1; transform: translateX(0); }
+
+/* PAGE HEADER */
+.page-header {
+  padding: 9rem 3rem 5rem;
+  background: var(--blue);
+  position: relative;
+  overflow: hidden;
+}
+.page-header::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='40' cy='40' r='1' fill='rgba(255,255,255,0.06)'/%3E%3C/svg%3E");
+  pointer-events: none;
+}
+.page-header-inner { max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; }
+.page-label { font-size: .68rem; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; color: rgba(255,255,255,.5); margin-bottom: .75rem; display: block; }
+.page-heading { font-family: 'Bebas Neue', sans-serif; font-size: clamp(3.5rem, 8vw, 7rem); line-height: .9; letter-spacing: .02em; color: #fff; }
+.page-sub { font-size: 1rem; color: rgba(255,255,255,.6); line-height: 1.7; margin-top: 1.5rem; max-width: 52ch; }
+
+/* GRADE FILTER */
+.filter-section {
+  background: var(--off-white);
+  border-bottom: 1px solid var(--border);
+  padding: 1.5rem 3rem;
+  position: sticky;
+  top: 64px;
+  z-index: 100;
+}
+.filter-inner { max-width: 1200px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+.filter-label { font-size: .68rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--text-muted); margin-right: .5rem; }
+.filter-btn {
+  padding: .4rem 1rem;
+  border-radius: 99px;
+  font-size: .72rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+  border: 1.5px solid var(--border);
+  color: var(--text-mid);
+  background: #fff;
+  transition: all .2s;
+}
+.filter-btn:hover, .filter-btn.active { background: var(--blue); border-color: var(--blue); color: #fff; }
+
+/* TEAMS SECTION */
+.teams-section {
+  padding: 5rem 3rem 7rem;
+  background: #fff;
+}
+.teams-inner { max-width: 1200px; margin: 0 auto; }
+
+/* Grade heading */
+.grade-block { margin-bottom: 5rem; }
+.grade-block:last-child { margin-bottom: 0; }
+.grade-heading {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(2rem, 4vw, 3rem);
+  letter-spacing: .03em;
+  color: var(--text);
+  padding-bottom: 1.25rem;
+  border-bottom: 2px solid var(--border);
+  margin-bottom: 2.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.grade-badge {
+  font-family: 'DM Sans', sans-serif;
+  font-size: .65rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
+  background: var(--blue-pale); color: var(--blue);
+  padding: .3rem .75rem; border-radius: 99px;
+  vertical-align: middle;
+}
+
+/* Team card grid */
+.teams-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+.team-card {
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+  background: #fff;
+  transition: transform .3s var(--ease), box-shadow .3s var(--ease);
+}
+.team-card:hover { transform: translateY(-5px); box-shadow: 0 16px 48px rgba(43,63,160,.12); }
+.team-card.featured {
+  grid-column: span 2;
+  background: var(--blue);
+  border-color: var(--blue);
+  color: #fff;
+}
+.team-card-top {
+  padding: 2rem 1.75rem 1.5rem;
+  flex: 1;
+}
+.team-card.featured .team-card-top { padding: 2.5rem 2rem 2rem; }
+.team-tag {
+  display: inline-block;
+  font-size: .62rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
+  padding: .25rem .65rem; border-radius: 99px;
+  background: var(--blue-pale); color: var(--blue);
+  margin-bottom: 1rem;
+}
+.team-card.featured .team-tag {
+  background: rgba(255,255,255,.18); color: #fff;
+}
+.team-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  letter-spacing: .03em;
+  color: var(--text);
+  margin-bottom: .35rem;
+  line-height: 1;
+}
+.team-card.featured .team-name { color: #fff; font-size: clamp(2rem, 4vw, 3rem); }
+.team-grade-label {
+  font-size: .72rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--blue); margin-bottom: .85rem;
+}
+.team-card.featured .team-grade-label { color: rgba(255,255,255,.65); }
+.team-desc { font-size: .875rem; line-height: 1.7; color: var(--text-muted); }
+.team-card.featured .team-desc { color: rgba(255,255,255,.7); }
+.team-card-footer {
+  padding: 1.25rem 1.75rem;
+  border-top: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.team-card.featured .team-card-footer { border-top-color: rgba(255,255,255,.15); }
+.team-cta {
+  display: inline-flex; align-items: center; gap: .4rem;
+  font-size: .72rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--blue); transition: gap .2s;
+}
+.team-cta::before { content: '↗'; }
+.team-cta:hover { gap: .65rem; }
+.team-card.featured .team-cta { color: rgba(255,255,255,.85); }
+.team-card.featured .team-cta:hover { color: #fff; }
+
+/* Wide card — 1 col full width for single items */
+.team-card.wide { grid-column: span 3; }
+.team-card.wide .team-card-top { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+.team-card.wide .team-meta-col { display: flex; flex-direction: column; }
+.team-card.wide .team-desc-col { display: flex; flex-direction: column; justify-content: flex-end; }
+
+@media (max-width: 900px) {
+  .teams-grid { grid-template-columns: 1fr 1fr; }
+  .team-card.featured { grid-column: span 2; }
+  .team-card.wide { grid-column: span 2; }
+  .team-card.wide .team-card-top { grid-template-columns: 1fr; gap: 1rem; }
+}
+@media (max-width: 600px) {
+  .teams-grid { grid-template-columns: 1fr; }
+  .team-card.featured { grid-column: span 1; }
+  .team-card.wide { grid-column: span 1; }
+  .teams-section { padding: 3rem 1.75rem 5rem; }
+  .filter-section { padding: 1rem 1.75rem; }
+  .page-header { padding: 7rem 1.75rem 3rem; }
+}
+
+/* CTA STRIP */
+#cta-strip {
+  background: var(--blue);
+  padding: 6rem 3rem;
+  text-align: center;
+}
+.cta-strip-inner { max-width: 700px; margin: 0 auto; }
+.cta-heading { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.5rem, 5vw, 4.5rem); color: #fff; letter-spacing: .03em; margin-bottom: 1.25rem; }
+.cta-sub { font-size: 1rem; color: rgba(255,255,255,.65); line-height: 1.7; margin-bottom: 2.5rem; }
+.btn-white { display: inline-flex; align-items: center; gap: .5rem; font-size: .8rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; padding: 1rem 2.5rem; border-radius: 6px; background: #fff; color: var(--blue); transition: background .2s, transform .15s; }
+.btn-white:hover { background: var(--blue-pale); transform: translateY(-2px); }
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+#footer { position: relative; z-index: 1; background: #0D1220; padding: 4rem 2.5rem 2rem; color: rgba(255,255,255,0.55); }
+.footer-inner { max-width: 1200px; margin: 0 auto; }
+.footer-top { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 3rem; padding-bottom: 3rem; border-bottom: 1px solid rgba(255,255,255,0.08); }
+.footer-brand { display: flex; flex-direction: column; gap: 1rem; }
+.footer-logo { width: 48px; }
+.footer-club-name { font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem; letter-spacing: 0.1em; color: #fff; }
+.footer-tagline { font-size: 0.78rem; line-height: 1.6; color: rgba(255,255,255,0.4); }
+.footer-col h4 { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 1rem; }
+.footer-col ul { display: flex; flex-direction: column; gap: 0.6rem; }
+.footer-col ul a { font-size: 0.82rem; font-weight: 500; color: rgba(255,255,255,0.55); transition: color 0.2s; }
+.footer-col ul a:hover { color: #fff; }
+.footer-contact-line { font-size: 0.82rem; margin-bottom: 0.5rem; }
+.footer-bottom { padding-top: 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem; }
+.footer-copy { font-size: 0.75rem; color: rgba(255,255,255,0.25); }
+.footer-credit { font-size: 0.75rem; color: rgba(255,255,255,0.25); }
+.footer-credit a { color: rgba(255,255,255,0.4); }
+.footer-credit a:hover { color: #fff; }
+.footer-social { display: flex; gap: 0.75rem; }
+.footer-social a { width: 34px; height: 34px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.15); display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.5); transition: border-color 0.2s, color 0.2s, background 0.2s; }
+.footer-social a:hover { border-color: #fff; color: #fff; background: rgba(255,255,255,0.08); }
+@media (max-width: 768px) { .footer-top { grid-template-columns: 1fr 1fr; gap: 2rem; } }
+@media (max-width: 480px) { .footer-top { grid-template-columns: 1fr; } .footer-bottom { flex-direction: column; text-align: center; } }
+</style>
+</head>
+<body>
+
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- SIDE NAV -->
+<nav id="side-nav">
+  <div id="side-nav-track"></div>
+  <div id="side-nav-thumb"></div>
+  <div class="side-nav-item" data-section="teams-section"><a href="#teams-section" class="side-nav-dot"></a><span class="side-nav-label">Teams</span></div>
+  <div class="side-nav-item" data-section="cta-strip"><a href="#cta-strip" class="side-nav-dot"></a><span class="side-nav-label">Join</span></div>
+</nav>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand">
+      <img src="crest.png" alt="Eden Roskill CC" class="nav-logo">
+      <span class="nav-brand-name">Eden Roskill CC</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="about.html">About</a></li>
+      <li class="nav-has-dropdown">
+        <a href="programs.html" class="active">Play Cricket</a>
+        <ul class="nav-dropdown">
+          <li><a href="teams.html">Teams</a></li>
+          <li><a href="programs.html">Programs</a></li>
+          <li><a href="programs.html#junior">Junior Cricket</a></li>
+          <li><a href="programs.html#senior">Senior Cricket</a></li>
+        </ul>
+      </li>
+      <li><a href="the-baggy.html">The Baggy</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a href="https://www.playhq.com/new-zealand-cricket/org/eden-roskill-cricket-club/0c54ceb4" target="_blank" class="btn-register">Register</a>
+      <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html" class="mobile-link">Home</a>
+  <a href="about.html" class="mobile-link">About</a>
+  <div class="mobile-accordion">
+    <button class="mobile-accordion-btn" aria-expanded="false">Play Cricket <span class="mobile-accordion-chevron"></span></button>
+    <div class="mobile-accordion-body">
+      <a href="teams.html" class="mobile-sub-link">Teams</a>
+      <a href="programs.html" class="mobile-sub-link">Programs</a>
+      <a href="programs.html#junior" class="mobile-sub-link">Junior Cricket</a>
+      <a href="programs.html#senior" class="mobile-sub-link">Senior Cricket</a>
+    </div>
+  </div>
+  <a href="the-baggy.html" class="mobile-link">The Baggy</a>
+  <a href="contact.html" class="mobile-link">Contact</a>
+  <a href="https://www.playhq.com/new-zealand-cricket/org/eden-roskill-cricket-club/0c54ceb4" target="_blank" class="btn-register" style="display:block;text-align:center;margin-top:1rem;">Register</a>
+</div>
+
+<!-- PAGE HEADER -->
+<header class="page-header">
+  <div class="page-header-inner">
+    <span class="page-label reveal">Our Teams</span>
+    <h1 class="page-heading reveal reveal-delay-1">Find your<br>side.</h1>
+    <p class="page-sub reveal reveal-delay-2">From Premier grade to junior development, there is a place for every cricketer at Eden Roskill. Scroll to find the right team for you.</p>
+  </div>
+</header>
+
+<!-- FILTER BAR -->
+<div class="filter-section" id="filter-bar">
+  <div class="filter-inner">
+    <span class="filter-label">Filter:</span>
+    <button class="filter-btn active" data-filter="all">All Teams</button>
+    <button class="filter-btn" data-filter="premier">Premier</button>
+    <button class="filter-btn" data-filter="club">Club Grade</button>
+    <button class="filter-btn" data-filter="womens">Women's</button>
+    <button class="filter-btn" data-filter="t20">T20</button>
+    <button class="filter-btn" data-filter="junior">Junior</button>
+  </div>
+</div>
+
+<!-- TEAMS -->
+<section id="teams-section" class="teams-section">
+  <div class="teams-inner">
+
+    <!-- PREMIER -->
+    <div class="grade-block" data-grade="premier">
+      <h2 class="grade-heading reveal">Premier Cricket <span class="grade-badge">Men's</span></h2>
+      <div class="teams-grid">
+
+        <div class="team-card featured reveal">
+          <div class="team-card-top">
+            <div class="team-tag">⭐ Flagship</div>
+            <div class="team-name">Premier Men</div>
+            <div class="team-grade-label">Auckland Premier Cricket</div>
+            <p class="team-desc">Our top senior men's side competes at the highest level of Auckland club cricket. A proud blend of seasoned campaigners and emerging talent, the Premier Men carry the Eden Roskill crest into Premier grade each season. Earners of the baggy.</p>
+          </div>
+          <div class="team-card-footer">
+            <a href="https://www.playhq.com/new-zealand-cricket/org/eden-roskill-cricket-club/0c54ceb4" target="_blank" class="team-cta">View on PlayHQ</a>
+          </div>
+        </div>
+
+        <div class="team-card reveal reveal-delay-1">
+          <div class="team-card-top">
+            <div class="team-tag">Men's Premier</div>
+            <div class="team-name">Premier Three</div>
+            <div class="team-grade-label">Auckland Premier 3</div>
+            <p class="team-desc">Competing in the Premier Three competition, this squad is packed with driven cricketers on the path to the top grade. Excellent standard, strong team culture.</p>
+          </div>
+          <div class="team-card-footer">
+            <a href="https://www.playhq.com/new-zealand-cricket/org/eden-roskill-cricket-club/0c54ceb4" target="_blank" class="team-cta">View on PlayHQ</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- CLUB GRADE -->
+    <div class="grade-block" data-grade="club">
+      <h2 class="grade-heading reveal">Club Grade <span class="grade-badge">Men's</span></h2>
+      <div class="teams-grid">
+
+        <div class="team-card reveal">
+          <div class="team-card-top">
+            <div class="team-tag">Club Grade</div>
+            <div class="team-name">Punjabi Tuskers</div>
+            <div class="team-grade-label">Auckland Club Cricket</div>
+            <p class="team-desc">A formidable club-grade side with a fierce competitive record. The Punjabi Tuskers represent the multicultural heart of Eden Roskill, bringing energy and skill every weekend.</p>
+          </div>
+          <div class="team-card-footer">
+            <a href="https://www.playhq.com/new-zealand-cricket/org/eden-roskill-cricket-club/0c54ceb4" target="_blank" class="team-cta">View on PlayHQ</a>
+          </div>
+        </div>
+
+        <div class="team-card reveal reveal-delay-1">
+          <div class="team-card-top">
+            <div class="team-tag">Club Grade</div>
+            <div class="team-name">Telugu Leaders</div>
+            <div class="team-grade-label">Auckland Club Cricket</div>
+            <p class="team-desc">Strong in the field and stronger in spirit. The Telugu Leaders bring together a close-knit group of cricketers competing with pride at club grade level.</p>
+          </div>
+          <div class="team-card-footer">
+            <a href="https://www.playhq.com/new-zealand-cricket/org/eden-roskill-cricket-club/0c54ceb4" target="_blank" class="team-cta">View on PlayHQ</a>
+          </div>
+        </div>
+
+        <div class="team-card reveal reveal-delay-2">
+          <div class="team-card-top">
+            <div class="team-tag">Club Grade</div>
+            <div class="team-name">Social XI</div>
+            <div class="team-grade-label">Weekend Club Cricket</div>
+            <p class="team-desc">For those who love the game but don't take themselves too seriously. A welcoming entry point into senior cricket, ideal for beginners, returners, and those just having fun.</p>
+          </div>
+          <div class="team-card-footer">
+            <a href="contact.html" class="team-cta">Get in touch</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- WOMEN'S -->
+    <div class="grade-block" data-grade="womens">
+      <h2 class="grade-heading reveal">Women's Cricket <span class="grade-badge">Women's</span></h2>
+      <div class="teams-grid">
+
+        <div class="team-card featured reveal">
+          <div class="team-card-top">
+            <div class="team-tag">Women's</div>
+            <div class="team-name">Women's XI</div>
+            <div class="team-grade-label">Auckland Women's Cricket</div>
+            <p class="team-desc">Eden Roskill's Women's XI compete in Auckland Cricket Association women's competitions. Whether you are an experienced player or picking up a bat for the first time, our women's team is open, welcoming, and competitive. Come and be part of something growing.</p>
+          </div>
+          <div class="team-card-footer">
+            <a href="https://www.playhq.com/new-zealand-cricket/org/eden-roskill-cricket-club/0c54ceb4" target="_blank" class="team-cta">View on PlayHQ</a>
+            <a href="contact.html" class="team-cta" style="margin-left:1rem;">Enquire</a>
+          </div>
+        </div>
+
+        <div class="team-card reveal reveal-delay-1">
+          <div class="team-card-top">
+            <div class="team-tag">Women's Development</div>
+            <div class="team-name">Women's Development</div>
+            <div class="team-grade-label">Women's entry-level program</div>
+            <p class="team-desc">A structured pathway for women new to cricket or returning to the game. Skills sessions, game experience, and a supportive environment, all are welcome.</p>
+          </div>
+          <div class="team-card-footer">
+            <a href="contact.html" class="team-cta">Enquire now</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- T20 -->
+    <div class="grade-block" data-grade="t20">
+      <h2 class="grade-heading reveal">T20 Cricket <span class="grade-badge">T20</span></h2>
+      <div class="teams-grid">
+
+        <div class="team-card reveal">
+          <div class="team-card-top">
+            <div class="team-tag">T20 Men's</div>
+            <div class="team-name">T20 Men's</div>
+            <div class="team-grade-label">Auckland T20 Competition</div>
+            <p class="team-desc">Fast cricket for players who want the short-format thrill. The T20 Men's side competes in the Auckland T20 competition, aggressive batting, sharp fielding, big moments.</p>
+          </div>
+          <div class="team-card-footer">
+            <a href="https://www.playhq.com/new-zealand-cricket/org/eden-roskill-cricket-club/0c54ceb4" target="_blank" class="team-cta">View on PlayHQ</a>
+          </div>
+        </div>
+
+        <div class="team-card reveal reveal-delay-1">
+          <div class="team-card-top">
+            <div class="team-tag">T20 Women's</div>
+            <div class="team-name">T20 Women's</div>
+            <div class="team-grade-label">Auckland Women's T20</div>
+            <p class="team-desc">Exciting short-format cricket for our women's players. The T20 Women's side is a great way to get more game time in a fast-paced, fun format.</p>
+          </div>
+          <div class="team-card-footer">
+            <a href="https://www.playhq.com/new-zealand-cricket/org/eden-roskill-cricket-club/0c54ceb4" target="_blank" class="team-cta">View on PlayHQ</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- JUNIOR -->
+    <div class="grade-block" data-grade="junior">
+      <h2 class="grade-heading reveal">Junior &amp; Youth <span class="grade-badge">U11, U19</span></h2>
+      <div class="teams-grid">
+
+        <div class="team-card reveal">
+          <div class="team-card-top">
+            <div class="team-tag">U11 · U13</div>
+            <div class="team-name">Junior Development</div>
+            <div class="team-grade-label">Age-grade competition</div>
+            <p class="team-desc">Our youngest players learn the fundamentals in a fun, structured environment. Great coaching, age-appropriate competition, and a foundation for a lifetime in the game.</p>
+          </div>
+          <div class="team-card-footer">
+            <a href="programs.html#junior" class="team-cta">Learn more</a>
+          </div>
+        </div>
+
+        <div class="team-card reveal reveal-delay-1">
+          <div class="team-card-top">
+            <div class="team-tag">U15 · U17</div>
+            <div class="team-name">Youth Cricket</div>
+            <div class="team-grade-label">Age-grade competition</div>
+            <p class="team-desc">The middle years where players develop their game and team identity. Competitive cricket at U15 and U17 with a pathway towards senior grades.</p>
+          </div>
+          <div class="team-card-footer">
+            <a href="programs.html#junior" class="team-cta">Learn more</a>
+          </div>
+        </div>
+
+        <div class="team-card reveal reveal-delay-2">
+          <div class="team-card-top">
+            <div class="team-tag">U19</div>
+            <div class="team-name">Under-19s</div>
+            <div class="team-grade-label">Age-grade · Senior pathway</div>
+            <p class="team-desc">The final step before senior cricket. U19s compete at the top junior level and are introduced to the demands and culture of club cricket at Eden Roskill.</p>
+          </div>
+          <div class="team-card-footer">
+            <a href="programs.html#junior" class="team-cta">Learn more</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="cta-strip">
+  <div class="cta-strip-inner reveal">
+    <h2 class="cta-heading">Not sure which team is right for you?</h2>
+    <p class="cta-sub">Get in touch and we'll point you in the right direction. No matter your age or ability, there is a place for you at Eden Roskill.</p>
+    <a href="contact.html" class="btn-white">Get in Touch ↗</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img src="crest.png" alt="Eden Roskill CC" class="footer-logo">
+        <div class="footer-club-name">Eden Roskill CC</div>
+        <p class="footer-tagline">Auckland cricket since 1903.<br>Keith Hay Park, Mt Roskill.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Club</h4>
+        <ul>
+          <li><a href="about.html">About</a></li>
+          <li><a href="the-baggy.html">The Baggy</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Play</h4>
+        <ul>
+          <li><a href="teams.html">Teams</a></li>
+          <li><a href="programs.html">Programs</a></li>
+          <li><a href="https://www.playhq.com/new-zealand-cricket/org/eden-roskill-cricket-club/0c54ceb4" target="_blank">Register</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <p class="footer-contact-line">13 Noton Road<br>Mt Roskill, Auckland 1041</p>
+        <p class="footer-contact-line"><a href="mailto:erdcc.cricket@gmail.com" style="color:inherit;">erdcc.cricket@gmail.com</a></p>
+        <p class="footer-contact-line"><a href="tel:0276259932" style="color:inherit;">027 625 9932</a></p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">&copy; 2026 Eden Roskill Cricket Club. Established 1903.</span>
+      <div class="footer-social">
+        <a href="https://www.instagram.com/roskillcricket/" target="_blank" aria-label="Instagram">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+            <circle cx="12" cy="12" r="4"/>
+            <circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/>
+          </svg>
+        </a>
+        <a href="https://www.facebook.com/EdenRoskilPrems" target="_blank" aria-label="Facebook">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+          </svg>
+        </a>
+      </div>
+      <span class="footer-credit">Website by <a href="https://webtag.co.nz" target="_blank">webtag.co.nz</a></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  /* CURSOR */
+  const dot = document.getElementById('cursorDot');
+  const ring = document.getElementById('cursorRing');
+  let mx = -100, my = -100, rx = -100, ry = -100;
+  function getCursorBg(x, y) {
+    dot.style.visibility = 'hidden'; ring.style.visibility = 'hidden';
+    const el = document.elementFromPoint(x, y);
+    dot.style.visibility = ''; ring.style.visibility = '';
+    let node = el;
+    while (node && node !== document.documentElement) {
+      const bg = getComputedStyle(node).backgroundColor;
+      if (bg && bg !== 'rgba(0, 0, 0, 0)' && bg !== 'transparent') return bg;
+      node = node.parentElement;
+    }
+    return getComputedStyle(document.body).backgroundColor;
+  }
+  function isDark(rgb) {
+    const m = rgb.match(/\d+/g);
+    if (!m) return false;
+    return (0.299 * +m[0] + 0.587 * +m[1] + 0.114 * +m[2]) / 255 < 0.45;
+  }
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    const dark = isDark(getCursorBg(e.clientX, e.clientY));
+    dot.classList.toggle('on-dark', dark);
+    ring.classList.toggle('on-dark', dark);
+  });
+  (function anim() { dot.style.left = mx+'px'; dot.style.top = my+'px'; rx += (mx-rx)*0.12; ry += (my-ry)*0.12; ring.style.left = rx+'px'; ring.style.top = ry+'px'; requestAnimationFrame(anim); })();
+  document.querySelectorAll('a,button').forEach(el => {
+    el.addEventListener('mouseenter', () => { dot.classList.add('hov'); ring.classList.add('hov'); });
+    el.addEventListener('mouseleave', () => { dot.classList.remove('hov'); ring.classList.remove('hov'); });
+  });
+
+  /* 3D TILT BUTTONS */
+  (function(){function tilt3D(s){document.querySelectorAll(s).forEach(el=>{let tx=0,ty=0,cx=0,cy=0,raf;el.style.willChange='transform';el.addEventListener('mousemove',e=>{const r=el.getBoundingClientRect();tx=((e.clientY-r.top)/r.height-0.5)*-22;ty=((e.clientX-r.left)/r.width-0.5)*22;cancelAnimationFrame(raf);(function sp(){cx+=(tx-cx)*0.18;cy+=(ty-cy)*0.18;el.style.transform=`perspective(700px) rotateX(${cx}deg) rotateY(${cy}deg) translateZ(18px)`;if(Math.abs(tx-cx)>0.05||Math.abs(ty-cy)>0.05)raf=requestAnimationFrame(sp);})();});el.addEventListener('mouseleave',()=>{tx=0;ty=0;cancelAnimationFrame(raf);(function bk(){cx+=(0-cx)*0.12;cy+=(0-cy)*0.12;el.style.transform=`perspective(700px) rotateX(${cx}deg) rotateY(${cy}deg) translateZ(${Math.abs(cx)+Math.abs(cy)>0.05?18:0}px)`;if(Math.abs(cx)>0.05||Math.abs(cy)>0.05)raf=requestAnimationFrame(bk);else el.style.transform='';})();});});}tilt3D('.btn-white, .btn-register, .team-cta');})();
+
+  /* HAMBURGER */
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => {
+    const open = mobileMenu.classList.toggle('open');
+    hamburger.classList.toggle('open', open);
+    hamburger.setAttribute('aria-expanded', String(open));
+  });
+  document.querySelectorAll('.mobile-link, .mobile-sub-link').forEach(el =>
+    el.addEventListener('click', () => { mobileMenu.classList.remove('open'); hamburger.classList.remove('open'); hamburger.setAttribute('aria-expanded','false'); })
+  );
+  document.querySelectorAll('.mobile-accordion-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const exp = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!exp));
+      btn.nextElementSibling.classList.toggle('open', !exp);
+    });
+  });
+
+  /* REVEAL */
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+  }, { threshold: 0.05 });
+  document.querySelectorAll('.reveal, .reveal-left').forEach(el => obs.observe(el));
+
+  /* FILTER */
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const gradeBlocks = document.querySelectorAll('.grade-block');
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const f = btn.dataset.filter;
+      gradeBlocks.forEach(block => {
+        block.style.display = (f === 'all' || block.dataset.grade === f) ? '' : 'none';
+      });
+    });
+  });
+
+  /* SIDE NAV */
+  const sideItems = Array.from(document.querySelectorAll('.side-nav-item'));
+  const sideThumb = document.getElementById('side-nav-thumb');
+  const count = sideItems.length;
+  sideItems.forEach((item, i) => { item.style.top = (count===1?50:(i/(count-1))*100)+'%'; });
+  function setThumb(i) { sideThumb.style.top = (count===1?50:(i/(count-1))*100)+'%'; }
+  setThumb(0);
+  const sections = Array.from(document.querySelectorAll('section[id]'));
+  function updateNav() {
+    const mid = window.scrollY + window.innerHeight * 0.4;
+    let best = 0;
+    sections.forEach((s, i) => { if (s.offsetTop <= mid) best = i; });
+    const si = sideItems.findIndex(el => el.dataset.section === sections[best]?.id);
+    if (si !== -1) setThumb(si);
+  }
+  window.addEventListener('scroll', updateNav, { passive: true });
+  updateNav();
+})();
+</script>
+</body>
+</html>

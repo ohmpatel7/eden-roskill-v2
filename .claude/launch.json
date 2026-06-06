@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "erdcc",
+      "runtimeExecutable": "bash",
+      "runtimeArgs": ["-c", "cd /Users/ohm/Downloads/erdcc-website && python3 -m http.server 8743"],
+      "port": 8743
+    }
+  ]
+}

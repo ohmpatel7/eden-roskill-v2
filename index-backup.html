@@ -1,0 +1,3182 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eden Roskill Cricket Club | Est. 1903 | Mt Roskill, Auckland</title>
+<meta name="description" content="Eden Roskill Cricket Club - Cricket, Community, Culture since 1903. Based at Keith Hay Park, Mt Roskill, Auckland.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   CSS CUSTOM PROPERTIES
+   ============================================================ */
+:root {
+  /* Club palette - deep blue from crest, accent blue */
+  --club-blue:        #2B3FA0;
+  --club-blue-light:  #3D52B8;
+  --club-blue-dark:   #1A2870;
+
+  /* Accent blue — replaces gold throughout */
+  --gold:             #3D9BFF;
+  --gold-light:       #64B2FF;
+  --gold-pale:        #A8D4FF;
+
+  /* Dark theme surfaces */
+  --bg-base:          #070B14;
+  --bg-surface:       #0D1220;
+  --bg-raised:        #111829;
+  --bg-overlay:       #161F33;
+  --border:           rgba(255,255,255,0.08);
+  --border-accent:    rgba(61,155,255,0.25);
+
+  /* Text */
+  --text-primary:     #F0F3FF;
+  --text-secondary:   #8B95B4;
+  --text-muted:       #4A5270;
+
+  /* Spacing scale */
+  --sp-xs: 0.5rem;
+  --sp-sm: 1rem;
+  --sp-md: 1.5rem;
+  --sp-lg: 2.5rem;
+  --sp-xl: 4rem;
+  --sp-2xl: 7rem;
+
+  /* Radius */
+  --r-sm: 6px;
+  --r-md: 12px;
+  --r-lg: 20px;
+  --r-xl: 32px;
+
+  /* Transitions */
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur: 0.35s;
+}
+
+[data-theme="light"] {
+  --bg-base:      #F4F6FF;
+  --bg-surface:   #FFFFFF;
+  --bg-raised:    #EEF1FA;
+  --bg-overlay:   #E4E8F5;
+  --border:       rgba(0,0,0,0.09);
+  --border-accent:rgba(200,148,26,0.3);
+  --text-primary: #0A0F1E;
+  --text-secondary:#3A4260;
+  --text-muted:   #7A85A0;
+}
+
+/* ============================================================
+   RESET & BASE
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg-base);
+  color: var(--text-primary);
+  line-height: 1.65;
+  overflow-x: hidden;
+  transition: background var(--dur) var(--ease), color var(--dur) var(--ease);
+}
+img { max-width: 100%; display: block; }
+a { text-decoration: none; color: inherit; }
+ul { list-style: none; }
+button { cursor: pointer; font-family: inherit; border: none; background: none; }
+input, textarea, select { font-family: inherit; }
+
+/* ============================================================
+   TYPOGRAPHY HELPERS
+   ============================================================ */
+.display {
+  font-family: 'Bebas Neue', sans-serif;
+  letter-spacing: 0.04em;
+  line-height: 0.95;
+}
+.section-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+.section-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(2.8rem, 6vw, 5rem);
+  letter-spacing: 0.03em;
+  line-height: 0.95;
+  color: var(--text-primary);
+}
+.section-sub {
+  font-size: 1.05rem;
+  color: var(--text-secondary);
+  max-width: 56ch;
+  line-height: 1.7;
+}
+
+/* ============================================================
+   LAYOUT HELPERS
+   ============================================================ */
+.container {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 var(--sp-md);
+}
+.section-wrap {
+  padding: var(--sp-2xl) 0;
+}
+.section-header {
+  margin-bottom: var(--sp-xl);
+}
+.section-header .section-label { margin-bottom: 0.6rem; display: block; }
+
+/* ============================================================
+   BUTTONS
+   ============================================================ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.8rem 1.8rem;
+  border-radius: var(--r-sm);
+  font-weight: 600;
+  font-size: 0.9rem;
+  letter-spacing: 0.04em;
+  transition: all var(--dur) var(--ease);
+  white-space: nowrap;
+  position: relative;
+  overflow: hidden;
+}
+.btn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255,255,255,0);
+  transition: background 0.2s;
+}
+.btn:hover::after { background: rgba(255,255,255,0.07); }
+.btn:active { transform: scale(0.97); }
+
+.btn-gold {
+  background: var(--gold);
+  color: #000;
+}
+.btn-gold:hover { background: var(--gold-light); box-shadow: 0 0 28px rgba(200,148,26,0.45); }
+
+.btn-outline {
+  border: 1.5px solid var(--border);
+  color: var(--text-primary);
+  background: transparent;
+}
+.btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+
+.btn-glass {
+  background: rgba(255,255,255,0.07);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+}
+.btn-glass:hover { border-color: var(--gold); background: rgba(200,148,26,0.12); }
+
+.btn-blue {
+  background: var(--club-blue);
+  color: #fff;
+}
+.btn-blue:hover { background: var(--club-blue-light); box-shadow: 0 0 24px rgba(43,63,160,0.5); }
+
+/* ============================================================
+   GLASSMORPHISM CARD BASE
+   ============================================================ */
+.glass-card {
+  background: rgba(255,255,255,0.035);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  transition: border-color var(--dur) var(--ease), transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+}
+.glass-card:hover {
+  border-color: var(--border-accent);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+}
+[data-theme="light"] .glass-card {
+  background: rgba(255,255,255,0.7);
+  border-color: rgba(0,0,0,0.08);
+}
+
+/* ============================================================
+   SCROLL REVEAL
+   ============================================================ */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: none;
+}
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+
+/* ============================================================
+   CUSTOM CURSOR
+   ============================================================ */
+*, *::before, *::after { cursor: none !important; }
+
+.cursor-dot {
+  position: fixed;
+  top: 0; left: 0;
+  width: 6px; height: 6px;
+  background: var(--gold);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 99999;
+  transform: translate(-50%, -50%);
+  transition: width 0.2s, height 0.2s, background 0.2s;
+  mix-blend-mode: difference;
+}
+.cursor-ring {
+  position: fixed;
+  top: 0; left: 0;
+  width: 18px; height: 18px;
+  border: 1px solid rgba(200, 148, 26, 0.6);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 99998;
+  transform: translate(-50%, -50%);
+  transition: transform 0.12s ease-out, width 0.25s, height 0.25s, border-color 0.2s;
+}
+.cursor-dot.hovering { width: 6px; height: 6px; background: #fff; }
+.cursor-ring.hovering { width: 26px; height: 26px; border-color: var(--gold); }
+
+/* ============================================================
+   NAVIGATION
+   ============================================================ */
+#navbar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  padding: 0 var(--sp-md);
+  height: 68px;
+  display: flex;
+  align-items: center;
+  transition: background 0.4s var(--ease), box-shadow 0.4s var(--ease), height 0.3s;
+  /* Always transparent until scrolled */
+  background: transparent;
+}
+#navbar.scrolled {
+  background: rgba(7, 11, 20, 0.88);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  box-shadow: 0 1px 0 var(--border);
+  height: 60px;
+}
+[data-theme="light"] #navbar.scrolled {
+  background: rgba(10, 15, 40, 0.92);
+}
+
+.nav-inner {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  /* brand left, links + button grouped to the right */
+  justify-content: space-between;
+  gap: var(--sp-md);
+}
+
+/* push links flush against the Join Now button */
+.nav-links {
+  margin-left: auto;
+}
+
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-shrink: 0;
+}
+.nav-logo-svg {
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+}
+.nav-brand-text {
+  line-height: 1.15;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.nav-brand-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.05rem;
+  letter-spacing: 0.08em;
+  color: #fff;
+  white-space: nowrap;
+}
+.nav-brand-sub {
+  font-size: 0.6rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gold);
+  white-space: nowrap;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+/* top-level links */
+.nav-links > li { position: relative; list-style: none; }
+.nav-links > li > a {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.72);
+  padding: 0.5rem 0.9rem;
+  border-radius: var(--r-sm);
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  transition: color 0.2s, background 0.2s;
+  white-space: nowrap;
+}
+.nav-links > li > a:hover,
+.nav-links > li:hover > a { color: #fff; background: rgba(255,255,255,0.07); }
+.nav-links > li > a.active { color: var(--gold); }
+
+/* dropdown chevron */
+.nav-has-dropdown > a::after {
+  content: '';
+  display: inline-block;
+  width: 6px; height: 6px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: rotate(45deg) translateY(-2px);
+  transition: transform 0.2s;
+  margin-left: 2px;
+}
+.nav-has-dropdown:hover > a::after { transform: rotate(225deg) translateY(-2px); }
+
+/* dropdown panel */
+.nav-dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  min-width: 200px;
+  background: rgba(8,12,24,0.96);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,0.09);
+  border-radius: var(--r-md);
+  padding: 0.4rem;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(6px);
+  transition: opacity 0.22s var(--ease), transform 0.22s var(--ease), visibility 0.22s;
+  z-index: 200;
+  list-style: none;
+}
+.nav-has-dropdown:hover .nav-dropdown,
+.nav-has-dropdown:focus-within .nav-dropdown {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+.nav-dropdown li a {
+  display: block;
+  padding: 0.6rem 1rem;
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.62);
+  border-radius: var(--r-sm);
+  transition: color 0.18s, background 0.18s;
+  white-space: nowrap;
+}
+.nav-dropdown li a:hover { color: var(--gold); background: rgba(200,148,26,0.08); }
+.nav-dropdown li + li { margin-top: 1px; }
+
+/* thin gold top-border on dropdown */
+.nav-dropdown::before {
+  content: '';
+  position: absolute;
+  top: -1px; left: 16px; right: 16px;
+  height: 2px;
+  background: linear-gradient(to right, var(--gold), transparent);
+  border-radius: 2px;
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-shrink: 0;
+}
+
+/* Theme toggle - hidden, kept for JS reference */
+.theme-toggle { display: none; }
+
+/* Hamburger */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  width: 38px; height: 38px;
+  align-items: center; justify-content: center;
+  background: var(--bg-raised);
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+}
+.hamburger span {
+  display: block;
+  width: 20px; height: 2px;
+  background: var(--text-primary);
+  border-radius: 2px;
+  transition: all 0.3s;
+}
+.hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+/* Mobile menu */
+.mobile-menu {
+  display: none;
+  position: fixed;
+  top: 60px; left: 0; right: 0;
+  background: rgba(7, 11, 20, 0.97);
+  backdrop-filter: blur(24px);
+  border-bottom: 1px solid var(--border);
+  padding: var(--sp-sm) var(--sp-md) var(--sp-md);
+  z-index: 999;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+[data-theme="light"] .mobile-menu { background: rgba(244, 246, 255, 0.98); }
+.mobile-menu.open { display: flex; }
+.mobile-menu a {
+  padding: 0.75rem 1rem;
+  border-radius: var(--r-sm);
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  transition: all 0.2s;
+  border-bottom: 1px solid var(--border);
+}
+.mobile-menu a:hover { color: var(--text-primary); background: rgba(255,255,255,0.05); }
+.mobile-menu .btn { margin-top: 0.5rem; text-align: center; justify-content: center; }
+
+/* Mobile accordion */
+.mobile-accordion { border-bottom: 1px solid var(--border); }
+.mobile-accordion-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  background: none;
+  border: none;
+  text-align: left;
+  transition: color 0.2s;
+}
+.mobile-accordion-btn:hover { color: var(--text-primary); }
+.mobile-accordion-chevron {
+  display: inline-block;
+  width: 7px; height: 7px;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(45deg);
+  transition: transform 0.25s;
+  flex-shrink: 0;
+}
+.mobile-accordion-btn[aria-expanded="true"] .mobile-accordion-chevron {
+  transform: rotate(225deg);
+}
+.mobile-accordion-body {
+  display: none;
+  flex-direction: column;
+  padding: 0 0 0.4rem 1rem;
+}
+.mobile-accordion-body.open { display: flex; }
+.mobile-sub-link {
+  padding: 0.55rem 1rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  border-radius: var(--r-sm);
+  transition: color 0.2s, background 0.2s;
+  border-bottom: none !important;
+}
+.mobile-sub-link:hover { color: var(--gold) !important; background: rgba(200,148,26,0.06); }
+
+@media (max-width: 1024px) {
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+}
+@media (max-width: 480px) {
+  .nav-brand-text { display: none; }
+}
+
+/* ============================================================
+   HERO SECTION
+   ============================================================ */
+#hero {
+  position: relative;
+  min-height: 100dvh;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+}
+
+.hero-video-wrap {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.hero-video-wrap video {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+.hero-video-wrap::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to bottom,
+      rgba(5,8,18,0.45) 0%,
+      rgba(5,8,18,0.2)  35%,
+      rgba(5,8,18,0.55) 70%,
+      rgba(5,8,18,0.92) 100%),
+    linear-gradient(to right, rgba(5,8,18,0.65) 0%, rgba(5,8,18,0.1) 55%);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 1280px;
+  width: 100%;
+  margin: 0 auto;
+  /* top padding clears the fixed navbar height (68px) + small breathing room */
+  padding: 80px var(--sp-md) 5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  min-height: 100dvh;
+}
+
+/* BIG STACKED HEADLINE — sized so all three lines + sub + buttons fit in one viewport */
+.hero-headline {
+  font-family: 'Bebas Neue', sans-serif;
+  /* clamp: 3.8rem phones → ~9.5vw fluid → 9rem max on large screens */
+  font-size: clamp(3.8rem, 9.5vw, 9rem);
+  line-height: 0.9;
+  letter-spacing: 0.01em;
+  color: #FFFFFF;
+  margin-bottom: 1.2rem;
+  display: flex;
+  flex-direction: column;
+}
+.hero-headline .line-gold { color: var(--gold); }
+
+/* morphing word inherits headline style, no extra markup needed */
+#hero-morph-word {
+  display: block;
+  min-height: 1em; /* prevents layout jump during morph */
+}
+
+
+/* Sub copy */
+.hero-sub {
+  font-size: clamp(0.88rem, 1.6vw, 1rem);
+  color: rgba(255,255,255,0.55);
+  font-weight: 400;
+  line-height: 1.65;
+  margin-bottom: 2.4rem;
+  max-width: 44ch;
+}
+
+/* CTAs */
+.hero-ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+}
+.hero-ctas .btn {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.85rem 1.8rem;
+}
+
+/* ============================================================
+   FROSTED GLASS 3D TILT  (ported from FrostedGlassCard component)
+   Applies to: .tilt-btn wrapper elements
+   ============================================================ */
+.tilt-wrap {
+  display: inline-block;
+  /* perspective gives the 3D depth for child transforms */
+  perspective: 600px;
+}
+.tilt-wrap .btn {
+  /* smooth return to flat when mouse leaves */
+  transition: transform 0.25s cubic-bezier(0.22,1,0.36,1),
+              box-shadow 0.25s cubic-bezier(0.22,1,0.36,1),
+              background 0.25s, border-color 0.25s;
+  transform-style: preserve-3d;
+  will-change: transform;
+  position: relative;
+  overflow: hidden;
+}
+/* Glare layer — moves with --mouse-x / --mouse-y CSS vars set by JS */
+.tilt-wrap .btn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    circle 80px at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    rgba(255,255,255,0.18) 0%,
+    transparent 70%
+  );
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+.tilt-wrap:hover .btn::after { opacity: 1; }
+.btn-hero-primary {
+  background: var(--gold);
+  color: #000;
+  border: none;
+}
+.btn-hero-primary:hover { background: var(--gold-light); box-shadow: 0 0 32px rgba(200,148,26,0.5); }
+.btn-hero-secondary {
+  background: transparent;
+  color: #fff;
+  border: 1.5px solid rgba(255,255,255,0.35);
+}
+.btn-hero-secondary:hover { border-color: rgba(255,255,255,0.7); background: rgba(255,255,255,0.06); }
+.btn-hero-ghost {
+  background: transparent;
+  color: rgba(255,255,255,0.6);
+  border: 1.5px solid rgba(255,255,255,0.15);
+}
+.btn-hero-ghost:hover { color: #fff; border-color: rgba(255,255,255,0.4); }
+
+/* Scroll indicator */
+.hero-scroll {
+  position: absolute;
+  bottom: 2rem;
+  right: var(--sp-md);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  z-index: 2;
+}
+.hero-scroll-label {
+  font-size: 0.62rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.3);
+  writing-mode: vertical-rl;
+}
+.scroll-arrow {
+  width: 32px; height: 32px;
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  animation: bounce 2.5s ease-in-out infinite;
+}
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(6px); }
+}
+.scroll-arrow svg { color: rgba(255,255,255,0.45); }
+
+@media (max-width: 640px) {
+  .hero-content { padding-bottom: 5rem; }
+  .hero-ctas { flex-direction: column; }
+  .hero-ctas .btn { width: 100%; justify-content: center; }
+  .hero-scroll { right: 1rem; bottom: 1.2rem; }
+}
+
+/* ============================================================
+   STATS BAR
+   ============================================================ */
+/* ============================================================
+   STATS BAR  (original blue design)
+   ============================================================ */
+#stats {
+  background: linear-gradient(135deg, var(--club-blue-dark) 0%, #0F1A5A 100%);
+  padding: var(--sp-xl) 0;
+  position: relative;
+  overflow: hidden;
+}
+#stats::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  pointer-events: none;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  position: relative;
+}
+
+/* Rounded container backdrop */
+.stats-grid::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255,255,255,0.06);
+  border-radius: var(--r-lg);
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.stat-item {
+  text-align: center;
+  padding: var(--sp-lg) var(--sp-sm);
+  position: relative;
+}
+
+/* Vertical dividers between items */
+.stat-item + .stat-item::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 20%; bottom: 20%;
+  width: 1px;
+  background: rgba(255,255,255,0.15);
+}
+
+.stat-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.stat-number {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(3rem, 6vw, 5rem);
+  letter-spacing: 0.02em;
+  color: var(--gold-light);
+  line-height: 1;
+  display: block;
+}
+
+.stat-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+  display: block;
+}
+
+/* remove the bottom-line element — not needed in this style */
+.stat-bottom-line { display: none; }
+
+@media (max-width: 640px) {
+  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+  .stat-item:nth-child(odd)::before { display: none; }
+  .stat-item:nth-child(n+3) { border-top: 1px solid rgba(255,255,255,0.08); }
+}
+
+/* ============================================================
+   RIGHT-SIDE SCROLL NAV — vertical track with sliding dot
+   ============================================================ */
+#side-nav {
+  position: fixed;
+  right: 22px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 900;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* total height of the track */
+  height: 220px;
+}
+
+/* the thin vertical line */
+#side-nav-track {
+  position: absolute;
+  top: 0; bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1.5px;
+  background: rgba(255,255,255,0.15);
+  border-radius: 2px;
+}
+
+/* the sliding active dot */
+#side-nav-thumb {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--gold);
+  box-shadow: 0 0 8px rgba(200,148,26,0.8);
+  transition: top 0.4s cubic-bezier(0.22,1,0.36,1);
+  top: 0%;
+  pointer-events: none;
+}
+
+/* invisible hit-targets stacked along the track */
+.side-nav-item {
+  position: absolute;
+  left: 50%;
+  /* match thumb: centre both axes so top:X% lands at exactly the same pixel */
+  transform: translate(-50%, -50%);
+  width: 20px; height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.side-nav-item:hover .side-nav-label { opacity: 1; transform: translateX(0); }
+
+.side-nav-label {
+  position: absolute;
+  right: 22px;
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #fff;
+  background: rgba(7,11,20,0.85);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--border);
+  padding: 0.2rem 0.55rem;
+  border-radius: 4px;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateX(6px);
+  transition: opacity 0.2s, transform 0.2s;
+  pointer-events: none;
+}
+
+.side-nav-dot {
+  display: block;
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.25);
+  border: none;
+  transition: background 0.2s;
+}
+.side-nav-item:hover .side-nav-dot { background: rgba(255,255,255,0.6); }
+
+@media (max-width: 900px) { #side-nav { display: none; } }
+
+/* ============================================================
+   ABOUT
+   ============================================================ */
+#about { background: var(--bg-base); }
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--sp-xl);
+  align-items: center;
+  margin-bottom: var(--sp-xl);
+}
+.about-text .section-title { margin: 0.5rem 0 var(--sp-sm); }
+.about-text p {
+  color: var(--text-secondary);
+  margin-bottom: var(--sp-sm);
+  font-size: 1.02rem;
+}
+.about-text p strong { color: var(--text-primary); }
+
+/* PLACEHOLDER: Replace with real about image */
+.about-img-wrap {
+  position: relative;
+  border-radius: var(--r-xl);
+  overflow: hidden;
+  aspect-ratio: 4/3;
+}
+.about-img-wrap img { width: 100%; height: 100%; object-fit: cover; }
+.about-img-wrap::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 2px solid var(--border-accent);
+  border-radius: var(--r-xl);
+  pointer-events: none;
+}
+.about-img-badge {
+  position: absolute;
+  bottom: var(--sp-sm); left: var(--sp-sm);
+  background: rgba(7,11,20,0.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--border-accent);
+  border-radius: var(--r-md);
+  padding: 0.6rem 1rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--gold-light);
+  text-transform: uppercase;
+}
+
+.values-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--sp-sm);
+}
+.value-card {
+  padding: var(--sp-lg);
+  border-radius: var(--r-lg);
+  background: var(--bg-raised);
+  border: 1px solid var(--border);
+  transition: all var(--dur) var(--ease);
+}
+.value-card:hover { border-color: var(--border-accent); transform: translateY(-3px); }
+.value-icon {
+  width: 48px; height: 48px;
+  border-radius: var(--r-md);
+  background: rgba(200,148,26,0.12);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.4rem;
+  margin-bottom: var(--sp-sm);
+}
+.value-card h3 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.5rem;
+  letter-spacing: 0.06em;
+  color: var(--text-primary);
+  margin-bottom: 0.4rem;
+}
+.value-card p { font-size: 0.9rem; color: var(--text-secondary); }
+
+@media (max-width: 900px) {
+  .about-grid { grid-template-columns: 1fr; }
+  .about-img-wrap { aspect-ratio: 16/9; }
+  .values-grid { grid-template-columns: 1fr; gap: var(--sp-xs); }
+}
+
+/* ============================================================
+   TEAMS
+   ============================================================ */
+#teams { background: var(--bg-surface); }
+
+.teams-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: var(--sp-lg);
+}
+.filter-btn {
+  padding: 0.45rem 1.1rem;
+  border-radius: 99px;
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.filter-btn:hover,
+.filter-btn.active {
+  background: var(--club-blue);
+  border-color: var(--club-blue-light);
+  color: #fff;
+}
+
+.teams-bento {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--sp-sm);
+}
+.team-card {
+  padding: var(--sp-lg);
+  border-radius: var(--r-lg);
+  background: rgba(255,255,255,0.025);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  transition: all var(--dur) var(--ease);
+  cursor: default;
+}
+.team-card:hover {
+  border-color: var(--club-blue-light);
+  transform: translateY(-4px);
+  box-shadow: 0 16px 50px rgba(43,63,160,0.2);
+}
+.team-card.featured {
+  grid-column: span 2;
+  background: linear-gradient(135deg, rgba(43,63,160,0.3) 0%, rgba(11,16,40,0.5) 100%);
+  border-color: rgba(43,63,160,0.5);
+}
+.team-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.25rem 0.7rem;
+  border-radius: 99px;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: rgba(200,148,26,0.12);
+  border: 1px solid rgba(200,148,26,0.25);
+  color: var(--gold-light);
+  width: fit-content;
+}
+.team-card h3 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.7rem;
+  letter-spacing: 0.04em;
+  color: var(--text-primary);
+  line-height: 1;
+}
+.team-card.featured h3 { font-size: 2.2rem; }
+.team-grade {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--club-blue-light);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.team-card p { font-size: 0.88rem; color: var(--text-secondary); flex: 1; }
+.team-card .btn { width: fit-content; font-size: 0.8rem; padding: 0.55rem 1.2rem; margin-top: auto; }
+
+[data-theme="light"] .team-card { background: rgba(255,255,255,0.8); }
+
+@media (max-width: 900px) { .teams-bento { grid-template-columns: 1fr 1fr; } .team-card.featured { grid-column: span 2; } }
+@media (max-width: 600px) { .teams-bento { grid-template-columns: 1fr; } .team-card.featured { grid-column: span 1; } }
+
+/* ============================================================
+   TRAINING
+   ============================================================ */
+#training { background: var(--bg-base); }
+
+.training-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--sp-lg);
+}
+.training-card {
+  padding: var(--sp-lg);
+  border-radius: var(--r-lg);
+  background: var(--bg-raised);
+  border: 1px solid var(--border);
+}
+.training-card h3 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.6rem;
+  letter-spacing: 0.05em;
+  color: var(--text-primary);
+  margin-bottom: var(--sp-sm);
+  display: flex; align-items: center; gap: 0.6rem;
+}
+.training-sessions { display: flex; flex-direction: column; gap: 0.6rem; }
+.session-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  border-radius: var(--r-sm);
+  background: var(--bg-overlay);
+  border: 1px solid var(--border);
+  font-size: 0.88rem;
+}
+.session-day {
+  font-weight: 600;
+  color: var(--text-primary);
+  min-width: 90px;
+}
+.session-time { color: var(--gold-light); font-weight: 500; }
+.session-group {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-align: right;
+}
+.venue-card {
+  padding: var(--sp-lg);
+  border-radius: var(--r-lg);
+  background: var(--bg-raised);
+  border: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-sm);
+}
+.venue-info p { font-size: 0.9rem; color: var(--text-secondary); display: flex; gap: 0.5rem; align-items: flex-start; }
+.venue-info p span:first-child { font-size: 1.1rem; flex-shrink: 0; margin-top: 1px; }
+/* PLACEHOLDER: Replace with Google Maps embed */
+.map-placeholder {
+  height: 220px;
+  border-radius: var(--r-md);
+  background: var(--bg-overlay);
+  border: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  color: var(--text-muted);
+  font-size: 0.82rem;
+}
+@media (max-width: 760px) { .training-grid { grid-template-columns: 1fr; } }
+
+/* ============================================================
+   FIXTURES
+   ============================================================ */
+#fixtures { background: var(--bg-surface); }
+
+.fixtures-season-toggle {
+  display: inline-flex;
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  overflow: hidden;
+  margin-bottom: var(--sp-lg);
+}
+.season-btn {
+  padding: 0.55rem 1.3rem;
+  font-size: 0.83rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: var(--text-secondary);
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: none;
+}
+.season-btn.active { background: var(--club-blue); color: #fff; }
+
+.fixtures-cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--sp-lg);
+  margin-bottom: var(--sp-lg);
+}
+.fixtures-block h3, .results-block h3 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.5rem;
+  letter-spacing: 0.05em;
+  color: var(--text-primary);
+  margin-bottom: var(--sp-sm);
+  display: flex; align-items: center; gap: 0.5rem;
+}
+.fixture-card {
+  padding: 1rem var(--sp-sm);
+  border-radius: var(--r-md);
+  background: var(--bg-raised);
+  border: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-bottom: 0.5rem;
+  transition: border-color 0.2s;
+}
+.fixture-card:hover { border-color: var(--club-blue-light); }
+.fixture-meta {
+  display: flex; justify-content: space-between; align-items: center;
+}
+.fixture-date { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gold); }
+.fixture-comp { font-size: 0.72rem; color: var(--text-muted); }
+.fixture-teams {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--text-primary);
+}
+.fixture-venue { font-size: 0.8rem; color: var(--text-secondary); }
+
+.result-card {
+  padding: 1rem var(--sp-sm);
+  border-radius: var(--r-md);
+  background: var(--bg-raised);
+  border-left: 3px solid;
+  margin-bottom: 0.5rem;
+  display: flex; flex-direction: column; gap: 0.3rem;
+}
+.result-card.win { border-color: #22c55e; }
+.result-card.loss { border-color: #ef4444; }
+.result-card.draw { border-color: var(--gold); }
+.result-outcome {
+  font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+}
+.result-card.win .result-outcome { color: #22c55e; }
+.result-card.loss .result-outcome { color: #ef4444; }
+.result-card.draw .result-outcome { color: var(--gold); }
+.result-teams { font-weight: 600; font-size: 0.95rem; color: var(--text-primary); }
+.result-score { font-size: 0.82rem; color: var(--text-secondary); }
+
+.fixtures-cta { text-align: center; padding-top: var(--sp-sm); }
+@media (max-width: 700px) { .fixtures-cols { grid-template-columns: 1fr; } }
+
+/* ============================================================
+   MEMBERSHIP
+   ============================================================ */
+#membership {
+  background: var(--bg-base);
+  position: relative;
+  overflow: hidden;
+}
+#membership::before {
+  content: '';
+  position: absolute;
+  top: -200px; right: -200px;
+  width: 600px; height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(43,63,160,0.12) 0%, transparent 70%);
+  pointer-events: none;
+}
+.membership-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--sp-xl);
+  align-items: start;
+}
+.membership-intro .section-title { margin: 0.5rem 0 var(--sp-sm); }
+.membership-intro p { color: var(--text-secondary); margin-bottom: var(--sp-sm); font-size: 1.02rem; }
+.membership-steps { display: flex; flex-direction: column; gap: 0.75rem; margin: var(--sp-md) 0; }
+.step-row {
+  display: flex; align-items: flex-start; gap: 1rem;
+  padding: 1rem;
+  border-radius: var(--r-md);
+  background: var(--bg-raised);
+  border: 1px solid var(--border);
+}
+.step-num {
+  width: 32px; height: 32px; flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--club-blue);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.85rem;
+  display: flex; align-items: center; justify-content: center;
+}
+.step-row h4 { font-size: 0.9rem; font-weight: 600; color: var(--text-primary); margin-bottom: 0.2rem; }
+.step-row p { font-size: 0.82rem; color: var(--text-secondary); }
+
+.membership-plans { display: flex; flex-direction: column; gap: var(--sp-sm); }
+.plan-card {
+  padding: var(--sp-md) var(--sp-lg);
+  border-radius: var(--r-lg);
+  background: var(--bg-raised);
+  border: 1px solid var(--border);
+  transition: all var(--dur) var(--ease);
+}
+.plan-card:hover { border-color: var(--border-accent); transform: translateX(4px); }
+.plan-card.featured-plan {
+  background: linear-gradient(135deg, rgba(43,63,160,0.25) 0%, rgba(43,63,160,0.08) 100%);
+  border-color: rgba(43,63,160,0.5);
+}
+.plan-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.75rem; }
+.plan-name { font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; letter-spacing: 0.05em; color: var(--text-primary); }
+/* PLACEHOLDER: Replace with real membership prices */
+.plan-price { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; color: var(--gold-light); letter-spacing: 0.02em; }
+.plan-period { font-size: 0.72rem; color: var(--text-muted); vertical-align: super; }
+.plan-features { display: flex; flex-direction: column; gap: 0.3rem; }
+.plan-features li { font-size: 0.85rem; color: var(--text-secondary); display: flex; gap: 0.5rem; }
+.plan-features li::before { content: '✓'; color: var(--gold); font-weight: 700; }
+
+@media (max-width: 900px) { .membership-grid { grid-template-columns: 1fr; } }
+
+/* ============================================================
+   COACHES
+   ============================================================ */
+#coaches { background: var(--bg-surface); }
+
+.coaches-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--sp-sm);
+}
+.coach-card {
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  background: var(--bg-raised);
+  border: 1px solid var(--border);
+  transition: all var(--dur) var(--ease);
+}
+.coach-card:hover { border-color: var(--border-accent); transform: translateY(-4px); box-shadow: 0 16px 48px rgba(0,0,0,0.25); }
+/* PLACEHOLDER: Replace with real coach photos */
+.coach-photo {
+  width: 100%;
+  aspect-ratio: 3/4;
+  object-fit: cover;
+  object-position: top;
+  display: block;
+}
+.coach-info { padding: 1rem; }
+.coach-name { font-family: 'Bebas Neue', sans-serif; font-size: 1.3rem; letter-spacing: 0.04em; color: var(--text-primary); }
+.coach-role {
+  font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 0.4rem; display: block;
+}
+.coach-desc { font-size: 0.82rem; color: var(--text-secondary); }
+
+@media (max-width: 900px) { .coaches-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 500px) { .coaches-grid { grid-template-columns: 1fr 1fr; } }
+
+/* ============================================================
+   GALLERY
+   ============================================================ */
+#gallery { background: var(--bg-base); }
+
+.gallery-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: var(--sp-md);
+}
+
+.gallery-masonry {
+  columns: 3;
+  column-gap: var(--sp-sm);
+}
+.gallery-item {
+  break-inside: avoid;
+  margin-bottom: var(--sp-sm);
+  border-radius: var(--r-md);
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+}
+/* PLACEHOLDER: Replace with real gallery photos */
+.gallery-item img {
+  width: 100%;
+  display: block;
+  transition: transform 0.5s var(--ease);
+}
+.gallery-item:hover img { transform: scale(1.06); }
+.gallery-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(7,11,20,0);
+  display: flex; align-items: flex-end; padding: 1rem;
+  transition: background 0.3s;
+}
+.gallery-item:hover .gallery-overlay { background: rgba(7,11,20,0.6); }
+.gallery-caption {
+  font-size: 0.82rem; font-weight: 500; color: #fff;
+  opacity: 0; transform: translateY(6px);
+  transition: all 0.3s;
+}
+.gallery-item:hover .gallery-caption { opacity: 1; transform: none; }
+
+@media (max-width: 760px) { .gallery-masonry { columns: 2; } }
+@media (max-width: 480px) { .gallery-masonry { columns: 2; } }
+
+/* ============================================================
+   NEWS
+   ============================================================ */
+#news { background: var(--bg-surface); }
+
+.news-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--sp-sm);
+}
+.news-card {
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  background: var(--bg-raised);
+  border: 1px solid var(--border);
+  display: flex; flex-direction: column;
+  transition: all var(--dur) var(--ease);
+}
+.news-card:hover { border-color: var(--border-accent); transform: translateY(-4px); box-shadow: 0 16px 48px rgba(0,0,0,0.2); }
+/* PLACEHOLDER: Replace with real news images */
+.news-img-wrap {
+  aspect-ratio: 16/9;
+  overflow: hidden;
+}
+.news-img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s var(--ease); }
+.news-card:hover .news-img-wrap img { transform: scale(1.05); }
+.news-body { padding: var(--sp-md); display: flex; flex-direction: column; flex: 1; gap: 0.5rem; }
+.news-tag {
+  display: inline-block;
+  padding: 0.2rem 0.65rem;
+  border-radius: 99px;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  width: fit-content;
+}
+.tag-match { background: rgba(43,63,160,0.2); color: #7B96FF; border: 1px solid rgba(43,63,160,0.4); }
+.tag-club  { background: rgba(200,148,26,0.15); color: var(--gold-light); border: 1px solid rgba(200,148,26,0.3); }
+.tag-junior { background: rgba(34,197,94,0.12); color: #4ade80; border: 1px solid rgba(34,197,94,0.25); }
+.news-date { font-size: 0.72rem; color: var(--text-muted); letter-spacing: 0.05em; }
+.news-card h3 { font-size: 1rem; font-weight: 600; color: var(--text-primary); line-height: 1.4; }
+.news-card p { font-size: 0.85rem; color: var(--text-secondary); flex: 1; }
+.news-card .btn { margin-top: auto; align-self: flex-start; font-size: 0.78rem; padding: 0.5rem 1.1rem; }
+
+@media (max-width: 900px) { .news-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 560px) { .news-grid { grid-template-columns: 1fr; } }
+
+/* ============================================================
+   SPONSORS
+   ============================================================ */
+#sponsors { background: var(--bg-base); }
+
+.sponsors-message {
+  text-align: center;
+  max-width: 54ch;
+  margin: 0 auto var(--sp-xl);
+}
+.sponsors-message .section-title { margin: 0.5rem 0 var(--sp-sm); }
+.sponsors-message p { color: var(--text-secondary); font-size: 1rem; }
+
+/* PLACEHOLDER: Replace with real sponsor logos */
+.sponsors-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--sp-sm);
+  margin-bottom: var(--sp-lg);
+}
+.sponsor-card {
+  aspect-ratio: 3/2;
+  border-radius: var(--r-lg);
+  background: var(--bg-raised);
+  border: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  transition: all var(--dur) var(--ease);
+  padding: var(--sp-sm);
+}
+.sponsor-card:hover { border-color: var(--border-accent); transform: translateY(-3px); }
+.sponsor-logo-ph { font-size: 0.7rem; color: var(--text-muted); letter-spacing: 0.1em; text-align: center; }
+.sponsor-logo-icon { font-size: 2rem; opacity: 0.2; }
+.sponsors-cta { text-align: center; }
+
+@media (max-width: 700px) { .sponsors-grid { grid-template-columns: repeat(2, 1fr); } }
+
+/* ============================================================
+   CONTACT
+   ============================================================ */
+#contact { background: var(--bg-surface); }
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: var(--sp-xl);
+  align-items: start;
+}
+.contact-info { display: flex; flex-direction: column; gap: var(--sp-md); }
+.contact-info .section-title { margin: 0.5rem 0 var(--sp-sm); }
+.contact-detail {
+  display: flex; gap: 1rem; align-items: flex-start;
+}
+.contact-icon {
+  width: 42px; height: 42px; flex-shrink: 0;
+  border-radius: var(--r-md);
+  background: rgba(43,63,160,0.15);
+  border: 1px solid rgba(43,63,160,0.3);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.1rem;
+}
+.contact-detail-text label { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); display: block; margin-bottom: 0.2rem; }
+.contact-detail-text span { font-size: 0.95rem; color: var(--text-primary); }
+.contact-detail-text a { color: var(--gold-light); }
+.contact-detail-text a:hover { color: var(--gold); text-decoration: underline; }
+
+.social-links { display: flex; gap: 0.5rem; margin-top: 0.5rem; }
+.social-link {
+  width: 42px; height: 42px;
+  border-radius: var(--r-md);
+  background: var(--bg-raised);
+  border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.2rem;
+  transition: all 0.2s;
+}
+.social-link:hover { border-color: var(--gold); color: var(--gold); background: rgba(200,148,26,0.08); }
+
+/* PLACEHOLDER: Replace with Google Maps embed */
+.map-embed-ph {
+  height: 220px;
+  border-radius: var(--r-lg);
+  background: var(--bg-overlay);
+  border: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  margin-top: var(--sp-sm);
+}
+
+.contact-form-wrap {
+  padding: var(--sp-xl);
+  border-radius: var(--r-xl);
+  background: var(--bg-raised);
+  border: 1px solid var(--border);
+}
+.contact-form-wrap h3 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2rem;
+  letter-spacing: 0.04em;
+  color: var(--text-primary);
+  margin-bottom: var(--sp-md);
+}
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-sm); }
+.form-group { display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: var(--sp-sm); }
+.form-group label { font-size: 0.8rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-secondary); }
+.form-group input,
+.form-group textarea,
+.form-group select {
+  padding: 0.8rem 1rem;
+  border-radius: var(--r-sm);
+  background: var(--bg-overlay);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  font-size: 0.95rem;
+  transition: border-color 0.2s;
+  outline: none;
+}
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: var(--club-blue-light);
+  box-shadow: 0 0 0 3px rgba(43,63,160,0.12);
+}
+.form-group textarea { resize: vertical; min-height: 120px; }
+[data-theme="light"] .form-group input,
+[data-theme="light"] .form-group textarea { background: #fff; }
+
+@media (max-width: 900px) { .contact-grid { grid-template-columns: 1fr; } }
+@media (max-width: 500px) { .form-row { grid-template-columns: 1fr; } .contact-form-wrap { padding: var(--sp-md); } }
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+#footer {
+  background: #040710;
+  border-top: 1px solid var(--border);
+  padding: var(--sp-xl) 0 var(--sp-md);
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  gap: var(--sp-lg);
+  margin-bottom: var(--sp-xl);
+}
+.footer-brand { display: flex; flex-direction: column; gap: var(--sp-sm); }
+.footer-brand-row { display: flex; align-items: center; gap: 0.75rem; }
+.footer-brand p { font-size: 0.88rem; color: var(--text-secondary); max-width: 32ch; line-height: 1.6; }
+.footer-col h4 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.1rem;
+  letter-spacing: 0.1em;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+}
+.footer-col ul { display: flex; flex-direction: column; gap: 0.5rem; }
+.footer-col ul a { font-size: 0.85rem; color: var(--text-secondary); transition: color 0.2s; }
+.footer-col ul a:hover { color: var(--gold-light); }
+.footer-bottom {
+  border-top: 1px solid var(--border);
+  padding-top: var(--sp-md);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+.footer-bottom p { font-size: 0.78rem; color: var(--text-muted); }
+.footer-bottom a { color: var(--gold); }
+.footer-social { display: flex; gap: 0.4rem; }
+.footer-social a {
+  width: 34px; height: 34px;
+  border-radius: var(--r-sm);
+  background: var(--bg-raised);
+  border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1rem;
+  color: var(--text-secondary);
+  transition: all 0.2s;
+}
+.footer-social a:hover { border-color: var(--gold); color: var(--gold); }
+@media (max-width: 900px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 540px) { .footer-grid { grid-template-columns: 1fr; } .footer-bottom { flex-direction: column; text-align: center; } }
+
+/* ============================================================
+   DIVIDERS / DECORATIVE
+   ============================================================ */
+.section-divider {
+  width: 60px; height: 3px;
+  background: linear-gradient(to right, var(--gold), transparent);
+  border-radius: 2px;
+  margin-top: 0.75rem;
+}
+
+/* Gold accent line */
+.gold-line {
+  width: 40px;
+  height: 3px;
+  background: var(--gold);
+  border-radius: 2px;
+  margin: 0.5rem 0 1rem;
+}
+
+/* ============================================================
+   LIGHT MODE OVERRIDES
+   ============================================================ */
+[data-theme="light"] .hero-video-wrap::after {
+  background:
+    linear-gradient(to bottom, rgba(10,20,60,0.6) 0%, rgba(10,20,60,0.3) 40%, rgba(10,20,60,0.75) 80%, #F4F6FF 100%),
+    linear-gradient(to right, rgba(10,20,60,0.55) 0%, transparent 60%);
+}
+[data-theme="light"] #stats { background: linear-gradient(135deg, var(--club-blue-dark) 0%, #0F1A5A 100%); }
+[data-theme="light"] .training-card,
+[data-theme="light"] .venue-card,
+[data-theme="light"] .plan-card,
+[data-theme="light"] .coach-card,
+[data-theme="light"] .news-card,
+[data-theme="light"] .sponsor-card,
+[data-theme="light"] .contact-form-wrap,
+[data-theme="light"] .value-card,
+[data-theme="light"] .step-row { background: #fff; }
+[data-theme="light"] .footer-col ul a { color: #5A6380; }
+[data-theme="light"] #footer { background: #E8EBF5; }
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     NAVIGATION
+     ============================================================ -->
+<nav id="navbar">
+  <div class="nav-inner">
+
+    <!-- BRAND / LOGO -->
+    <a href="#home" class="nav-brand">
+      <!-- Club crest SVG -->
+      <svg class="nav-logo-svg" viewBox="0 0 100 112" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Shield body -->
+        <path d="M50 4 L95 18 L95 58 Q95 92 50 108 Q5 92 5 58 L5 18 Z" fill="#2B3FA0"/>
+        <!-- Inner shield border -->
+        <path d="M50 9 L90 21 L90 58 Q90 88 50 103 Q10 88 10 58 L10 21 Z" fill="none" stroke="rgba(255,255,255,0.35)" stroke-width="1.2"/>
+        <!-- Outer shield border -->
+        <path d="M50 4 L95 18 L95 58 Q95 92 50 108 Q5 92 5 58 L5 18 Z" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="1.5"/>
+
+        <!-- Top-left triangle (pointing up) -->
+        <polygon points="22,14 30,35 14,35" fill="white"/>
+        <!-- Top-right triangle (pointing up) -->
+        <polygon points="78,14 86,35 70,35" fill="white"/>
+
+        <!-- E-R label -->
+        <text x="50" y="32" text-anchor="middle" font-family="Arial,sans-serif" font-weight="700" font-size="14" fill="white" letter-spacing="1">E-R</text>
+
+        <!-- Chevron divider — two angled lines forming a V pointing up -->
+        <polyline points="10,54 50,40 90,54" fill="none" stroke="white" stroke-width="2.2" stroke-linejoin="round"/>
+        <polyline points="14,60 50,47 86,60" fill="none" stroke="white" stroke-width="1.2" stroke-linejoin="round"/>
+
+        <!-- D label (above bottom triangle) -->
+        <text x="50" y="74" text-anchor="middle" font-family="Arial,sans-serif" font-weight="700" font-size="11" fill="white">D</text>
+
+        <!-- Bottom triangle (pointing up, centred) -->
+        <polygon points="50,78 61,100 39,100" fill="white"/>
+
+        <!-- C  C labels flanking the bottom triangle -->
+        <text x="30" y="100" text-anchor="middle" font-family="Arial,sans-serif" font-weight="700" font-size="11" fill="white">C</text>
+        <text x="70" y="100" text-anchor="middle" font-family="Arial,sans-serif" font-weight="700" font-size="11" fill="white">C</text>
+      </svg>
+      <div class="nav-brand-text">
+        <div class="nav-brand-name">Eden Roskill CC</div>
+        <div class="nav-brand-sub">Est. 1903 &bull; Mt Roskill</div>
+      </div>
+    </a>
+
+    <!-- DESKTOP NAV LINKS -->
+    <ul class="nav-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+
+      <!-- PLAY CRICKET dropdown -->
+      <li class="nav-has-dropdown">
+        <a href="#teams">Play Cricket</a>
+        <ul class="nav-dropdown">
+          <li><a href="#teams">Teams</a></li>
+          <li><a href="#training">Training</a></li>
+          <li><a href="#coaches">Coaches</a></li>
+          <li><a href="#teams">Junior Cricket</a></li>
+          <li><a href="#teams">Senior Cricket</a></li>
+        </ul>
+      </li>
+
+      <li><a href="#fixtures">Fixtures</a></li>
+
+      <!-- NEWS dropdown -->
+      <li class="nav-has-dropdown">
+        <a href="#news">News</a>
+        <ul class="nav-dropdown">
+          <li><a href="#news">Club News</a></li>
+          <li><a href="#gallery">Gallery</a></li>
+        </ul>
+      </li>
+
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+
+    <!-- ACTIONS -->
+    <div class="nav-actions">
+      <div class="tilt-wrap"><a href="#membership" class="btn btn-gold">Join Now</a></div>
+      <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu" role="navigation">
+  <a href="#home"     class="mobile-link">Home</a>
+  <a href="#about"    class="mobile-link">About</a>
+
+  <!-- PLAY CRICKET accordion -->
+  <div class="mobile-accordion">
+    <button class="mobile-accordion-btn" aria-expanded="false">
+      Play Cricket
+      <span class="mobile-accordion-chevron"></span>
+    </button>
+    <div class="mobile-accordion-body">
+      <a href="#teams"    class="mobile-sub-link">Teams</a>
+      <a href="#training" class="mobile-sub-link">Training</a>
+      <a href="#coaches"  class="mobile-sub-link">Coaches</a>
+      <a href="#teams"    class="mobile-sub-link">Junior Cricket</a>
+      <a href="#teams"    class="mobile-sub-link">Senior Cricket</a>
+    </div>
+  </div>
+
+  <a href="#fixtures" class="mobile-link">Fixtures</a>
+
+  <!-- NEWS accordion -->
+  <div class="mobile-accordion">
+    <button class="mobile-accordion-btn" aria-expanded="false">
+      News
+      <span class="mobile-accordion-chevron"></span>
+    </button>
+    <div class="mobile-accordion-body">
+      <a href="#news"    class="mobile-sub-link">Club News</a>
+      <a href="#gallery" class="mobile-sub-link">Gallery</a>
+    </div>
+  </div>
+
+  <a href="#contact"    class="mobile-link">Contact</a>
+  <a href="#membership" class="btn btn-gold" style="margin-top:0.75rem;justify-content:center;">Join Now</a>
+</div>
+
+
+<!-- CUSTOM CURSOR -->
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- RIGHT SIDE SCROLL NAV — track + sliding thumb + hit targets -->
+<nav id="side-nav" aria-label="Page sections">
+  <div id="side-nav-track"></div>
+  <div id="side-nav-thumb"></div>
+  <!-- hit targets are positioned by JS after layout -->
+  <div class="side-nav-item" data-section="home">    <a href="#home"       class="side-nav-dot"></a><span class="side-nav-label">Home</span></div>
+  <div class="side-nav-item" data-section="about">   <a href="#about"      class="side-nav-dot"></a><span class="side-nav-label">About</span></div>
+  <div class="side-nav-item" data-section="teams">   <a href="#teams"      class="side-nav-dot"></a><span class="side-nav-label">Teams</span></div>
+  <div class="side-nav-item" data-section="training"><a href="#training"   class="side-nav-dot"></a><span class="side-nav-label">Training</span></div>
+  <div class="side-nav-item" data-section="fixtures"><a href="#fixtures"   class="side-nav-dot"></a><span class="side-nav-label">Fixtures</span></div>
+  <div class="side-nav-item" data-section="membership"><a href="#membership" class="side-nav-dot"></a><span class="side-nav-label">Join</span></div>
+  <div class="side-nav-item" data-section="coaches"> <a href="#coaches"    class="side-nav-dot"></a><span class="side-nav-label">Coaches</span></div>
+  <div class="side-nav-item" data-section="gallery"> <a href="#gallery"    class="side-nav-dot"></a><span class="side-nav-label">Gallery</span></div>
+  <div class="side-nav-item" data-section="news">    <a href="#news"       class="side-nav-dot"></a><span class="side-nav-label">News</span></div>
+  <div class="side-nav-item" data-section="sponsors"><a href="#sponsors"   class="side-nav-dot"></a><span class="side-nav-label">Sponsors</span></div>
+  <div class="side-nav-item" data-section="contact"> <a href="#contact"    class="side-nav-dot"></a><span class="side-nav-label">Contact</span></div>
+</nav>
+
+<!-- ============================================================
+     HERO
+     ============================================================ -->
+<section id="home">
+  <div id="hero">
+
+    <!-- VIDEO BACKGROUND -->
+    <!-- PLACEHOLDER VIDEO: Replace src with your final video path or URL -->
+    <div class="hero-video-wrap">
+      <video autoplay muted loop playsinline preload="auto">
+        <source src="/Users/ohm/Downloads/roskil_website_vid.mov" type="video/mp4">
+      </video>
+    </div>
+
+    <!-- HERO CONTENT -->
+    <div class="hero-content">
+
+      <!-- BIG STACKED HEADLINE -->
+      <h1 class="hero-headline">
+        <span class="line-white">CRICKET.</span>
+        <span class="line-white">COMMUNITY.</span>
+        <span class="line-gold" id="hero-morph-word">CULTURE.</span>
+      </h1>
+
+      <!-- Supporting copy -->
+      <p class="hero-sub">Auckland's proudest, most multicultural cricket family. From Premier grade to junior development, we play hard and welcome everyone.</p>
+
+      <!-- CTAs -->
+      <div class="hero-ctas">
+        <div class="tilt-wrap"><a href="#membership" class="btn btn-hero-primary">Join the Club &rarr;</a></div>
+        <div class="tilt-wrap"><a href="#fixtures"   class="btn btn-hero-secondary">View Fixtures &rarr;</a></div>
+        <div class="tilt-wrap"><a href="#contact"    class="btn btn-hero-ghost">Contact Us</a></div>
+      </div>
+
+    </div>
+
+
+  </div>
+</section>
+
+
+<!-- ============================================================
+     STATS BAR
+     ============================================================ -->
+<section id="stats">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-item reveal">
+        <div class="stat-inner">
+          <span class="stat-number" data-target="120" data-suffix="+">0</span>
+          <span class="stat-label">Years of Cricket</span>
+          <div class="stat-bottom-line"></div>
+        </div>
+      </div>
+      <div class="stat-item reveal reveal-delay-1">
+        <div class="stat-inner">
+          <span class="stat-number" data-target="9">0</span>
+          <span class="stat-label">Senior Teams</span>
+          <div class="stat-bottom-line"></div>
+        </div>
+      </div>
+      <div class="stat-item reveal reveal-delay-2">
+        <div class="stat-inner">
+          <span class="stat-number" data-target="500" data-suffix="+">0</span>
+          <span class="stat-label">Club Members</span>
+          <div class="stat-bottom-line"></div>
+        </div>
+      </div>
+      <div class="stat-item reveal reveal-delay-3">
+        <div class="stat-inner">
+          <span class="stat-number" data-target="1">0</span>
+          <span class="stat-label">Community</span>
+          <div class="stat-bottom-line"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     ABOUT
+     ============================================================ -->
+<section id="about" class="section-wrap">
+  <div class="container">
+    <div class="about-grid">
+
+      <!-- LEFT: TEXT -->
+      <div class="about-text reveal">
+        <span class="section-label">Our Story</span>
+        <h2 class="section-title">More Than<br>Just Cricket</h2>
+        <div class="gold-line"></div>
+        <!-- PLACEHOLDER: Edit the club story copy below -->
+        <p>Eden Roskill Cricket Club has been a cornerstone of Auckland cricket since <strong>1903</strong>. Originally established as separate entities, Eden and Roskill merged in <strong>1952</strong> to form one of the most respected clubs in New Zealand cricket.</p>
+        <p>Today we call <strong>Keith Hay Park, Mt Roskill</strong> home. Our grounds are a hub of activity every weekend throughout the season, filled with the sound of bat on ball, families cheering, and teammates celebrating together.</p>
+        <p>We compete across <strong>Auckland Cricket Association</strong> competitions including Premier Men, T20 grades, and a thriving junior program that nurtures the next generation of New Zealand cricketers.</p>
+        <p>We are a <strong>multicultural, community-first</strong> club that welcomes players and supporters from all walks of life. Whether you are a seasoned cricketer or picking up a bat for the first time, you belong here.</p>
+        <div style="display:flex; gap:0.75rem; flex-wrap:wrap; margin-top:var(--sp-md);">
+          <div class="tilt-wrap"><a href="#membership" class="btn btn-gold">Join the Club</a></div>
+          <div class="tilt-wrap"><a href="#contact" class="btn btn-outline">Get in Touch</a></div>
+        </div>
+      </div>
+
+      <!-- RIGHT: IMAGE -->
+      <!-- PLACEHOLDER: Replace the placehold.co URL with a real club photo -->
+      <div class="about-img-wrap reveal reveal-delay-1">
+        <img src="https://placehold.co/800x600/1A2870/C8941A?text=ERDCC+Club+Photo" alt="Eden Roskill Cricket Club team photo">
+        <!-- PLACEHOLDER: Replace alt text and src with real club photo -->
+        <div class="about-img-badge">Est. 1903 &bull; Keith Hay Park</div>
+      </div>
+
+    </div>
+
+    <!-- VALUES -->
+    <div class="values-grid">
+      <div class="value-card reveal">
+        <div class="value-icon">&#127942;</div>
+        <h3>Community</h3>
+        <p>Cricket brings us together. We are a multicultural club that celebrates diversity and welcomes everyone from across Auckland and beyond.</p>
+      </div>
+      <div class="value-card reveal reveal-delay-1">
+        <div class="value-icon">&#127941;</div>
+        <h3>Excellence</h3>
+        <p>From Premier Men to junior grades, we push ourselves to improve every session. Teamwork, fitness, and sportsmanship drive everything we do.</p>
+      </div>
+      <div class="value-card reveal reveal-delay-2">
+        <div class="value-icon">&#10024;</div>
+        <h3>Inclusion</h3>
+        <p>Cricket is for everyone. Regardless of age, background, or ability, there is a place for you at Eden Roskill Cricket Club.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ============================================================
+     TEAMS
+     ============================================================ -->
+<section id="teams" class="section-wrap">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-label">Our Teams</span>
+      <h2 class="section-title">Find Your Team</h2>
+      <div class="gold-line"></div>
+      <p class="section-sub">From Premier Men to junior grades, there is a place for every cricketer at ERDCC.</p>
+    </div>
+
+    <!-- FILTER BUTTONS -->
+    <div class="teams-filter reveal">
+      <button class="filter-btn active" data-filter="all">All Teams</button>
+      <button class="filter-btn" data-filter="senior">Senior</button>
+      <button class="filter-btn" data-filter="junior">Junior</button>
+      <button class="filter-btn" data-filter="womens">Women</button>
+    </div>
+
+    <!-- BENTO GRID -->
+    <div class="teams-bento">
+
+      <!-- FEATURED: Premier Men -->
+      <!-- PLACEHOLDER: Update team description with real season info -->
+      <div class="team-card featured" data-category="senior">
+        <div class="team-badge">&#127942; Flagship Team</div>
+        <h3>Premier Men</h3>
+        <span class="team-grade">Auckland Premier Cricket &bull; Men's</span>
+        <p>Our top senior men's side competes at the highest grade in Auckland club cricket. A proud mix of experienced campaigners and emerging talent representing ERDCC at Premier level.</p>
+        <!-- PLACEHOLDER: Link to real team page or PlayHQ roster -->
+        <a href="https://www.playhq.com/new-zealand-cricket/org/eden-roskill-cricket-club/0c54ceb4" target="_blank" class="btn btn-gold">View Team</a>
+      </div>
+
+      <!-- Premier Three Men -->
+      <div class="team-card" data-category="senior">
+        <div class="team-badge">Senior Men</div>
+        <h3>Premier Three Men</h3>
+        <span class="team-grade">Auckland Premier 3 &bull; Men's</span>
+        <!-- PLACEHOLDER: Update team description -->
+        <p>Competing in the Premier Three competition, this squad is filled with driven cricketers aiming to push up to the top grade.</p>
+        <a href="https://www.playhq.com/new-zealand-cricket/org/eden-roskill-cricket-club/0c54ceb4" target="_blank" class="btn btn-outline">View Team</a>
+      </div>
+
+      <!-- T20 Teams -->
+      <div class="team-card" data-category="senior">
+        <div class="team-badge">T20</div>
+        <h3>T20 Teams</h3>
+        <span class="team-grade">Auckland T20 Competition</span>
+        <!-- PLACEHOLDER: Update T20 team description -->
+        <p>Fast, exciting, and competitive. ERDCC fields multiple T20 sides across men's grades, bringing aggressive cricket to the shortest format.</p>
+        <a href="https://www.playhq.com/new-zealand-cricket/org/eden-roskill-cricket-club/0c54ceb4" target="_blank" class="btn btn-outline">View Team</a>
+      </div>
+
+      <!-- Grade 1B -->
+      <div class="team-card" data-category="senior">
+        <div class="team-badge">Grade</div>
+        <h3>Grade 1B</h3>
+        <span class="team-grade">Auckland Grade Cricket &bull; 1B</span>
+        <!-- PLACEHOLDER: Update grade team description -->
+        <p>Strongly contested grade cricket. Our 1B side battles hard every weekend with a passionate group of senior players.</p>
+        <a href="https://www.playhq.com/new-zealand-cricket/org/eden-roskill-cricket-club/0c54ceb4" target="_blank" class="btn btn-outline">View Team</a>
+      </div>
+
+      <!-- Grade 2C -->
+      <div class="team-card" data-category="senior">
+        <div class="team-badge">Grade</div>
+        <h3>Grade 2C</h3>
+        <span class="team-grade">Auckland Grade Cricket &bull; 2C</span>
+        <!-- PLACEHOLDER: Update grade team description -->
+        <p>A development-focused grade side giving players the chance to grow their game in a competitive but supportive environment.</p>
+        <a href="https://www.playhq.com/new-zealand-cricket/org/eden-roskill-cricket-club/0c54ceb4" target="_blank" class="btn btn-outline">View Team</a>
+      </div>
+
+      <!-- Grade 3B -->
+      <div class="team-card" data-category="senior">
+        <div class="team-badge">Grade</div>
+        <h3>Grade 3B</h3>
+        <span class="team-grade">Auckland Grade Cricket &bull; 3B</span>
+        <!-- PLACEHOLDER: Update grade team description -->
+        <p>Welcoming experienced and newer senior players alike, Grade 3B offers competitive weekend cricket for all.</p>
+        <a href="https://www.playhq.com/new-zealand-cricket/org/eden-roskill-cricket-club/0c54ceb4" target="_blank" class="btn btn-outline">View Team</a>
+      </div>
+
+      <!-- Grade 4A -->
+      <div class="team-card" data-category="senior">
+        <div class="team-badge">Grade</div>
+        <h3>Grade 4A</h3>
+        <span class="team-grade">Auckland Grade Cricket &bull; 4A</span>
+        <!-- PLACEHOLDER: Update grade team description -->
+        <p>Perfect for returning players and those new to senior cricket, Grade 4A is social and competitive in equal measure.</p>
+        <a href="https://www.playhq.com/new-zealand-cricket/org/eden-roskill-cricket-club/0c54ceb4" target="_blank" class="btn btn-outline">View Team</a>
+      </div>
+
+      <!-- Women's Teams -->
+      <!-- PLACEHOLDER: Update women's team details when available -->
+      <div class="team-card featured" data-category="womens">
+        <div class="team-badge">&#9792; Women's Cricket</div>
+        <h3>Women's Teams</h3>
+        <span class="team-grade">Auckland Women's Competition</span>
+        <p>ERDCC is proud to field women's sides in Auckland competitions. We are committed to growing the women's game and providing a welcoming environment for all female cricketers in the community.</p>
+        <a href="https://www.playhq.com/new-zealand-cricket/org/eden-roskill-cricket-club/0c54ceb4" target="_blank" class="btn btn-gold">View Team</a>
+      </div>
+
+      <!-- Junior & Youth -->
+      <div class="team-card" data-category="junior">
+        <div class="team-badge">&#127774; Junior</div>
+        <h3>Junior Teams</h3>
+        <span class="team-grade">Youth &bull; U10 to U18</span>
+        <!-- PLACEHOLDER: Update with specific junior grade details -->
+        <p>From Milo Cricket for under-10s right through to Under-18 competitive grades, our junior program gives young players the best possible start in cricket.</p>
+        <a href="https://www.playhq.com/new-zealand-cricket/org/eden-roskill-cricket-club/0c54ceb4" target="_blank" class="btn btn-outline">View Team</a>
+      </div>
+
+      <!-- Age Groups -->
+      <div class="team-card" data-category="junior">
+        <div class="team-badge">&#127800; Youth</div>
+        <h3>Age Groups</h3>
+        <span class="team-grade">U13, U15, U17 &bull; Development</span>
+        <!-- PLACEHOLDER: Update age group details -->
+        <p>Structured age-group cricket giving players tailored coaching and competition, preparing them for senior cricket in a positive, skills-focused environment.</p>
+        <a href="https://www.playhq.com/new-zealand-cricket/org/eden-roskill-cricket-club/0c54ceb4" target="_blank" class="btn btn-outline">View Team</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     TRAINING
+     ============================================================ -->
+<section id="training" class="section-wrap">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-label">Get on the Park</span>
+      <h2 class="section-title">Training Times</h2>
+      <div class="gold-line"></div>
+      <p class="section-sub">All training takes place at Keith Hay Park, Mt Roskill. New players are always welcome.</p>
+    </div>
+
+    <div class="training-grid">
+
+      <!-- SESSIONS CARD -->
+      <!-- PLACEHOLDER: Update training days and times with real schedule -->
+      <div class="training-card reveal">
+        <h3>
+          <span style="font-size:1.4rem;">&#128337;</span>
+          Training Schedule
+        </h3>
+        <div class="training-sessions">
+          <div class="session-row">
+            <span class="session-day">Tuesday</span>
+            <span class="session-time">5:30pm &ndash; 7:30pm</span>
+            <span class="session-group">Senior Men</span>
+          </div>
+          <div class="session-row">
+            <span class="session-day">Wednesday</span>
+            <span class="session-time">4:30pm &ndash; 6:30pm</span>
+            <span class="session-group">Junior / Youth</span>
+          </div>
+          <div class="session-row">
+            <span class="session-day">Thursday</span>
+            <span class="session-time">5:30pm &ndash; 7:30pm</span>
+            <span class="session-group">Premier Men</span>
+          </div>
+          <div class="session-row">
+            <span class="session-day">Friday</span>
+            <span class="session-time">4:00pm &ndash; 6:00pm</span>
+            <span class="session-group">Women's Teams</span>
+          </div>
+          <div class="session-row">
+            <span class="session-day">Saturday</span>
+            <span class="session-time">Match Day</span>
+            <span class="session-group">All Grades</span>
+          </div>
+        </div>
+        <p style="font-size:0.8rem; color:var(--text-muted); margin-top:0.5rem;">
+          * Schedule subject to change during holidays and special events. Check our social media for updates.
+        </p>
+      </div>
+
+      <!-- VENUE CARD -->
+      <div class="venue-card reveal reveal-delay-1">
+        <h3 style="font-family:'Bebas Neue',sans-serif;font-size:1.6rem;letter-spacing:0.05em;color:var(--text-primary);display:flex;align-items:center;gap:0.6rem;">
+          <span style="font-size:1.4rem;">&#128205;</span> Venue
+        </h3>
+        <div class="venue-info">
+          <p><span>&#127974;</span><span><strong style="color:var(--text-primary);">Keith Hay Park</strong><br>13 Noton Road, Mt Roskill<br>Auckland 1041, New Zealand</span></p>
+          <p><span>&#128222;</span><span><a href="tel:02762599 32" style="color:var(--gold-light);">027 625 9932</a></span></p>
+          <p><span>&#9993;</span><span><a href="mailto:erdcc.cricket@gmail.com" style="color:var(--gold-light);">erdcc.cricket@gmail.com</a></span></p>
+        </div>
+        <!-- PLACEHOLDER: Replace this div with a real Google Maps <iframe> embed -->
+        <div class="map-placeholder">
+          <span style="font-size:2rem;">&#128506;</span>
+          <span>Google Maps embed</span>
+          <span style="font-size:0.72rem; text-align:center; padding:0 1rem;">Replace this div with:<br>&lt;iframe src="https://maps.google.com/..." ...&gt;&lt;/iframe&gt;</span>
+        </div>
+        <a href="https://maps.google.com/?q=Keith+Hay+Park+13+Noton+Road+Mt+Roskill+Auckland" target="_blank" class="btn btn-outline" style="width:100%;justify-content:center;">
+          Open in Google Maps
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     FIXTURES & RESULTS
+     ============================================================ -->
+<section id="fixtures" class="section-wrap">
+  <div class="container">
+
+    <div class="section-header reveal">
+      <span class="section-label">On the Field</span>
+      <h2 class="section-title">Fixtures &amp; Results</h2>
+      <div class="gold-line"></div>
+    </div>
+
+    <!-- SEASON TOGGLE -->
+    <div class="fixtures-season-toggle reveal">
+      <button class="season-btn active" data-season="summer">Summer Season</button>
+      <button class="season-btn" data-season="winter">Winter Season</button>
+    </div>
+
+    <div class="fixtures-cols">
+
+      <!-- UPCOMING FIXTURES -->
+      <!-- PLACEHOLDER: Replace with real fixture data from PlayHQ -->
+      <div class="fixtures-block reveal">
+        <h3>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          Upcoming Fixtures
+        </h3>
+        <!-- PLACEHOLDER: Replace each fixture-card with real match data -->
+        <div class="fixture-card">
+          <div class="fixture-meta">
+            <span class="fixture-date">Sat 7 Dec 2024</span>
+            <span class="fixture-comp">Premier Men</span>
+          </div>
+          <div class="fixture-teams">ERDCC vs [Opponent] <!-- PLACEHOLDER --></div>
+          <div class="fixture-venue">&#128205; Keith Hay Park (Home)</div>
+        </div>
+        <div class="fixture-card">
+          <div class="fixture-meta">
+            <span class="fixture-date">Sat 14 Dec 2024</span>
+            <span class="fixture-comp">Grade 1B</span>
+          </div>
+          <div class="fixture-teams">ERDCC vs [Opponent] <!-- PLACEHOLDER --></div>
+          <div class="fixture-venue">&#128205; Away</div>
+        </div>
+        <div class="fixture-card">
+          <div class="fixture-meta">
+            <span class="fixture-date">Sat 21 Dec 2024</span>
+            <span class="fixture-comp">T20</span>
+          </div>
+          <div class="fixture-teams">ERDCC vs [Opponent] <!-- PLACEHOLDER --></div>
+          <div class="fixture-venue">&#128205; Keith Hay Park (Home)</div>
+        </div>
+        <div class="fixture-card">
+          <div class="fixture-meta">
+            <span class="fixture-date">Sat 11 Jan 2025</span>
+            <span class="fixture-comp">Junior U15</span>
+          </div>
+          <div class="fixture-teams">ERDCC vs [Opponent] <!-- PLACEHOLDER --></div>
+          <div class="fixture-venue">&#128205; Away</div>
+        </div>
+      </div>
+
+      <!-- RECENT RESULTS -->
+      <!-- PLACEHOLDER: Replace with real results from PlayHQ -->
+      <div class="results-block reveal reveal-delay-1">
+        <h3>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+          Recent Results
+        </h3>
+        <div class="result-card win">
+          <span class="result-outcome">Win</span>
+          <div class="result-teams">ERDCC vs [Opponent] <!-- PLACEHOLDER --></div>
+          <div class="result-score">ERDCC 245/6 &bull; [Opp] 198 all out <!-- PLACEHOLDER --></div>
+        </div>
+        <div class="result-card win">
+          <span class="result-outcome">Win</span>
+          <div class="result-teams">ERDCC vs [Opponent] <!-- PLACEHOLDER --></div>
+          <div class="result-score">ERDCC 189/8 &bull; [Opp] 185/9 <!-- PLACEHOLDER --></div>
+        </div>
+        <div class="result-card loss">
+          <span class="result-outcome">Loss</span>
+          <div class="result-teams">ERDCC vs [Opponent] <!-- PLACEHOLDER --></div>
+          <div class="result-score">[Opp] 210/5 &bull; ERDCC 178 all out <!-- PLACEHOLDER --></div>
+        </div>
+        <div class="result-card draw">
+          <span class="result-outcome">Draw</span>
+          <div class="result-teams">ERDCC vs [Opponent] <!-- PLACEHOLDER --></div>
+          <div class="result-score">Match called off &bull; Rain <!-- PLACEHOLDER --></div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- CTA -->
+    <div class="fixtures-cta reveal">
+      <p style="color:var(--text-secondary);margin-bottom:1rem;font-size:0.9rem;">View the full fixtures list, live scores, and competition tables on PlayHQ</p>
+      <a href="https://www.playhq.com/new-zealand-cricket/org/eden-roskill-cricket-club/0c54ceb4" target="_blank" class="btn btn-gold">
+        View Full Fixtures on PlayHQ
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+      </a>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ============================================================
+     MEMBERSHIP
+     ============================================================ -->
+<section id="membership" class="section-wrap">
+  <div class="container">
+    <div class="membership-grid">
+
+      <!-- LEFT: INFO -->
+      <div class="membership-intro reveal">
+        <span class="section-label">Get Involved</span>
+        <h2 class="section-title">Join the Club</h2>
+        <div class="gold-line"></div>
+        <!-- PLACEHOLDER: Update membership intro copy -->
+        <p>Whether you are a seasoned cricketer looking for a new club or a complete beginner wanting to try the sport, Eden Roskill Cricket Club welcomes you. We have teams and programs for every age and skill level.</p>
+        <p>Registration is managed through <strong>PlayHQ</strong>, New Zealand Cricket's official platform. Signing up is fast and easy.</p>
+
+        <!-- HOW TO JOIN STEPS -->
+        <div class="membership-steps">
+          <div class="step-row">
+            <div class="step-num">1</div>
+            <div>
+              <h4>Visit PlayHQ</h4>
+              <p>Head to our PlayHQ page and select your membership type.</p>
+            </div>
+          </div>
+          <div class="step-row">
+            <div class="step-num">2</div>
+            <div>
+              <h4>Complete Registration</h4>
+              <p>Fill in your details and pay your registration fee online.</p>
+            </div>
+          </div>
+          <div class="step-row">
+            <div class="step-num">3</div>
+            <div>
+              <h4>Show Up and Play</h4>
+              <p>Come to training, meet the team, and get on the park.</p>
+            </div>
+          </div>
+        </div>
+
+        <div style="display:flex;gap:0.75rem;flex-wrap:wrap;">
+          <a href="https://www.playhq.com/new-zealand-cricket/org/eden-roskill-cricket-club/0c54ceb4" target="_blank" class="btn btn-gold">Register Now on PlayHQ</a>
+          <a href="#contact" class="btn btn-outline">Ask a Question</a>
+        </div>
+      </div>
+
+      <!-- RIGHT: MEMBERSHIP PLANS -->
+      <!-- PLACEHOLDER: Replace all prices and plan details with real membership fees -->
+      <div class="membership-plans reveal reveal-delay-1">
+        <div class="plan-card featured-plan">
+          <div class="plan-top">
+            <div class="plan-name">Senior Men</div>
+            <!-- PLACEHOLDER: Replace with real senior fee -->
+            <div class="plan-price">$TBC<span class="plan-period">/season</span></div>
+          </div>
+          <!-- PLACEHOLDER: Update benefits list -->
+          <ul class="plan-features">
+            <li>Full playing rights in all grade competitions</li>
+            <li>Access to training sessions</li>
+            <li>Club kit discount</li>
+            <li>PlayHQ member profile</li>
+            <li>Club social events</li>
+          </ul>
+        </div>
+        <div class="plan-card">
+          <div class="plan-top">
+            <div class="plan-name">Women's</div>
+            <!-- PLACEHOLDER: Replace with real women's fee -->
+            <div class="plan-price">$TBC<span class="plan-period">/season</span></div>
+          </div>
+          <ul class="plan-features">
+            <li>All women's competitions</li>
+            <li>Coaching and development sessions</li>
+            <li>Club kit discount</li>
+            <li>PlayHQ member profile</li>
+          </ul>
+        </div>
+        <div class="plan-card">
+          <div class="plan-top">
+            <div class="plan-name">Junior / Youth</div>
+            <!-- PLACEHOLDER: Replace with real junior fee -->
+            <div class="plan-price">$TBC<span class="plan-period">/season</span></div>
+          </div>
+          <ul class="plan-features">
+            <li>U10 through to U18 competitions</li>
+            <li>Professional junior coaching</li>
+            <li>Safe and fun environment</li>
+            <li>NZC umpires and scorers</li>
+          </ul>
+        </div>
+        <div class="plan-card">
+          <div class="plan-top">
+            <div class="plan-name">Social / Supporter</div>
+            <!-- PLACEHOLDER: Replace with real social membership fee -->
+            <div class="plan-price">$TBC<span class="plan-period">/season</span></div>
+          </div>
+          <ul class="plan-features">
+            <li>Support the club without playing</li>
+            <li>Access to club events</li>
+            <li>Club newsletter</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     COACHES & STAFF
+     ============================================================ -->
+<section id="coaches" class="section-wrap">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-label">The Team Behind the Team</span>
+      <h2 class="section-title">Coaches &amp; Staff</h2>
+      <div class="gold-line"></div>
+      <p class="section-sub">Meet the dedicated coaches, managers, and volunteers who drive ERDCC forward every season.</p>
+    </div>
+
+    <!-- PLACEHOLDER: Replace all coach cards with real names, roles, photos, and bios -->
+    <div class="coaches-grid">
+
+      <!-- PLACEHOLDER COACH 1: Replace with real head coach details -->
+      <div class="coach-card reveal">
+        <img class="coach-photo" src="https://placehold.co/400x533/1A2870/C8941A?text=Head+Coach" alt="Head Coach - PLACEHOLDER">
+        <!-- PLACEHOLDER: Replace name and role -->
+        <div class="coach-info">
+          <span class="coach-role">Head Coach</span>
+          <div class="coach-name">[Coach Name]</div>
+          <!-- PLACEHOLDER: Replace bio text -->
+          <p class="coach-desc">Experienced cricket coach with a passion for developing talent at all levels of the game.</p>
+        </div>
+      </div>
+
+      <!-- PLACEHOLDER COACH 2 -->
+      <div class="coach-card reveal reveal-delay-1">
+        <img class="coach-photo" src="https://placehold.co/400x533/2B3FA0/F5D98A?text=Assistant+Coach" alt="Assistant Coach - PLACEHOLDER">
+        <div class="coach-info">
+          <span class="coach-role">Assistant Coach</span>
+          <div class="coach-name">[Coach Name]</div>
+          <!-- PLACEHOLDER: Replace bio text -->
+          <p class="coach-desc">Specialising in batting technique and game strategy at club and representative level.</p>
+        </div>
+      </div>
+
+      <!-- PLACEHOLDER COACH 3: Club Manager -->
+      <div class="coach-card reveal reveal-delay-2">
+        <img class="coach-photo" src="https://placehold.co/400x533/1A2870/C8941A?text=Club+Manager" alt="Club Manager - PLACEHOLDER">
+        <div class="coach-info">
+          <span class="coach-role">Club Manager</span>
+          <div class="coach-name">[Manager Name]</div>
+          <!-- PLACEHOLDER: Replace bio text -->
+          <p class="coach-desc">Organising the club behind the scenes, ensuring everything runs smoothly on and off the field.</p>
+        </div>
+      </div>
+
+      <!-- PLACEHOLDER COACH 4: Junior Coordinator -->
+      <div class="coach-card reveal reveal-delay-3">
+        <img class="coach-photo" src="https://placehold.co/400x533/2B3FA0/F5D98A?text=Junior+Coordinator" alt="Junior Coordinator - PLACEHOLDER">
+        <div class="coach-info">
+          <span class="coach-role">Junior Coordinator</span>
+          <div class="coach-name">[Coordinator Name]</div>
+          <!-- PLACEHOLDER: Replace bio text -->
+          <p class="coach-desc">Dedicated to building the next generation of ERDCC cricketers through quality junior programs.</p>
+        </div>
+      </div>
+
+      <!-- PLACEHOLDER COACH 5: Premier Captain -->
+      <div class="coach-card reveal">
+        <img class="coach-photo" src="https://placehold.co/400x533/1A2870/C8941A?text=Premier+Captain" alt="Premier Captain - PLACEHOLDER">
+        <div class="coach-info">
+          <span class="coach-role">Premier Men Captain</span>
+          <div class="coach-name">[Captain Name]</div>
+          <!-- PLACEHOLDER: Replace bio text -->
+          <p class="coach-desc">Leading ERDCC's Premier Men with skill, determination, and inspiring leadership.</p>
+        </div>
+      </div>
+
+      <!-- PLACEHOLDER COACH 6: Women's Captain -->
+      <div class="coach-card reveal reveal-delay-1">
+        <img class="coach-photo" src="https://placehold.co/400x533/2B3FA0/F5D98A?text=Women%27s+Captain" alt="Women's Captain - PLACEHOLDER">
+        <div class="coach-info">
+          <span class="coach-role">Women's Captain</span>
+          <div class="coach-name">[Captain Name]</div>
+          <!-- PLACEHOLDER: Replace bio text -->
+          <p class="coach-desc">A champion of women's cricket in the community and a leader both on and off the park.</p>
+        </div>
+      </div>
+
+      <!-- PLACEHOLDER COACH 7: Volunteer -->
+      <div class="coach-card reveal reveal-delay-2">
+        <img class="coach-photo" src="https://placehold.co/400x533/1A2870/C8941A?text=Volunteer" alt="Volunteer - PLACEHOLDER">
+        <div class="coach-info">
+          <span class="coach-role">Club Volunteer</span>
+          <div class="coach-name">[Volunteer Name]</div>
+          <!-- PLACEHOLDER: Replace bio text -->
+          <p class="coach-desc">The lifeblood of the club. Our volunteers give countless hours to keep ERDCC running strong.</p>
+        </div>
+      </div>
+
+      <!-- PLACEHOLDER COACH 8: Scorer/Admin -->
+      <div class="coach-card reveal reveal-delay-3">
+        <img class="coach-photo" src="https://placehold.co/400x533/2B3FA0/F5D98A?text=Club+Admin" alt="Club Admin - PLACEHOLDER">
+        <div class="coach-info">
+          <span class="coach-role">Club Administrator</span>
+          <div class="coach-name">[Admin Name]</div>
+          <!-- PLACEHOLDER: Replace bio text -->
+          <p class="coach-desc">Keeping our records, registrations, and communications sharp throughout the season.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     GALLERY
+     ============================================================ -->
+<section id="gallery" class="section-wrap">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-label">In the Moment</span>
+      <h2 class="section-title">Club Gallery</h2>
+      <div class="gold-line"></div>
+    </div>
+
+    <div class="gallery-filter reveal">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="match">Matches</button>
+      <button class="filter-btn" data-filter="training">Training</button>
+      <button class="filter-btn" data-filter="events">Events</button>
+    </div>
+
+    <!-- GALLERY MASONRY GRID -->
+    <!-- PLACEHOLDER: Replace all gallery images with real club photos. Labels indicate what each photo should show. -->
+    <div class="gallery-masonry">
+
+      <!-- PLACEHOLDER: Match action photo - batting -->
+      <div class="gallery-item" data-gcat="match">
+        <img src="https://placehold.co/600x800/1A2870/C8941A?text=Match+Action+1" alt="Match action - PLACEHOLDER">
+        <div class="gallery-overlay"><span class="gallery-caption">Match Day Action</span></div>
+      </div>
+
+      <!-- PLACEHOLDER: Training session photo -->
+      <div class="gallery-item" data-gcat="training">
+        <img src="https://placehold.co/600x450/2B3FA0/F5D98A?text=Training+Session" alt="Training session - PLACEHOLDER">
+        <div class="gallery-overlay"><span class="gallery-caption">Training at Keith Hay Park</span></div>
+      </div>
+
+      <!-- PLACEHOLDER: Team photo -->
+      <div class="gallery-item" data-gcat="match">
+        <img src="https://placehold.co/600x500/0D1220/C8941A?text=Team+Photo" alt="Team photo - PLACEHOLDER">
+        <div class="gallery-overlay"><span class="gallery-caption">ERDCC Senior Team</span></div>
+      </div>
+
+      <!-- PLACEHOLDER: Junior cricket photo -->
+      <div class="gallery-item" data-gcat="training">
+        <img src="https://placehold.co/600x700/1A2870/F5D98A?text=Junior+Cricket" alt="Junior cricket - PLACEHOLDER">
+        <div class="gallery-overlay"><span class="gallery-caption">Junior Training Session</span></div>
+      </div>
+
+      <!-- PLACEHOLDER: Club event photo -->
+      <div class="gallery-item" data-gcat="events">
+        <img src="https://placehold.co/600x600/2B3FA0/C8941A?text=Club+Event" alt="Club event - PLACEHOLDER">
+        <div class="gallery-overlay"><span class="gallery-caption">End of Season Celebration</span></div>
+      </div>
+
+      <!-- PLACEHOLDER: Bowling action -->
+      <div class="gallery-item" data-gcat="match">
+        <img src="https://placehold.co/600x850/0D1220/F5D98A?text=Bowling+Action" alt="Bowling action - PLACEHOLDER">
+        <div class="gallery-overlay"><span class="gallery-caption">Premier Bowling</span></div>
+      </div>
+
+      <!-- PLACEHOLDER: Women's cricket -->
+      <div class="gallery-item" data-gcat="match">
+        <img src="https://placehold.co/600x480/1A2870/C8941A?text=Women%27s+Cricket" alt="Women's cricket - PLACEHOLDER">
+        <div class="gallery-overlay"><span class="gallery-caption">Women's Match Day</span></div>
+      </div>
+
+      <!-- PLACEHOLDER: Keith Hay Park grounds -->
+      <div class="gallery-item" data-gcat="events">
+        <img src="https://placehold.co/600x550/2B3FA0/F5D98A?text=Keith+Hay+Park" alt="Keith Hay Park grounds - PLACEHOLDER">
+        <div class="gallery-overlay"><span class="gallery-caption">Keith Hay Park</span></div>
+      </div>
+
+      <!-- PLACEHOLDER: Fielding action -->
+      <div class="gallery-item" data-gcat="match">
+        <img src="https://placehold.co/600x720/0D1220/C8941A?text=Fielding+Action" alt="Fielding action - PLACEHOLDER">
+        <div class="gallery-overlay"><span class="gallery-caption">Sharp Fielding</span></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     NEWS & ANNOUNCEMENTS
+     ============================================================ -->
+<section id="news" class="section-wrap">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-label">Latest from the Club</span>
+      <h2 class="section-title">News &amp; Announcements</h2>
+      <div class="gold-line"></div>
+    </div>
+
+    <!-- PLACEHOLDER: Replace all news cards with real club news articles -->
+    <div class="news-grid">
+
+      <!-- PLACEHOLDER NEWS 1: Match Report -->
+      <div class="news-card reveal">
+        <!-- PLACEHOLDER: Replace with real match report image -->
+        <div class="news-img-wrap">
+          <img src="https://placehold.co/800x450/1A2870/C8941A?text=Match+Report" alt="Match report - PLACEHOLDER">
+        </div>
+        <div class="news-body">
+          <span class="news-tag tag-match">Match Report</span>
+          <span class="news-date"><!-- PLACEHOLDER: Real date -->30 Nov 2024</span>
+          <!-- PLACEHOLDER: Replace with real match report headline -->
+          <h3>Premier Men Take Commanding Win at Keith Hay Park</h3>
+          <!-- PLACEHOLDER: Replace with real match report summary -->
+          <p>A brilliant all-round performance saw ERDCC's Premier Men dominate from the first over, posting a match-winning total before a disciplined bowling display sealed the result.</p>
+          <!-- PLACEHOLDER: Link to full match report -->
+          <a href="#" class="btn btn-outline">Read More</a>
+        </div>
+      </div>
+
+      <!-- PLACEHOLDER NEWS 2: Club News -->
+      <div class="news-card reveal reveal-delay-1">
+        <!-- PLACEHOLDER: Replace with real club news image -->
+        <div class="news-img-wrap">
+          <img src="https://placehold.co/800x450/2B3FA0/F5D98A?text=Club+News" alt="Club news - PLACEHOLDER">
+        </div>
+        <div class="news-body">
+          <span class="news-tag tag-club">Club News</span>
+          <span class="news-date"><!-- PLACEHOLDER: Real date -->22 Nov 2024</span>
+          <!-- PLACEHOLDER: Replace with real news headline -->
+          <h3>2024/25 Season Registrations Now Open</h3>
+          <!-- PLACEHOLDER: Replace with real news summary -->
+          <p>Registrations for the new cricket season are now live on PlayHQ. Senior, women's, and junior spots are available. Secure yours before the season kicks off.</p>
+          <!-- PLACEHOLDER: Link to full article -->
+          <a href="#membership" class="btn btn-outline">Read More</a>
+        </div>
+      </div>
+
+      <!-- PLACEHOLDER NEWS 3: Junior Update -->
+      <div class="news-card reveal reveal-delay-2">
+        <!-- PLACEHOLDER: Replace with real junior news image -->
+        <div class="news-img-wrap">
+          <img src="https://placehold.co/800x450/0D1220/C8941A?text=Junior+Update" alt="Junior update - PLACEHOLDER">
+        </div>
+        <div class="news-body">
+          <span class="news-tag tag-junior">Junior Updates</span>
+          <span class="news-date"><!-- PLACEHOLDER: Real date -->15 Nov 2024</span>
+          <!-- PLACEHOLDER: Replace with real junior news headline -->
+          <h3>Junior Program Launch: Skills Clinics Every Wednesday</h3>
+          <!-- PLACEHOLDER: Replace with real junior news summary -->
+          <p>Our junior development program kicks off this Wednesday with free skills clinics for U10 to U14 players. All equipment provided. Parents and guardians welcome.</p>
+          <!-- PLACEHOLDER: Link to full article -->
+          <a href="#training" class="btn btn-outline">Read More</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     SPONSORS
+     ============================================================ -->
+<section id="sponsors" class="section-wrap">
+  <div class="container">
+
+    <div class="sponsors-message reveal">
+      <span class="section-label">Our Partners</span>
+      <h2 class="section-title">Club Sponsors</h2>
+      <div class="gold-line" style="margin:0.75rem auto 1rem;"></div>
+      <!-- PLACEHOLDER: Update sponsors message -->
+      <p>Our sponsors make cricket possible at Eden Roskill. Their generous support allows us to provide world-class facilities, coaching, and opportunities for our players and community.</p>
+    </div>
+
+    <!-- PRINCIPAL SPONSORS -->
+    <!-- PLACEHOLDER: Replace all sponsor cards with real sponsor logos and names -->
+    <div style="margin-bottom:0.75rem;">
+      <p style="font-size:0.72rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-muted);margin-bottom:1rem;text-align:center;">Principal Sponsors</p>
+      <div class="sponsors-grid reveal">
+        <!-- PLACEHOLDER SPONSOR 1 -->
+        <div class="sponsor-card">
+          <span class="sponsor-logo-icon">&#127942;</span>
+          <span class="sponsor-logo-ph">SPONSOR LOGO<br>PLACEHOLDER</span>
+        </div>
+        <!-- PLACEHOLDER SPONSOR 2 -->
+        <div class="sponsor-card">
+          <span class="sponsor-logo-icon">&#127942;</span>
+          <span class="sponsor-logo-ph">SPONSOR LOGO<br>PLACEHOLDER</span>
+        </div>
+        <!-- PLACEHOLDER SPONSOR 3 -->
+        <div class="sponsor-card">
+          <span class="sponsor-logo-icon">&#127942;</span>
+          <span class="sponsor-logo-ph">SPONSOR LOGO<br>PLACEHOLDER</span>
+        </div>
+        <!-- PLACEHOLDER SPONSOR 4 -->
+        <div class="sponsor-card">
+          <span class="sponsor-logo-icon">&#127942;</span>
+          <span class="sponsor-logo-ph">SPONSOR LOGO<br>PLACEHOLDER</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECONDARY SPONSORS -->
+    <div style="margin-bottom:var(--sp-xl);">
+      <p style="font-size:0.72rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-muted);margin-bottom:1rem;text-align:center;">Club Partners</p>
+      <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:0.5rem;" class="reveal">
+        <!-- PLACEHOLDER SPONSORS 5-10 -->
+        <div class="sponsor-card" style="aspect-ratio:2/1;"><span class="sponsor-logo-ph" style="font-size:0.6rem;">PARTNER PLACEHOLDER</span></div>
+        <div class="sponsor-card" style="aspect-ratio:2/1;"><span class="sponsor-logo-ph" style="font-size:0.6rem;">PARTNER PLACEHOLDER</span></div>
+        <div class="sponsor-card" style="aspect-ratio:2/1;"><span class="sponsor-logo-ph" style="font-size:0.6rem;">PARTNER PLACEHOLDER</span></div>
+        <div class="sponsor-card" style="aspect-ratio:2/1;"><span class="sponsor-logo-ph" style="font-size:0.6rem;">PARTNER PLACEHOLDER</span></div>
+        <div class="sponsor-card" style="aspect-ratio:2/1;"><span class="sponsor-logo-ph" style="font-size:0.6rem;">PARTNER PLACEHOLDER</span></div>
+        <div class="sponsor-card" style="aspect-ratio:2/1;"><span class="sponsor-logo-ph" style="font-size:0.6rem;">PARTNER PLACEHOLDER</span></div>
+      </div>
+    </div>
+
+    <div class="sponsors-cta reveal" style="text-align:center;">
+      <p style="color:var(--text-secondary);margin-bottom:1rem;font-size:1rem;max-width:50ch;margin-left:auto;margin-right:auto;">Interested in partnering with Eden Roskill Cricket Club? We would love to hear from you.</p>
+      <a href="#contact" class="btn btn-gold">Become a Sponsor</a>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ============================================================
+     CONTACT
+     ============================================================ -->
+<section id="contact" class="section-wrap">
+  <div class="container">
+    <div class="contact-grid">
+
+      <!-- LEFT: INFO -->
+      <div class="contact-info reveal">
+        <span class="section-label">Get in Touch</span>
+        <h2 class="section-title">Contact Us</h2>
+        <div class="gold-line"></div>
+        <p class="section-sub" style="margin-bottom:var(--sp-md);">Whether you want to join, sponsor, volunteer, or just find out more, we would love to hear from you.</p>
+
+        <div class="contact-detail">
+          <div class="contact-icon">&#128205;</div>
+          <div class="contact-detail-text">
+            <label>Address</label>
+            <span>Keith Hay Park, 13 Noton Road<br>Mt Roskill, Auckland 1041</span>
+          </div>
+        </div>
+
+        <div class="contact-detail">
+          <div class="contact-icon">&#128222;</div>
+          <div class="contact-detail-text">
+            <label>Phone</label>
+            <span><a href="tel:02762 59932">027 625 9932</a></span>
+          </div>
+        </div>
+
+        <div class="contact-detail">
+          <div class="contact-icon">&#9993;</div>
+          <div class="contact-detail-text">
+            <label>Email</label>
+            <span><a href="mailto:erdcc.cricket@gmail.com">erdcc.cricket@gmail.com</a></span>
+          </div>
+        </div>
+
+        <!-- SOCIAL LINKS -->
+        <div>
+          <label style="font-size:0.72rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-muted);display:block;margin-bottom:0.6rem;">Follow Us</label>
+          <div class="social-links">
+            <!-- PLACEHOLDER: Replace href with real Instagram URL -->
+            <a href="#" class="social-link" title="Instagram" aria-label="Instagram">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+            </a>
+            <!-- PLACEHOLDER: Replace href with real Facebook URL -->
+            <a href="#" class="social-link" title="Facebook" aria-label="Facebook">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- MAP PLACEHOLDER -->
+        <!-- PLACEHOLDER: Replace this div with a real Google Maps embed <iframe> -->
+        <div class="map-embed-ph">
+          <span style="font-size:2rem;">&#128506;</span>
+          <strong>Keith Hay Park Map</strong>
+          <span>Replace with Google Maps iframe embed</span>
+        </div>
+
+      </div>
+
+      <!-- RIGHT: FORM -->
+      <div class="contact-form-wrap reveal reveal-delay-1">
+        <h3>Send Us a Message</h3>
+        <form id="contactForm" novalidate>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="firstName">First Name</label>
+              <input type="text" id="firstName" name="firstName" placeholder="Your first name" required>
+            </div>
+            <div class="form-group">
+              <label for="lastName">Last Name</label>
+              <input type="text" id="lastName" name="lastName" placeholder="Your last name" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" placeholder="your@email.com" required>
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone</label>
+              <input type="tel" id="phone" name="phone" placeholder="027 XXX XXXX">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="subject">I am enquiring about</label>
+            <select id="subject" name="subject">
+              <option value="">Select an option</option>
+              <option value="joining">Joining the Club</option>
+              <option value="junior">Junior Programs</option>
+              <option value="sponsorship">Sponsorship</option>
+              <option value="volunteering">Volunteering</option>
+              <option value="general">General Enquiry</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" placeholder="Tell us how we can help..." required></textarea>
+          </div>
+          <button type="submit" class="btn btn-gold" style="width:100%;justify-content:center;font-size:1rem;padding:1rem;">
+            Send Message
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          </button>
+          <div id="formSuccess" style="display:none;margin-top:1rem;padding:0.8rem 1rem;border-radius:var(--r-sm);background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.3);color:#4ade80;font-size:0.88rem;text-align:center;">
+            Thank you! Your message has been sent. We will be in touch shortly.
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer id="footer">
+  <div class="container">
+    <div class="footer-grid">
+
+      <!-- BRAND COL -->
+      <div class="footer-brand">
+        <div class="footer-brand-row">
+          <svg width="36" height="42" viewBox="0 0 100 115" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M50 3 L97 20 L97 60 Q97 95 50 112 Q3 95 3 60 L3 20 Z" fill="#2B3FA0" stroke="#fff" stroke-width="2"/>
+            <polygon points="20,22 29,44 11,44" fill="white"/>
+            <polygon points="80,22 89,44 71,44" fill="white"/>
+            <text x="50" y="40" text-anchor="middle" font-family="sans-serif" font-size="16" fill="white" font-weight="bold">E-R</text>
+            <polygon points="50,68 61,92 39,92" fill="white"/>
+            <text x="50" y="72" text-anchor="middle" font-family="sans-serif" font-size="11" fill="white">D</text>
+            <text x="34" y="100" text-anchor="middle" font-family="sans-serif" font-size="10" fill="white">C</text>
+            <text x="66" y="100" text-anchor="middle" font-family="sans-serif" font-size="10" fill="white">C</text>
+          </svg>
+          <div>
+            <div style="font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:0.06em;color:var(--text-primary);">Eden Roskill CC</div>
+            <div style="font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);">Est. 1903</div>
+          </div>
+        </div>
+        <p>Cricket. Community. Culture. Based at Keith Hay Park, Mt Roskill, Auckland since 1903.</p>
+        <div class="footer-social">
+          <!-- PLACEHOLDER: Replace href with real Instagram URL -->
+          <a href="#" aria-label="Instagram">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+          </a>
+          <!-- PLACEHOLDER: Replace href with real Facebook URL -->
+          <a href="#" aria-label="Facebook">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- QUICK LINKS -->
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#teams">Our Teams</a></li>
+          <li><a href="#training">Training</a></li>
+          <li><a href="#fixtures">Fixtures</a></li>
+          <li><a href="#membership">Join the Club</a></li>
+        </ul>
+      </div>
+
+      <!-- CLUB INFO -->
+      <div class="footer-col">
+        <h4>Club</h4>
+        <ul>
+          <li><a href="#coaches">Coaches &amp; Staff</a></li>
+          <li><a href="#gallery">Gallery</a></li>
+          <li><a href="#news">News</a></li>
+          <li><a href="#sponsors">Sponsors</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+
+      <!-- CONTACT -->
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:erdcc.cricket@gmail.com">erdcc.cricket@gmail.com</a></li>
+          <li><a href="tel:02762 59932">027 625 9932</a></li>
+          <li><a href="https://maps.google.com/?q=Keith+Hay+Park+Auckland" target="_blank">Keith Hay Park, Mt Roskill</a></li>
+          <li><a href="https://www.playhq.com/new-zealand-cricket/org/eden-roskill-cricket-club/0c54ceb4" target="_blank">PlayHQ Registration</a></li>
+          <li><a href="https://www.edenroskillcricketclub.co.nz" target="_blank">Official Website</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- BOTTOM BAR -->
+    <div class="footer-bottom">
+      <p>&copy; 2024 Eden Roskill Cricket Club. All rights reserved.</p>
+      <p>Website by <a href="https://webtag.co.nz" target="_blank">webtag.co.nz</a></p>
+    </div>
+
+  </div>
+</footer>
+
+
+<!-- ============================================================
+     JAVASCRIPT
+     ============================================================ -->
+<script>
+(function () {
+  'use strict';
+
+  /* theme always dark */
+  document.documentElement.setAttribute('data-theme', 'dark');
+
+  /* ---- NAVBAR SCROLL ---- */
+  const navbar = document.getElementById('navbar');
+  const onScroll = () => navbar.classList.toggle('scrolled', window.scrollY > 40);
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  /* ---- HAMBURGER / MOBILE MENU ---- */
+  const hamburger  = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => {
+    const open = mobileMenu.classList.toggle('open');
+    hamburger.classList.toggle('open', open);
+    hamburger.setAttribute('aria-expanded', String(open));
+  });
+  document.querySelectorAll('.mobile-link, .mobile-sub-link, .mobile-menu .btn').forEach(el =>
+    el.addEventListener('click', () => {
+      mobileMenu.classList.remove('open');
+      hamburger.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', 'false');
+    })
+  );
+
+  /* mobile accordion toggles */
+  document.querySelectorAll('.mobile-accordion-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const expanded = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!expanded));
+      btn.nextElementSibling.classList.toggle('open', !expanded);
+    });
+  });
+
+  /* ---- CUSTOM CURSOR ---- */
+  const dot  = document.getElementById('cursorDot');
+  const ring = document.getElementById('cursorRing');
+  let mx = -100, my = -100, rx = -100, ry = -100;
+
+  document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+  document.addEventListener('mouseleave', () => { dot.style.opacity = '0'; ring.style.opacity = '0'; });
+  document.addEventListener('mouseenter', () => { dot.style.opacity = '1'; ring.style.opacity = '1'; });
+
+  /* ring lags behind dot for that fluid feel */
+  function animateCursor() {
+    dot.style.left  = mx + 'px';
+    dot.style.top   = my + 'px';
+    rx += (mx - rx) * 0.12;
+    ry += (my - ry) * 0.12;
+    ring.style.left = rx + 'px';
+    ring.style.top  = ry + 'px';
+    requestAnimationFrame(animateCursor);
+  }
+  animateCursor();
+
+  /* grow cursor on interactive elements */
+  document.querySelectorAll('a, button, [role="button"], input, textarea, select, .team-card, .news-card, .coach-card, .gallery-item').forEach(el => {
+    el.addEventListener('mouseenter', () => { dot.classList.add('hovering'); ring.classList.add('hovering'); });
+    el.addEventListener('mouseleave', () => { dot.classList.remove('hovering'); ring.classList.remove('hovering'); });
+  });
+
+  /* ---- MORPHING GOLD HEADLINE WORD (ported from MorphingText React component) ---- */
+  const morphEl   = document.getElementById('hero-morph-word');
+  const words     = ['CULTURE.', 'LEGACY.', 'PASSION.', 'PRIDE.', 'EXCELLENCE.', 'FAMILY.', 'HISTORY.'];
+  const INTERVAL  = 3000;   /* ms between word changes — matches component default */
+  const MORPH_DUR = 800;    /* ms for the morph animation — matches component */
+  const STEPS     = 20;     /* steps — matches component */
+  let currentIdx  = 0;
+
+  function runMorph() {
+    const currentWord = words[currentIdx];
+    const nextWord    = words[(currentIdx + 1) % words.length];
+    let step = 0;
+
+    const morphInterval = setInterval(() => {
+      step++;
+      const progress = step / STEPS;
+
+      let displayText;
+      if (progress < 0.5) {
+        /* morphing OUT — shrink current word */
+        const charCount = Math.floor(currentWord.length * (1 - progress * 2));
+        displayText = currentWord.slice(0, charCount);
+      } else {
+        /* morphing IN — grow next word */
+        const charCount = Math.floor(nextWord.length * ((progress - 0.5) * 2));
+        displayText = nextWord.slice(0, charCount);
+      }
+
+      morphEl.textContent = displayText || ' '; /* non-breaking space prevents height collapse */
+
+      if (step >= STEPS) {
+        clearInterval(morphInterval);
+        morphEl.textContent = nextWord;
+      }
+    }, MORPH_DUR / STEPS);
+
+    /* advance index after full interval */
+    setTimeout(() => {
+      currentIdx = (currentIdx + 1) % words.length;
+      runMorph();
+    }, INTERVAL);
+  }
+
+  /* kick off after a short pause so page loads first */
+  setTimeout(runMorph, 1500);
+
+  /* ---- SCROLL REVEAL ---- */
+  const reveals   = document.querySelectorAll('.reveal');
+  const revealObs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); revealObs.unobserve(e.target); } });
+  }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+  reveals.forEach(el => revealObs.observe(el));
+
+  /* ---- ANIMATED COUNTERS ---- */
+  let counted = false;
+  const statsSection = document.getElementById('stats');
+  const statsObs = new IntersectionObserver(entries => {
+    if (entries[0].isIntersecting && !counted) {
+      counted = true;
+      document.querySelectorAll('.stat-number').forEach(counter => {
+        const target = +counter.dataset.target;
+        const suffix = counter.dataset.suffix || '';
+        const start  = performance.now();
+        const dur    = 1800;
+        const step   = now => {
+          const p = Math.min((now - start) / dur, 1);
+          const ease = 1 - Math.pow(1 - p, 3);
+          counter.textContent = Math.floor(ease * target) + (p === 1 ? suffix : '');
+          if (p < 1) requestAnimationFrame(step);
+        };
+        requestAnimationFrame(step);
+      });
+    }
+  }, { threshold: 0.5 });
+  if (statsSection) statsObs.observe(statsSection);
+
+  /* ---- TEAMS FILTER ---- */
+  const teamFilterBtns = document.querySelectorAll('.teams-filter .filter-btn');
+  const teamCards      = document.querySelectorAll('.teams-bento .team-card');
+  teamFilterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      teamFilterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const f = btn.dataset.filter;
+      teamCards.forEach(card => {
+        const match = f === 'all' || card.dataset.category === f;
+        card.style.transition = 'opacity 0.3s, transform 0.3s';
+        if (match) { card.style.opacity = '1'; card.style.transform = ''; card.style.display = ''; }
+        else { card.style.opacity = '0'; card.style.transform = 'scale(0.96)'; setTimeout(() => { if (card.style.opacity === '0') card.style.display = 'none'; }, 300); }
+      });
+    });
+  });
+
+  /* ---- GALLERY FILTER ---- */
+  const galleryFilters = document.querySelectorAll('.gallery-filter .filter-btn');
+  const galleryItems   = document.querySelectorAll('.gallery-item');
+  galleryFilters.forEach(btn => {
+    btn.addEventListener('click', () => {
+      galleryFilters.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const f = btn.dataset.filter;
+      galleryItems.forEach(item => {
+        const show = f === 'all' || item.dataset.gcat === f;
+        item.style.transition = 'opacity 0.3s';
+        item.style.opacity    = show ? '1' : '0';
+        item.style.display    = show ? '' : 'none';
+      });
+    });
+  });
+
+  /* ---- SEASON TOGGLE ---- */
+  document.querySelectorAll('.season-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.season-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      /* PLACEHOLDER: swap fixture data for summer vs winter here */
+    });
+  });
+
+  /* ---- CONTACT FORM ---- */
+  const form        = document.getElementById('contactForm');
+  const formSuccess = document.getElementById('formSuccess');
+  if (form) {
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      /* PLACEHOLDER: wire up Formspree / EmailJS / backend POST here */
+      formSuccess.style.display = 'block';
+      form.reset();
+      setTimeout(() => { formSuccess.style.display = 'none'; }, 6000);
+    });
+  }
+
+  /* ---- SIDE NAV — position items + sliding thumb ---- */
+  const sideThumb = document.getElementById('side-nav-thumb');
+  const sideItems = Array.from(document.querySelectorAll('.side-nav-item'));
+  const count     = sideItems.length;
+
+  /* space hit-target dots evenly along the track */
+  sideItems.forEach((item, i) => {
+    item.style.top = (count === 1 ? 0 : (i / (count - 1)) * 100) + '%';
+  });
+
+  function setThumb(idx) {
+    sideThumb.style.top = (count === 1 ? 0 : (idx / (count - 1)) * 100) + '%';
+  }
+  setThumb(0);
+
+  /* ---- SCROLL-BASED ACTIVE SECTION DETECTION ---- */
+  const navLinks    = document.querySelectorAll('.nav-links a');
+  const allSections = Array.from(document.querySelectorAll('section[id]'));
+
+  function getActiveIndex() {
+    const mid = window.scrollY + window.innerHeight * 0.4;
+    let best = 0;
+    allSections.forEach((sec, i) => {
+      if (sec.offsetTop <= mid) best = i;
+    });
+    return best;
+  }
+
+  function onScrollUpdate() {
+    const idx = getActiveIndex();
+    const id  = allSections[idx] ? allSections[idx].id : '';
+
+    /* slide the thumb */
+    const sideIdx = sideItems.findIndex(el => el.dataset.section === id);
+    if (sideIdx !== -1) setThumb(sideIdx);
+
+    /* highlight top navbar link */
+    navLinks.forEach(a => {
+      const active = a.getAttribute('href') === '#' + id;
+      a.style.color      = active ? '#fff' : '';
+      a.style.fontWeight = active ? '700'  : '';
+    });
+  }
+
+  window.addEventListener('scroll', onScrollUpdate, { passive: true });
+  onScrollUpdate(); /* run once on load */
+
+  /* ---- FROSTED GLASS 3D TILT (ported from FrostedGlassCard component) ---- */
+  document.querySelectorAll('.tilt-wrap').forEach(wrap => {
+    const btn = wrap.querySelector('.btn');
+    if (!btn) return;
+
+    wrap.addEventListener('mousemove', e => {
+      const rect  = wrap.getBoundingClientRect();
+      const x     = e.clientX - rect.left;
+      const y     = e.clientY - rect.top;
+      const cx    = rect.width  / 2;
+      const cy    = rect.height / 2;
+      const rotY  = ((x - cx) / cx) * 10;   /* max ±10deg — matches component */
+      const rotX  = ((y - cy) / cy) * -10;
+      btn.style.transform = `rotateX(${rotX}deg) rotateY(${rotY}deg) scale(1.04)`;
+      btn.style.setProperty('--mouse-x', `${x}px`);
+      btn.style.setProperty('--mouse-y', `${y}px`);
+    });
+
+    wrap.addEventListener('mouseleave', () => {
+      btn.style.transform = 'rotateX(0deg) rotateY(0deg) scale(1)';
+    });
+  });
+
+})();
+</script>
+
+</body>
+</html>

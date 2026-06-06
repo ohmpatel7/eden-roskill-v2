@@ -1,0 +1,1696 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eden Roskill Cricket Club | Est. 1903</title>
+<meta name="description" content="Auckland cricket since 1903. Eden Roskill District Cricket Club, Mt Roskill, Auckland.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   RESET & BASE
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; cursor: none !important; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: #fff;
+  color: #0D1220;
+  -webkit-font-smoothing: antialiased;
+}
+a { text-decoration: none; color: inherit; }
+ul { list-style: none; }
+img { display: block; max-width: 100%; }
+
+/* ============================================================
+   CSS VARIABLES
+   ============================================================ */
+:root {
+  --blue:        #2B3FA0;
+  --blue-light:  #3D52B8;
+  --blue-dark:   #1A2870;
+  --blue-pale:   #EEF1FB;
+  --blue-mid:    #4A90E2;
+  --white:       #ffffff;
+  --off-white:   #F7F8FC;
+  --text:        #0D1220;
+  --text-mid:    #3A4560;
+  --text-muted:  #7A85A3;
+  --border:      rgba(0,0,0,0.08);
+  --ease:        cubic-bezier(0.22, 1, 0.36, 1);
+  --dur:         0.2s;
+}
+
+/* ============================================================
+   CUSTOM CURSOR
+   ============================================================ */
+.cursor-dot {
+  position: fixed; top: 0; left: 0;
+  width: 4px; height: 4px;
+  background: #E02020;
+  border-radius: 50%;
+  pointer-events: none; z-index: 99999;
+  transform: translate(-50%, -50%);
+  transition: width 0.2s, height 0.2s, background 0.2s;
+}
+.cursor-ring {
+  position: fixed; top: 0; left: 0;
+  width: 26px; height: 26px;
+  border: 1.5px solid rgba(224,32,32,0.5);
+  border-radius: 50%;
+  pointer-events: none; z-index: 99998;
+  transform: translate(-50%, -50%);
+  transition: width 0.25s, height 0.25s, border-color 0.2s;
+}
+.cursor-dot.hov  { width: 8px; height: 8px; background: #E02020; }
+.cursor-ring.hov { width: 40px; height: 40px; border-color: #E02020; }
+.cursor-dot.on-dark       { background: #fff; }
+.cursor-ring.on-dark      { border-color: rgba(255,255,255,0.5); }
+.cursor-dot.on-dark.hov   { background: #fff; }
+.cursor-ring.on-dark.hov  { border-color: #fff; }
+
+/* ============================================================
+   NAVIGATION
+   ============================================================ */
+#navbar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  padding: 0 3rem;
+  transition: background 0.4s var(--ease), box-shadow 0.3s;
+  background: transparent;
+}
+#navbar.scrolled {
+  background: rgba(255,255,255,0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 1px 0 var(--border);
+}
+/* on inner (white) pages always show white bg */
+#navbar.page-nav {
+  background: rgba(255,255,255,0.97);
+  backdrop-filter: blur(20px);
+  box-shadow: 0 1px 0 var(--border);
+}
+
+.nav-inner {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-shrink: 0;
+}
+.nav-logo {
+  width: 38px; height: 38px;
+  object-fit: contain;
+}
+.nav-brand-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.1rem;
+  letter-spacing: 0.08em;
+  color: var(--blue);
+  transition: color var(--dur);
+}
+/* on hero, brand name is white */
+#navbar:not(.scrolled):not(.page-nav) .nav-brand-name { color: #fff; }
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 0.1rem;
+  /* push links to the right, near Register button */
+  margin-left: auto;
+  margin-right: 0;
+}
+.nav-links > li { position: relative; list-style: none; }
+.nav-links > li > a {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.5rem 0.85rem;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  color: rgba(255,255,255,0.8);
+  transition: color 0.2s, background 0.2s;
+  white-space: nowrap;
+}
+#navbar.scrolled .nav-links > li > a,
+#navbar.page-nav .nav-links > li > a {
+  color: var(--text-mid);
+}
+.nav-links > li > a:hover { color: var(--blue); background: var(--blue-pale); }
+#navbar:not(.scrolled):not(.page-nav) .nav-links > li > a:hover {
+  color: #fff;
+  background: rgba(255,255,255,0.12);
+}
+
+/* dropdown chevron */
+.nav-has-dropdown > a::after {
+  content: '';
+  display: inline-block;
+  width: 5px; height: 5px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: rotate(45deg) translateY(-2px);
+  transition: transform 0.2s;
+}
+.nav-has-dropdown:hover > a::after { transform: rotate(225deg) translateY(-2px); }
+
+/* dropdown panel */
+.nav-dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  min-width: 190px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 0.4rem;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(6px);
+  transition: opacity 0.2s var(--ease), transform 0.2s var(--ease), visibility 0.2s;
+  z-index: 200;
+}
+.nav-has-dropdown:hover .nav-dropdown,
+.nav-has-dropdown:focus-within .nav-dropdown {
+  opacity: 1; visibility: visible; transform: translateY(0);
+}
+.nav-dropdown li a {
+  display: block;
+  padding: 0.55rem 1rem;
+  font-size: 0.73rem;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--text-mid);
+  border-radius: 6px;
+  transition: color 0.18s, background 0.18s;
+}
+.nav-dropdown li a:hover { color: var(--blue); background: var(--blue-pale); }
+.nav-dropdown::before {
+  content: '';
+  position: absolute;
+  top: -1px; left: 14px; right: 14px;
+  height: 2px;
+  background: #fff;
+  border-radius: 2px;
+}
+
+.nav-actions { display: flex; align-items: center; gap: 0.75rem; margin-left: 1rem; }
+.btn-register {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.6rem 1.4rem;
+  border-radius: 6px;
+  background: var(--blue);
+  color: #fff;
+  border: 2px solid var(--blue);
+  transition: background 0.2s, color 0.2s, transform 0.15s;
+  white-space: nowrap;
+}
+.btn-register:hover { background: var(--blue-dark); border-color: var(--blue-dark); transform: translateY(-1px); }
+
+/* Hamburger */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  width: 36px; height: 36px;
+  align-items: center; justify-content: center;
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.3);
+  border-radius: 6px;
+}
+#navbar.scrolled .hamburger,
+#navbar.page-nav .hamburger { border-color: var(--border); }
+.hamburger span {
+  display: block; width: 18px; height: 1.5px;
+  background: #fff;
+  border-radius: 2px;
+  transition: all 0.3s;
+}
+#navbar.scrolled .hamburger span,
+#navbar.page-nav .hamburger span { background: var(--text); }
+.hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(4.5px, 4.5px); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(4.5px, -4.5px); }
+
+/* Mobile menu */
+.mobile-menu {
+  display: none;
+  position: fixed;
+  top: 64px; left: 0; right: 0;
+  background: rgba(255,255,255,0.98);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  padding: 1rem 2rem 1.5rem;
+  z-index: 999;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+.mobile-menu.open { display: flex; }
+.mobile-menu a {
+  padding: 0.8rem 0;
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-mid);
+  border-bottom: 1px solid var(--border);
+  transition: color 0.2s;
+}
+.mobile-menu a:hover { color: var(--blue); }
+.mobile-accordion-btn {
+  width: 100%; display: flex; align-items: center;
+  justify-content: space-between;
+  padding: 0.8rem 0;
+  font-size: 0.9rem; font-weight: 600;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--text-mid);
+  background: none; border: none;
+  border-bottom: 1px solid var(--border);
+  transition: color 0.2s;
+}
+.mobile-accordion-btn:hover { color: var(--blue); }
+.mobile-accordion-chevron {
+  width: 6px; height: 6px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: rotate(45deg);
+  transition: transform 0.25s;
+  flex-shrink: 0;
+}
+.mobile-accordion-btn[aria-expanded="true"] .mobile-accordion-chevron { transform: rotate(225deg); }
+.mobile-accordion-body { display: none; flex-direction: column; padding: 0.25rem 0 0.25rem 1rem; }
+.mobile-accordion-body.open { display: flex; }
+.mobile-sub-link {
+  padding: 0.55rem 0 !important;
+  font-size: 0.8rem !important;
+  color: var(--text-muted) !important;
+  border-bottom: none !important;
+  letter-spacing: 0.06em !important;
+}
+.mobile-sub-link:hover { color: var(--blue) !important; }
+.mobile-menu .btn-register { margin-top: 1rem; text-align: center; width: 100%; display: block; }
+
+@media (max-width: 1000px) {
+  .nav-links { display: none; }
+  .nav-actions .btn-register { display: none; }
+  .hamburger { display: flex; }
+}
+@media (max-width: 480px) { #navbar { padding: 0 1.25rem; } }
+
+/* ============================================================
+   HERO, keeps existing video + morphing text
+   ============================================================ */
+#hero {
+  position: sticky;
+  top: 0;
+  /* sits behind all scrolling content */
+  z-index: 0;
+  min-height: 100dvh;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+}
+
+.hero-video-wrap {
+  position: absolute; inset: 0; z-index: 0;
+}
+.hero-video-wrap video {
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center;
+}
+.hero-video-wrap::after {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(to bottom,
+      rgba(5,8,18,0.35) 0%,
+      rgba(5,8,18,0.15) 30%,
+      rgba(5,8,18,0.5)  65%,
+      rgba(5,8,18,0.88) 100%),
+    linear-gradient(to right, rgba(5,8,18,0.6) 0%, rgba(5,8,18,0.05) 60%);
+}
+.hero-content {
+  position: relative; z-index: 2;
+  width: 100%;
+  /* top: clears navbar (64px) + breathing room
+     left/right: consistent with navbar brand edge */
+  padding: clamp(5rem, 12vh, 9rem) 3rem 5rem 3rem;
+}
+.hero-headline {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(4rem, 10vw, 10rem);
+  line-height: 0.88;
+  letter-spacing: 0.01em;
+  color: #fff;
+  margin-bottom: 1.4rem;
+  display: flex;
+  flex-direction: column;
+  max-width: 900px;
+}
+.hero-headline .line-blue { color: #64B2FF; }
+#hero-morph-word { display: block; min-height: 1em; }
+
+.hero-sub {
+  font-size: clamp(0.9rem, 1.5vw, 1rem);
+  color: rgba(255,255,255,0.6);
+  line-height: 1.7;
+  margin-bottom: 2.4rem;
+  max-width: 44ch;
+}
+.hero-ctas { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+.btn-hero-fill {
+  font-size: 0.75rem; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  padding: 0.9rem 2rem; border-radius: 6px;
+  background: var(--blue); color: #fff;
+  border: 2px solid var(--blue);
+  transition: background 0.2s, transform 0.2s;
+}
+.btn-hero-fill:hover { background: var(--blue-light); border-color: var(--blue-light); transform: translateY(-2px); }
+.btn-hero-outline {
+  font-size: 0.75rem; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  padding: 0.9rem 2rem; border-radius: 6px;
+  background: transparent; color: #fff;
+  border: 2px solid rgba(255,255,255,0.4);
+  transition: border-color 0.2s, background 0.2s, transform 0.2s;
+}
+.btn-hero-outline:hover {
+  border-color: rgba(255,255,255,0.9);
+  background: rgba(255,255,255,0.08);
+  transform: translateY(-2px);
+}
+
+/* hero scroll hint — sits just left of the side-nav track (right: ~32px) */
+.hero-scroll-hint {
+  position: absolute;
+  /* aligned with the side-nav which is at right: 20px,
+     so we sit at right: 14px to optically line up */
+  bottom: 3rem; right: 14px;
+  display: flex; flex-direction: column;
+  align-items: center; gap: 0.5rem;
+  z-index: 2;
+}
+.hero-scroll-hint span {
+  font-size: 0.55rem; letter-spacing: 0.22em;
+  text-transform: uppercase; color: rgba(255,255,255,0.35);
+  writing-mode: vertical-rl;
+  /* rotate so text reads bottom-to-top */
+  transform: rotate(180deg);
+}
+.scroll-line {
+  width: 1px; height: 44px;
+  background: rgba(255,255,255,0.15);
+  position: relative; overflow: hidden;
+  border-radius: 1px;
+}
+.scroll-line::after {
+  content: '';
+  position: absolute; top: -100%; left: 0; right: 0; height: 100%;
+  background: rgba(255,255,255,0.65);
+  animation: scroll-drop 2s ease-in-out infinite;
+}
+@keyframes scroll-drop {
+  0%   { top: -100%; }
+  100% { top: 200%; }
+}
+
+@media (max-width: 640px) {
+  .hero-content { padding: clamp(5rem, 14vh, 8rem) 1.75rem 4rem 1.75rem; }
+  .hero-headline { font-size: clamp(3.2rem, 16vw, 5.5rem); }
+  .hero-ctas { flex-direction: column; }
+  .hero-ctas a { text-align: center; }
+}
+
+/* ============================================================
+   BENTO HUB
+   ============================================================ */
+#bento-hub {
+  background: #EEEAE4;
+  padding: 6rem 2.5rem 7rem;
+  position: relative;
+  z-index: 1;
+}
+.bento-hub-inner { max-width: 1200px; margin: 0 auto; }
+.bento-hub-header { margin-bottom: 2.5rem; }
+.bento-hub-label {
+  font-size: .68rem; font-weight: 700; letter-spacing: .22em;
+  text-transform: uppercase; color: var(--text-muted);
+  display: block; margin-bottom: .6rem;
+}
+.bento-hub-heading {
+  font-family: 'DM Sans', sans-serif;
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  font-weight: 700;
+  letter-spacing: -.02em;
+  color: var(--text);
+  line-height: 1.1;
+}
+
+/* Grid */
+.bento-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: 240px 200px 220px 220px;
+  gap: 10px;
+}
+
+/* Base card */
+.bento-card {
+  border-radius: 14px;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 1.4rem 1.5rem;
+  text-decoration: none;
+  transition: transform .3s cubic-bezier(.22,1,.36,1), box-shadow .3s cubic-bezier(.22,1,.36,1);
+}
+.bento-card:hover { transform: scale(1.015); box-shadow: 0 16px 48px rgba(0,0,0,.18); }
+
+/* Arrow button */
+.bento-arrow {
+  position: absolute; top: 1rem; right: 1rem;
+  width: 32px; height: 32px; border-radius: 50%;
+  background: #00C4A0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: .9rem; color: #fff;
+  flex-shrink: 0;
+  transition: background .2s, transform .2s;
+}
+.bento-card:hover .bento-arrow { background: #00A88A; transform: scale(1.1); }
+
+/* Card label + title */
+.bento-card-label {
+  font-size: .6rem; font-weight: 700; letter-spacing: .18em;
+  text-transform: uppercase; color: rgba(255,255,255,.5);
+  display: block; margin-bottom: .3rem;
+}
+.bento-card-title {
+  font-family: 'DM Sans', sans-serif;
+  font-size: clamp(1rem, 1.6vw, 1.3rem);
+  font-weight: 700; letter-spacing: -.01em;
+  color: #fff; line-height: 1.2;
+}
+
+/* Photo card — image fills, overlay at bottom */
+.bento-card-photo {
+  background: #1A2870;
+  isolation: isolate;
+}
+.bento-photo-img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center;
+  z-index: 0;
+}
+.bento-photo-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(5,10,30,.82) 0%, rgba(5,10,30,.15) 60%);
+  z-index: 1;
+}
+/* Arrow and text always on top */
+.bento-card-photo .bento-arrow { z-index: 3; }
+.bento-card-photo > div:last-of-type,
+.bento-card-photo > div[style] { z-index: 2; }
+/* placeholder for missing photos */
+.bento-photo-ph {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  background: #1a2460;
+  font-size: .7rem; letter-spacing: .1em; text-transform: uppercase;
+  color: rgba(255,255,255,.2);
+  z-index: 0;
+}
+
+/* Solid navy card */
+.bento-card-navy { background: #0F1D4E; }
+
+/* Teal card */
+.bento-card-teal { background: #00C4A0; }
+.bento-card-teal .bento-card-label { color: rgba(255,255,255,.65); }
+.bento-card-teal .bento-arrow { background: rgba(0,0,0,.18); }
+.bento-card-teal:hover .bento-arrow { background: rgba(0,0,0,.28); }
+
+/* Grid placement */
+.bento-fixtures  { grid-column: 1 / 3; grid-row: 1 / 3; }
+.bento-register  { grid-column: 3 / 5; grid-row: 1 / 2; }
+.bento-teams     { grid-column: 3 / 5; grid-row: 2 / 3; }
+.bento-baggy     { grid-column: 1 / 2; grid-row: 3 / 5; }
+.bento-programs  { grid-column: 2 / 3; grid-row: 3 / 4; }
+.bento-contact   { grid-column: 2 / 3; grid-row: 4 / 5; }
+.bento-sponsors  { grid-column: 3 / 4; grid-row: 3 / 4; }
+.bento-news      { grid-column: 4 / 5; grid-row: 3 / 5; }
+/* sponsors gets a second small row for spacing */
+.bento-sponsors-gap { grid-column: 3 / 4; grid-row: 4 / 5; display: none; }
+
+/* Make sponsors fill both bottom rows on col 3 */
+.bento-sponsors { grid-row: 3 / 5; }
+
+@media (max-width: 900px) {
+  .bento-grid {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+  }
+  .bento-fixtures  { grid-column: 1 / 3; grid-row: auto; min-height: 220px; }
+  .bento-register  { grid-column: 1 / 2; grid-row: auto; min-height: 160px; }
+  .bento-teams     { grid-column: 2 / 3; grid-row: auto; min-height: 160px; }
+  .bento-baggy     { grid-column: 1 / 2; grid-row: auto; min-height: 180px; }
+  .bento-programs  { grid-column: 2 / 3; grid-row: auto; min-height: 180px; }
+  .bento-contact   { grid-column: 1 / 2; grid-row: auto; min-height: 150px; }
+  .bento-sponsors  { grid-column: 2 / 3; grid-row: auto; min-height: 150px; }
+  .bento-news      { grid-column: 1 / 3; grid-row: auto; min-height: 200px; }
+}
+@media (max-width: 560px) {
+  #bento-hub { padding: 4rem 1.25rem 5rem; }
+  .bento-grid { grid-template-columns: 1fr; }
+  .bento-fixtures, .bento-register, .bento-teams, .bento-baggy,
+  .bento-programs, .bento-contact, .bento-sponsors, .bento-news {
+    grid-column: 1; min-height: 160px;
+  }
+}
+
+/* ============================================================
+   QUICK LINKS BAR
+   ============================================================ */
+#quick-links {
+  background: var(--blue);
+  padding: 0;
+  position: relative;
+  z-index: 1;
+}
+.quick-links-grid {
+  max-width: 1200px; margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+.quick-link-item {
+  display: flex; align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem 2rem;
+  border-right: 1px solid rgba(255,255,255,0.12);
+  color: rgba(255,255,255,0.75);
+  font-size: 0.8rem; font-weight: 600;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  transition: background 0.2s, color 0.2s;
+}
+.quick-link-item:last-child { border-right: none; }
+.quick-link-item:hover { background: rgba(255,255,255,0.1); color: #fff; }
+.quick-link-arrow {
+  font-size: 1.1rem;
+  transition: transform 0.2s;
+}
+.quick-link-item:hover .quick-link-arrow { transform: translate(3px, -3px); }
+@media (max-width: 768px) {
+  .quick-links-grid { grid-template-columns: repeat(2, 1fr); }
+  .quick-link-item:nth-child(2) { border-right: none; }
+  .quick-link-item:nth-child(n+3) { border-top: 1px solid rgba(255,255,255,0.12); }
+}
+
+/* ============================================================
+   SHARED SECTION STYLES
+   ============================================================ */
+.section { padding: 7rem 2.5rem; }
+.section-sm { padding: 4rem 2.5rem; }
+.container { max-width: 1200px; margin: 0 auto; }
+
+.label {
+  font-size: 0.68rem; font-weight: 700;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: 1rem;
+  display: block;
+}
+.display-heading {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(3rem, 6vw, 5.5rem);
+  letter-spacing: 0.02em;
+  color: var(--text);
+  line-height: 0.95;
+}
+.display-heading-white {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(3rem, 6vw, 5.5rem);
+  letter-spacing: 0.02em;
+  color: #fff;
+  line-height: 0.95;
+}
+.body-text {
+  font-size: 1rem; font-weight: 400;
+  line-height: 1.75; color: var(--text-mid);
+  max-width: 55ch;
+}
+.body-text-white { color: rgba(255,255,255,0.7); }
+
+/* Arrow link style — matches reference site */
+.arrow-link {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  font-size: 0.8rem; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--blue);
+  transition: gap 0.2s;
+}
+.arrow-link::before { content: '↗'; font-size: 0.9rem; }
+.arrow-link:hover { gap: 0.65rem; }
+.arrow-link-white { color: rgba(255,255,255,0.85); }
+.arrow-link-white:hover { color: #fff; }
+
+/* Divider line */
+.rule { width: 100%; height: 1px; background: var(--border); margin: 0; }
+
+/* ============================================================
+   SCROLL REVEAL , smooth, slow, cinematic like the reference
+   ============================================================ */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1),
+              transform 0.9s cubic-bezier(0.16,1,0.3,1);
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-delay-1 { transition-delay: 0.12s; }
+.reveal-delay-2 { transition-delay: 0.24s; }
+.reveal-delay-3 { transition-delay: 0.36s; }
+.reveal-delay-4 { transition-delay: 0.48s; }
+.reveal-left {
+  opacity: 0; transform: translateX(-40px);
+  transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1),
+              transform 0.9s cubic-bezier(0.16,1,0.3,1);
+}
+.reveal-left.visible { opacity: 1; transform: translateX(0); }
+
+/* ============================================================
+   ONE CLUB SECTION
+   ============================================================ */
+#one-club {
+  background: var(--blue);
+  padding: 8rem 2.5rem;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
+#one-club::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none'%3E%3Ccircle cx='40' cy='40' r='1' fill='rgba(255,255,255,0.06)'/%3E%3C/g%3E%3C/svg%3E");
+  pointer-events: none;
+}
+.one-club-inner {
+  max-width: 1200px; margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  align-items: center;
+}
+/* left-aligned so each line starts at the same edge */
+.one-club-inner > div:first-child {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+}
+/* better crest position — centred bottom, larger, slightly more visible */
+.one-club-crest {
+  width: 320px;
+  opacity: 0.07;
+  position: absolute;
+  right: 3rem;
+  bottom: 50%;
+  transform: translateY(50%);
+}
+@media (max-width: 768px) {
+  .one-club-inner { grid-template-columns: 1fr; gap: 3rem; }
+  .one-club-crest { display: none; }
+}
+
+/* ============================================================
+   THE BAGGY TEASER
+   ============================================================ */
+#baggy-teaser {
+  position: relative; z-index: 1;
+  background: var(--off-white);
+  padding: 7rem 2.5rem;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.baggy-inner {
+  max-width: 1200px; margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  align-items: center;
+}
+.baggy-quote {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  color: var(--blue);
+  line-height: 1.1;
+  letter-spacing: 0.02em;
+}
+.baggy-quote em {
+  font-style: normal;
+  color: var(--text-muted);
+  font-size: 0.6em;
+  display: block;
+  margin-top: 0.75rem;
+  letter-spacing: 0.05em;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 400;
+  text-transform: none;
+}
+@media (max-width: 768px) {
+  .baggy-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+}
+
+/* ============================================================
+   PROGRAMS TEASER, carousel cards (ported from PlaceCard)
+   ============================================================ */
+#programs-teaser {
+  position: relative; z-index: 1;
+  padding: 7rem 2.5rem;
+  background: #fff;
+}
+.programs-grid {
+  max-width: 1200px; margin: 2.5rem auto 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+/* PLACE CARD */
+.place-card {
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  background: #fff;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  transition: transform 0.35s cubic-bezier(0.22,1,0.36,1),
+              box-shadow 0.35s cubic-bezier(0.22,1,0.36,1);
+  cursor: pointer;
+}
+.place-card:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 16px 48px rgba(43,63,160,0.14);
+}
+
+/* Carousel */
+.place-carousel {
+  position: relative;
+  height: 220px;
+  overflow: hidden;
+}
+.place-carousel-img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: opacity 0.35s ease, transform 0.35s ease;
+  opacity: 0;
+}
+.place-carousel-img.active { opacity: 1; transform: none; }
+.place-carousel-img.exit-left  { opacity: 0; transform: translateX(-40px); }
+.place-carousel-img.exit-right { opacity: 0; transform: translateX(40px); }
+
+/* Nav arrows */
+.carousel-nav {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 0.6rem;
+  opacity: 0; transition: opacity 0.2s;
+  pointer-events: none;
+}
+.place-carousel:hover .carousel-nav { opacity: 1; pointer-events: all; }
+.carousel-btn {
+  width: 32px; height: 32px; border-radius: 50%;
+  background: rgba(0,0,0,0.35); border: none;
+  color: #fff; display: flex; align-items: center; justify-content: center;
+  transition: background 0.2s; font-size: 1rem; line-height: 1;
+}
+.carousel-btn:hover { background: rgba(0,0,0,0.6); }
+
+/* Tags overlay */
+.place-tags {
+  position: absolute; top: 0.75rem; left: 0.75rem;
+  display: flex; gap: 0.4rem; flex-wrap: wrap;
+}
+.place-tag {
+  font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em;
+  text-transform: uppercase; padding: 0.25rem 0.6rem;
+  border-radius: 99px;
+  background: rgba(255,255,255,0.82); backdrop-filter: blur(6px);
+  color: var(--blue); border: 1px solid rgba(43,63,160,0.15);
+}
+
+/* Pagination dots */
+.carousel-dots {
+  position: absolute; bottom: 0.6rem; left: 50%;
+  transform: translateX(-50%);
+  display: flex; gap: 5px; align-items: center;
+}
+.carousel-dot {
+  height: 5px; border-radius: 99px;
+  background: rgba(255,255,255,0.5);
+  border: none; padding: 0;
+  transition: width 0.25s, background 0.25s;
+  width: 5px;
+}
+.carousel-dot.active { width: 14px; background: #fff; }
+
+/* Card body */
+.place-body {
+  padding: 1.4rem 1.5rem;
+}
+.place-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.5rem; letter-spacing: 0.04em;
+  color: var(--text); margin-bottom: 0.5rem;
+}
+.place-meta {
+  font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--blue);
+  margin-bottom: 0.75rem;
+}
+.place-desc {
+  font-size: 0.875rem; line-height: 1.7;
+  color: var(--text-muted); margin-bottom: 1.25rem;
+}
+.place-footer {
+  display: flex; align-items: center; justify-content: space-between;
+}
+.place-cta {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--blue);
+  transition: gap 0.2s;
+}
+.place-cta::before { content: '↗'; }
+.place-cta:hover { gap: 0.65rem; }
+
+@media (max-width: 768px) {
+  .programs-grid { grid-template-columns: 1fr; }
+  .place-carousel { height: 200px; }
+}
+
+/* ============================================================
+   STATS STRIP
+   ============================================================ */
+#stats-strip {
+  background: var(--blue);
+  padding: 4rem 2.5rem;
+  position: relative;
+  z-index: 1;
+}
+.stats-strip-grid {
+  max-width: 1200px; margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: rgba(255,255,255,0.12);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.stats-strip-item {
+  padding: 2.5rem 2rem;
+  background: var(--blue);
+  text-align: center;
+}
+.stats-strip-number {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(2.8rem, 5vw, 4rem);
+  color: #fff;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  display: block;
+}
+.stats-strip-label {
+  font-size: 0.7rem; font-weight: 600;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
+  margin-top: 0.5rem;
+  display: block;
+}
+@media (max-width: 640px) {
+  .stats-strip-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ============================================================
+   TEAMS TEASER
+   ============================================================ */
+#teams-teaser {
+  position: relative; z-index: 1;
+  padding: 7rem 2.5rem;
+  background: var(--off-white);
+  border-top: 1px solid var(--border);
+}
+.teams-list {
+  max-width: 1200px; margin: 2.5rem auto 0;
+}
+.teams-list-row {
+  display: flex; align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem 0;
+  border-bottom: 1px solid var(--border);
+  transition: padding-left 0.2s var(--ease);
+}
+.teams-list-row:hover { padding-left: 0.75rem; }
+.teams-list-row:hover .teams-list-name { color: var(--blue); }
+.teams-list-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  letter-spacing: 0.04em;
+  color: var(--text);
+  transition: color 0.2s;
+}
+.teams-list-tag {
+  font-size: 0.68rem; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--text-muted);
+  background: rgba(43,63,160,0.08);
+  padding: 0.3rem 0.75rem;
+  border-radius: 99px;
+}
+
+/* ============================================================
+   CTA BANNER
+   ============================================================ */
+#cta-banner {
+  background: var(--blue);
+  padding: 6rem 2.5rem;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+.cta-banner-inner { max-width: 700px; margin: 0 auto; }
+.cta-heading {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  color: #fff;
+  letter-spacing: 0.03em;
+  margin-bottom: 1.25rem;
+}
+.cta-sub {
+  font-size: 1rem; color: rgba(255,255,255,0.65);
+  line-height: 1.7; margin-bottom: 2.5rem;
+}
+.btn-white {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  font-size: 0.8rem; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  padding: 1rem 2.5rem; border-radius: 6px;
+  background: #fff; color: var(--blue);
+  transition: background 0.2s, transform 0.15s;
+}
+.btn-white:hover { background: var(--blue-pale); transform: translateY(-2px); }
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+#footer {
+  position: relative; z-index: 1;
+  background: var(--text);
+  padding: 4rem 2.5rem 2rem;
+  color: rgba(255,255,255,0.55);
+}
+.footer-inner {
+  max-width: 1200px; margin: 0 auto;
+}
+.footer-top {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  gap: 3rem;
+  padding-bottom: 3rem;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.footer-brand { display: flex; flex-direction: column; gap: 1rem; }
+.footer-logo { width: 48px; }
+.footer-club-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.1rem; letter-spacing: 0.1em;
+  color: #fff;
+}
+.footer-tagline {
+  font-size: 0.78rem; line-height: 1.6;
+  color: rgba(255,255,255,0.4);
+}
+.footer-col h4 {
+  font-size: 0.68rem; font-weight: 700;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+  margin-bottom: 1rem;
+}
+.footer-col ul { display: flex; flex-direction: column; gap: 0.6rem; }
+.footer-col ul a {
+  font-size: 0.82rem; font-weight: 500;
+  color: rgba(255,255,255,0.55);
+  transition: color 0.2s;
+}
+.footer-col ul a:hover { color: #fff; }
+.footer-contact-line {
+  font-size: 0.82rem; margin-bottom: 0.5rem;
+}
+.footer-bottom {
+  padding-top: 1.5rem;
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 0.75rem;
+}
+.footer-copy { font-size: 0.75rem; color: rgba(255,255,255,0.25); }
+.footer-credit { font-size: 0.75rem; color: rgba(255,255,255,0.25); }
+.footer-credit a { color: rgba(255,255,255,0.4); }
+.footer-credit a:hover { color: #fff; }
+.footer-social { display: flex; gap: 0.75rem; }
+.footer-social a {
+  width: 34px; height: 34px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.15);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.75rem; color: rgba(255,255,255,0.5);
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
+}
+.footer-social a:hover { border-color: #fff; color: #fff; background: rgba(255,255,255,0.08); }
+
+@media (max-width: 768px) {
+  .footer-top { grid-template-columns: 1fr 1fr; gap: 2rem; }
+}
+@media (max-width: 480px) {
+  .footer-top { grid-template-columns: 1fr; }
+  .footer-bottom { flex-direction: column; text-align: center; }
+}
+
+/* ============================================================
+   RIGHT SIDE NAV DOT
+   ============================================================ */
+#side-nav {
+  position: fixed; right: 20px; top: 50%;
+  transform: translateY(-50%);
+  z-index: 900;
+  display: flex; flex-direction: column; align-items: center;
+  height: 200px;
+}
+#side-nav-track {
+  position: absolute; top: 0; bottom: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 1px; background: rgba(0,0,0,0.12); border-radius: 1px;
+}
+/* on hero, track is white */
+#side-nav.on-hero #side-nav-track { background: rgba(255,255,255,0.2); }
+#side-nav-thumb {
+  position: absolute; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--blue);
+  box-shadow: 0 0 8px rgba(43,63,160,0.6);
+  transition: top 0.4s cubic-bezier(0.22,1,0.36,1);
+  top: 0%;
+  pointer-events: none;
+}
+#side-nav.on-hero #side-nav-thumb {
+  background: #fff;
+  box-shadow: 0 0 8px rgba(255,255,255,0.6);
+}
+.side-nav-item {
+  position: absolute; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 20px; height: 20px;
+  display: flex; align-items: center; justify-content: center;
+}
+.side-nav-item:hover .side-nav-label { opacity: 1; transform: translateX(0); }
+.side-nav-label {
+  position: absolute; right: 20px;
+  font-size: 0.62rem; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--text); background: rgba(255,255,255,0.95);
+  border: 1px solid var(--border);
+  padding: 0.2rem 0.55rem; border-radius: 4px;
+  white-space: nowrap; opacity: 0;
+  transform: translateX(6px);
+  transition: opacity 0.2s, transform 0.2s;
+  pointer-events: none;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+#side-nav.on-hero .side-nav-label {
+  color: var(--text); background: rgba(255,255,255,0.9);
+}
+.side-nav-dot {
+  display: block; width: 4px; height: 4px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.2);
+  border: none; transition: background 0.2s;
+}
+#side-nav.on-hero .side-nav-dot { background: rgba(255,255,255,0.3); }
+.side-nav-item:hover .side-nav-dot { background: var(--blue); }
+@media (max-width: 900px) { #side-nav { display: none; } }
+</style>
+</head>
+<body>
+
+<!-- CURSOR -->
+<div class="cursor-dot"  id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- SIDE NAV -->
+<nav id="side-nav" aria-label="Page sections">
+  <div id="side-nav-track"></div>
+  <div id="side-nav-thumb"></div>
+  <div class="side-nav-item" data-section="hero">     <a href="#hero"          class="side-nav-dot"></a><span class="side-nav-label">Home</span></div>
+  <div class="side-nav-item" data-section="one-club"> <a href="#one-club"      class="side-nav-dot"></a><span class="side-nav-label">One Club</span></div>
+  <div class="side-nav-item" data-section="baggy-teaser"><a href="#baggy-teaser" class="side-nav-dot"></a><span class="side-nav-label">The Baggy</span></div>
+  <div class="side-nav-item" data-section="programs-teaser"><a href="#programs-teaser" class="side-nav-dot"></a><span class="side-nav-label">Programs</span></div>
+  <div class="side-nav-item" data-section="teams-teaser"><a href="#teams-teaser" class="side-nav-dot"></a><span class="side-nav-label">Teams</span></div>
+  <div class="side-nav-item" data-section="cta-banner"><a href="#cta-banner"   class="side-nav-dot"></a><span class="side-nav-label">Join</span></div>
+</nav>
+
+<!-- ============================================================
+     NAVIGATION
+     ============================================================ -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand">
+      <img src="crest.png" alt="Eden Roskill CC" class="nav-logo">
+      <span class="nav-brand-name">Eden Roskill CC</span>
+    </a>
+
+    <ul class="nav-links">
+      <li><a href="about.html">About</a></li>
+      <li class="nav-has-dropdown">
+        <a href="programs.html">Play Cricket</a>
+        <ul class="nav-dropdown">
+          <li><a href="teams.html">Teams</a></li>
+          <li><a href="programs.html">Programs</a></li>
+          <li><a href="programs.html#junior">Junior Cricket</a></li>
+          <li><a href="programs.html#senior">Senior Cricket</a></li>
+        </ul>
+      </li>
+      <li><a href="the-baggy.html">The Baggy</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+
+    <div class="nav-actions">
+      <a href="https://www.playhq.com/new-zealand-cricket/org/eden-roskill-cricket-club/0c54ceb4" target="_blank" class="btn-register">Register</a>
+      <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html"   class="mobile-link">Home</a>
+  <a href="about.html"   class="mobile-link">About</a>
+  <div class="mobile-accordion">
+    <button class="mobile-accordion-btn" aria-expanded="false">
+      Play Cricket <span class="mobile-accordion-chevron"></span>
+    </button>
+    <div class="mobile-accordion-body">
+      <a href="teams.html"    class="mobile-sub-link">Teams</a>
+      <a href="programs.html" class="mobile-sub-link">Programs</a>
+      <a href="programs.html#junior" class="mobile-sub-link">Junior Cricket</a>
+      <a href="programs.html#senior" class="mobile-sub-link">Senior Cricket</a>
+    </div>
+  </div>
+  <a href="the-baggy.html" class="mobile-link">The Baggy</a>
+  <a href="contact.html"   class="mobile-link">Contact</a>
+  <a href="https://www.playhq.com/new-zealand-cricket/org/eden-roskill-cricket-club/0c54ceb4" target="_blank" class="btn-register mobile-link" style="display:block;text-align:center;margin-top:1rem;">Register</a>
+</div>
+
+<!-- ============================================================
+     HERO
+     ============================================================ -->
+<section id="hero">
+  <!-- PLACEHOLDER VIDEO: replace src with your video path -->
+  <div class="hero-video-wrap">
+    <video autoplay muted loop playsinline preload="auto">
+      <source src="/Users/ohm/Downloads/roskil_website_vid.mov" type="video/mp4">
+    </video>
+  </div>
+
+  <div class="hero-content">
+    <h1 class="hero-headline">
+      <span>CRICKET.</span>
+      <span>COMMUNITY.</span>
+      <span class="line-blue" id="hero-morph-word">CULTURE.</span>
+    </h1>
+    <p class="hero-sub">Auckland cricket since 1903. Different backgrounds, one crest, one community.</p>
+    <div class="hero-ctas">
+      <a href="https://www.playhq.com/new-zealand-cricket/org/eden-roskill-cricket-club/0c54ceb4" target="_blank" class="btn-hero-fill">Register to Play</a>
+      <a href="about.html" class="btn-hero-outline">Our Story</a>
+    </div>
+  </div>
+
+  <div class="hero-scroll-hint">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ============================================================
+     QUICK LINKS
+     ============================================================ -->
+<div id="quick-links">
+  <div class="quick-links-grid">
+    <a href="https://www.playhq.com/new-zealand-cricket/org/eden-roskill-cricket-club/0c54ceb4" target="_blank" class="quick-link-item">
+      Fixtures &amp; Results <span class="quick-link-arrow">↗</span>
+    </a>
+    <a href="https://www.playhq.com/new-zealand-cricket/org/eden-roskill-cricket-club/0c54ceb4" target="_blank" class="quick-link-item">
+      2025/26 Registration <span class="quick-link-arrow">↗</span>
+    </a>
+    <a href="teams.html" class="quick-link-item">
+      Our Teams <span class="quick-link-arrow">↗</span>
+    </a>
+    <a href="contact.html" class="quick-link-item">
+      Get in Touch <span class="quick-link-arrow">↗</span>
+    </a>
+  </div>
+</div>
+
+<!-- ============================================================
+     ONE CLUB
+     ============================================================ -->
+<section id="one-club">
+  <div class="one-club-inner">
+    <div>
+      <span class="label" style="color:rgba(255,255,255,0.5);">Who We Are</span>
+      <h2 class="display-heading-white reveal">Different<br>backgrounds.<br>One crest.</h2>
+    </div>
+    <div>
+      <p class="body-text body-text-white reveal reveal-delay-1" style="max-width:100%;">
+        Eden Roskill is one of Auckland's most multicultural cricket clubs. From Premier grade to junior development, we welcome players of every background, age, and ability. If you love cricket, there's a place for you here.
+      </p>
+      <br>
+      <p class="body-text body-text-white reveal reveal-delay-2" style="max-width:100%;">
+        Founded in 1903 and based at Keith Hay Park in Mt Roskill, we have been part of the Auckland Cricket Association for over a century. Our community spans dozens of cultures and nationalities, united by one shared passion.
+      </p>
+      <br>
+      <p class="body-text body-text-white reveal reveal-delay-2" style="max-width:100%;">
+        Whether you are chasing your first wicket or your tenth Premier title, Eden Roskill is the club for you. Come as you are. Leave as family.
+      </p>
+      <br>
+      <a href="about.html" class="arrow-link arrow-link-white reveal reveal-delay-3">Our Story</a>
+    </div>
+  </div>
+  <img src="crest.png" alt="" class="one-club-crest" aria-hidden="true">
+</section>
+
+
+<!-- ============================================================
+     BENTO HUB
+     ============================================================ -->
+<section id="bento-hub">
+  <div class="bento-hub-inner">
+    <div class="bento-hub-header reveal">
+      <span class="bento-hub-label">The Club</span>
+      <h2 class="bento-hub-heading">Everything, one tap away.</h2>
+    </div>
+
+    <div class="bento-grid">
+
+      <!-- FIXTURES — large photo card -->
+      <a href="https://www.playhq.com/new-zealand-cricket/org/eden-roskill-cricket-club/0c54ceb4" target="_blank" class="bento-card bento-card-photo bento-fixtures reveal">
+        <img src="photo-fixtures.jpg" alt="Fixtures" class="bento-photo-img">
+        <div class="bento-photo-overlay"></div>
+        <div class="bento-arrow">↗</div>
+        <div style="position:relative;z-index:1;">
+          <span class="bento-card-label">Live on PlayHQ</span>
+          <span class="bento-card-title">Fixtures &amp; results</span>
+        </div>
+      </a>
+
+      <!-- REGISTER -->
+      <a href="https://www.playhq.com/new-zealand-cricket/org/eden-roskill-cricket-club/0c54ceb4" target="_blank" class="bento-card bento-card-navy bento-register reveal reveal-delay-1">
+        <div class="bento-arrow">↗</div>
+        <div>
+          <span class="bento-card-label">Season 2025/26</span>
+          <span class="bento-card-title">Register to play</span>
+        </div>
+      </a>
+
+      <!-- TEAMS — photo card -->
+      <a href="teams.html" class="bento-card bento-card-photo bento-teams reveal reveal-delay-2">
+        <img src="photo-teams.jpg" alt="Teams" class="bento-photo-img">
+        <div class="bento-photo-overlay"></div>
+        <div class="bento-arrow">↗</div>
+        <div style="position:relative;z-index:1;">
+          <span class="bento-card-label">Our Sides</span>
+          <span class="bento-card-title">Teams</span>
+        </div>
+      </a>
+
+      <!-- THE BAGGY — photo card -->
+      <a href="the-baggy.html" class="bento-card bento-card-photo bento-baggy reveal reveal-delay-1">
+        <img src="photo-baggy.jpg" alt="The Baggy" class="bento-photo-img" style="object-fit:contain;object-position:center;background:#0a1030;">
+        <div class="bento-photo-overlay"></div>
+        <div class="bento-arrow">↗</div>
+        <div style="position:relative;z-index:3;">
+          <span class="bento-card-label">Earned, not given</span>
+          <span class="bento-card-title">The Baggy</span>
+        </div>
+      </a>
+
+      <!-- PROGRAMS -->
+      <a href="programs.html" class="bento-card bento-card-photo bento-programs reveal reveal-delay-2">
+        <img src="photo-programs.jpg" alt="Programs" class="bento-photo-img" style="object-position: center 70%;">
+        <div class="bento-photo-overlay"></div>
+        <div class="bento-arrow">↗</div>
+        <div style="position:relative;z-index:3;">
+          <span class="bento-card-label">Juniors &amp; Seniors</span>
+          <span class="bento-card-title">Programs</span>
+        </div>
+      </a>
+
+      <!-- SPONSORS -->
+      <a href="contact.html" class="bento-card bento-card-navy bento-sponsors reveal reveal-delay-3">
+        <div class="bento-arrow">↗</div>
+        <div style="position:relative;z-index:3;">
+          <span class="bento-card-label">Our Partners</span>
+          <span class="bento-card-title">Sponsors</span>
+        </div>
+      </a>
+
+      <!-- VISIT & CONTACT -->
+      <a href="contact.html" class="bento-card bento-card-photo bento-contact reveal reveal-delay-3">
+        <img src="photo-contact.jpg" alt="Visit and Contact" class="bento-photo-img">
+        <div class="bento-photo-overlay"></div>
+        <div class="bento-arrow">↗</div>
+        <div style="position:relative;z-index:3;">
+          <span class="bento-card-label">13 Noton Road, Mount Roskill</span>
+          <span class="bento-card-title">Visit &amp; contact</span>
+        </div>
+      </a>
+
+      <!-- NEWS — photo card -->
+      <a href="contact.html" class="bento-card bento-card-photo bento-news reveal reveal-delay-4">
+        <img src="photo-news.jpg" alt="News" class="bento-photo-img">
+        <div class="bento-photo-overlay"></div>
+        <div class="bento-arrow">↗</div>
+        <div style="position:relative;z-index:1;">
+          <span class="bento-card-label">Latest</span>
+          <span class="bento-card-title">News</span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     CTA BANNER
+     ============================================================ -->
+<section id="cta-banner">
+  <div class="cta-banner-inner reveal">
+    <h2 class="cta-heading">Come and play.</h2>
+    <p class="cta-sub">
+      However you come to the game, five years old or thirty-five, there is a place for you at Eden Roskill. Register for the 2025/26 season today.
+    </p>
+    <a href="https://www.playhq.com/new-zealand-cricket/org/eden-roskill-cricket-club/0c54ceb4" target="_blank" class="btn-white">Register to Play ↗</a>
+  </div>
+</section>
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer id="footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img src="crest.png" alt="Eden Roskill CC" class="footer-logo">
+        <div class="footer-club-name">Eden Roskill CC</div>
+        <p class="footer-tagline">Auckland cricket since 1903.<br>Keith Hay Park, Mt Roskill.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Club</h4>
+        <ul>
+          <li><a href="about.html">About</a></li>
+          <li><a href="the-baggy.html">The Baggy</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Play</h4>
+        <ul>
+          <li><a href="teams.html">Teams</a></li>
+          <li><a href="programs.html">Programs</a></li>
+          <li><a href="https://www.playhq.com/new-zealand-cricket/org/eden-roskill-cricket-club/0c54ceb4" target="_blank">Register</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <p class="footer-contact-line">13 Noton Road<br>Mt Roskill, Auckland 1041</p>
+        <p class="footer-contact-line"><a href="mailto:erdcc.cricket@gmail.com" style="color:inherit;">erdcc.cricket@gmail.com</a></p>
+        <p class="footer-contact-line"><a href="tel:0276259932" style="color:inherit;">027 625 9932</a></p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">&copy; 2026 Eden Roskill Cricket Club. Established 1903.</span>
+      <div class="footer-social">
+        <a href="https://www.instagram.com/roskillcricket/" target="_blank" aria-label="Instagram">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+            <circle cx="12" cy="12" r="4"/>
+            <circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/>
+          </svg>
+        </a>
+        <a href="https://www.facebook.com/EdenRoskilPrems" target="_blank" aria-label="Facebook">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+          </svg>
+        </a>
+      </div>
+      <span class="footer-credit">Website by <a href="https://webtag.co.nz" target="_blank">webtag.co.nz</a></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ---- CUSTOM CURSOR ---- */
+  const dot  = document.getElementById('cursorDot');
+  const ring = document.getElementById('cursorRing');
+  let mx = -100, my = -100, rx = -100, ry = -100;
+
+  function getCursorBg(x, y) {
+    dot.style.visibility = 'hidden'; ring.style.visibility = 'hidden';
+    const el = document.elementFromPoint(x, y);
+    dot.style.visibility = ''; ring.style.visibility = '';
+    let node = el;
+    while (node && node !== document.documentElement) {
+      const bg = getComputedStyle(node).backgroundColor;
+      if (bg && bg !== 'rgba(0, 0, 0, 0)' && bg !== 'transparent') return bg;
+      node = node.parentElement;
+    }
+    return getComputedStyle(document.body).backgroundColor;
+  }
+  function isDark(rgb) {
+    const m = rgb.match(/\d+/g);
+    if (!m) return false;
+    return (0.299 * +m[0] + 0.587 * +m[1] + 0.114 * +m[2]) / 255 < 0.45;
+  }
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    const dark = isDark(getCursorBg(e.clientX, e.clientY));
+    dot.classList.toggle('on-dark', dark);
+    ring.classList.toggle('on-dark', dark);
+  });
+  document.addEventListener('mouseleave', () => { dot.style.opacity = '0'; ring.style.opacity = '0'; });
+  document.addEventListener('mouseenter', () => { dot.style.opacity = '1'; ring.style.opacity = '1'; });
+  (function animateCursor() {
+    dot.style.left = mx + 'px'; dot.style.top = my + 'px';
+    rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12;
+    ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+    requestAnimationFrame(animateCursor);
+  })();
+  document.querySelectorAll('a,button,input,textarea').forEach(el => {
+    el.addEventListener('mouseenter', () => { dot.classList.add('hov'); ring.classList.add('hov'); });
+    el.addEventListener('mouseleave', () => { dot.classList.remove('hov'); ring.classList.remove('hov'); });
+  });
+
+  /* ---- 3D TILT BUTTONS ---- */
+  (function () {
+    function tilt3D(selector) {
+      document.querySelectorAll(selector).forEach(el => {
+        let tx = 0, ty = 0, cx = 0, cy = 0, raf;
+        el.style.willChange = 'transform';
+        el.addEventListener('mousemove', e => {
+          const r = el.getBoundingClientRect();
+          tx = ((e.clientY - r.top)  / r.height - 0.5) * -22;
+          ty = ((e.clientX - r.left) / r.width  - 0.5) *  22;
+          cancelAnimationFrame(raf);
+          (function spring() {
+            cx += (tx - cx) * 0.18; cy += (ty - cy) * 0.18;
+            el.style.transform = `perspective(700px) rotateX(${cx}deg) rotateY(${cy}deg) translateZ(18px)`;
+            if (Math.abs(tx-cx)>0.05||Math.abs(ty-cy)>0.05) raf=requestAnimationFrame(spring);
+          })();
+        });
+        el.addEventListener('mouseleave', () => {
+          tx=0; ty=0; cancelAnimationFrame(raf);
+          (function back() {
+            cx+=(0-cx)*0.12; cy+=(0-cy)*0.12;
+            el.style.transform=`perspective(700px) rotateX(${cx}deg) rotateY(${cy}deg) translateZ(${Math.abs(cx)+Math.abs(cy)>0.05?18:0}px)`;
+            if(Math.abs(cx)>0.05||Math.abs(cy)>0.05) raf=requestAnimationFrame(back);
+            else el.style.transform='';
+          })();
+        });
+      });
+    }
+    tilt3D('.btn-hero-fill, .btn-hero-outline, .btn-register, .btn-white');
+  })();
+
+  /* ---- NAVBAR SCROLL ---- */
+  const navbar = document.getElementById('navbar');
+  const sideNav = document.getElementById('side-nav');
+  const hero = document.getElementById('hero');
+  function onScroll() {
+    const scrolled = window.scrollY > 40;
+    navbar.classList.toggle('scrolled', scrolled);
+    /* side nav style — blue on white sections, white on hero */
+    if (hero) {
+      const heroBottom = hero.offsetTop + hero.offsetHeight;
+      sideNav.classList.toggle('on-hero', window.scrollY < heroBottom - 100);
+    }
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  /* ---- HAMBURGER ---- */
+  const hamburger  = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => {
+    const open = mobileMenu.classList.toggle('open');
+    hamburger.classList.toggle('open', open);
+    hamburger.setAttribute('aria-expanded', String(open));
+  });
+  document.querySelectorAll('.mobile-link, .mobile-sub-link, .mobile-menu .btn-register').forEach(el =>
+    el.addEventListener('click', () => {
+      mobileMenu.classList.remove('open');
+      hamburger.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', 'false');
+    })
+  );
+  document.querySelectorAll('.mobile-accordion-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const exp = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!exp));
+      btn.nextElementSibling.classList.toggle('open', !exp);
+    });
+  });
+
+  /* ---- SCROLL REVEAL ---- */
+  const revealObs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); revealObs.unobserve(e.target); } });
+  }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+  document.querySelectorAll('.reveal, .reveal-left').forEach(el => revealObs.observe(el));
+
+  /* ---- ANIMATED COUNTERS ---- */
+  let counted = false;
+  const statsObs = new IntersectionObserver(entries => {
+    if (entries[0].isIntersecting && !counted) {
+      counted = true;
+      document.querySelectorAll('[data-target]').forEach(el => {
+        const target = +el.dataset.target;
+        const suffix = el.dataset.suffix || '';
+        const start  = performance.now();
+        const dur    = 1600;
+        (function step(now) {
+          const p = Math.min((now - start) / dur, 1);
+          const e = 1 - Math.pow(1 - p, 3);
+          el.textContent = Math.floor(e * target) + (p === 1 ? suffix : '');
+          if (p < 1) requestAnimationFrame(step);
+        })(performance.now());
+      });
+    }
+  }, { threshold: 0.5 });
+  const statsEl = document.getElementById('stats-strip');
+  if (statsEl) statsObs.observe(statsEl);
+
+  /* ---- MORPHING HEADLINE WORD — backspace then type ---- */
+  const morphEl = document.getElementById('hero-morph-word');
+  if (morphEl) {
+    const words   = ['CULTURE.','LEGACY.','PASSION.','PRIDE.','EXCELLENCE.','FAMILY.','HISTORY.'];
+    const DELETE_SPEED = 55;   /* ms per character deleted */
+    const TYPE_SPEED   = 70;   /* ms per character typed */
+    const PAUSE        = 2200; /* ms word stays visible */
+    let idx = 0;
+
+    function deleteWord(word, cb) {
+      let i = word.length;
+      (function step() {
+        if (i < 0) { cb(); return; }
+        morphEl.textContent = word.slice(0, i);
+        i--;
+        setTimeout(step, DELETE_SPEED);
+      })();
+    }
+
+    function typeWord(word, cb) {
+      let i = 0;
+      (function step() {
+        if (i > word.length) { cb(); return; }
+        morphEl.textContent = word.slice(0, i);
+        i++;
+        setTimeout(step, TYPE_SPEED);
+      })();
+    }
+
+    function cycle() {
+      const current = words[idx];
+      setTimeout(() => {
+        deleteWord(current, () => {
+          idx = (idx + 1) % words.length;
+          setTimeout(() => {
+            typeWord(words[idx], cycle);
+          }, 120); /* tiny gap between delete and type */
+        });
+      }, PAUSE);
+    }
+
+    /* type the first word in on load, then start cycling */
+    typeWord(words[0], cycle);
+  }
+
+  /* ---- SIDE NAV ---- */
+  const sideItems = Array.from(document.querySelectorAll('.side-nav-item'));
+  const sideThumb = document.getElementById('side-nav-thumb');
+  const count = sideItems.length;
+  sideItems.forEach((item, i) => { item.style.top = (count===1?0:(i/(count-1))*100)+'%'; });
+  function setThumb(i) { sideThumb.style.top = (count===1?0:(i/(count-1))*100)+'%'; }
+  setThumb(0);
+  const allSections = Array.from(document.querySelectorAll('section[id]'));
+  function updateNav() {
+    const mid = window.scrollY + window.innerHeight * 0.4;
+    let best = 0;
+    allSections.forEach((s, i) => { if (s.offsetTop <= mid) best = i; });
+    const id = allSections[best]?.id || '';
+    const si = sideItems.findIndex(el => el.dataset.section === id);
+    if (si !== -1) setThumb(si);
+  }
+  window.addEventListener('scroll', updateNav, { passive: true });
+  updateNav();
+
+})();
+</script>
+</body>
+</html>

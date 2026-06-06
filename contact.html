@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact | Eden Roskill Cricket Club</title>
+<meta name="description" content="Get in touch with Eden Roskill Cricket Club, Keith Hay Park, Mt Roskill, Auckland.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body { font-family: 'DM Sans', sans-serif; background: #fff; color: #0D1220; -webkit-font-smoothing: antialiased; }
+a { text-decoration: none; color: inherit; }
+ul { list-style: none; }
+img { display: block; max-width: 100%; }
+
+:root {
+  --blue:       #2B3FA0;
+  --blue-light: #3D52B8;
+  --blue-dark:  #1A2870;
+  --blue-pale:  #EEF1FB;
+  --blue-mid:   #4A90E2;
+  --off-white:  #F7F8FC;
+  --text:       #0D1220;
+  --text-mid:   #3A4560;
+  --text-muted: #7A85A3;
+  --border:     rgba(0,0,0,0.08);
+  --ease:       cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* CURSOR */
+.cursor-dot {
+  position: fixed; top: 0; left: 0; width: 4px; height: 4px;
+  background: #E02020; border-radius: 50%;
+  pointer-events: none; z-index: 99999; transform: translate(-50%, -50%);
+  transition: width 0.2s, height 0.2s, background 0.2s;
+}
+.cursor-ring {
+  position: fixed; top: 0; left: 0; width: 26px; height: 26px;
+  border: 1.5px solid rgba(224,32,32,0.5); border-radius: 50%;
+  pointer-events: none; z-index: 99998; transform: translate(-50%, -50%);
+  transition: width 0.25s, height 0.25s, border-color 0.2s;
+}
+.cursor-dot.hov { width: 8px; height: 8px; background: #E02020; }
+.cursor-ring.hov { width: 40px; height: 40px; border-color: #E02020; }
+.cursor-dot.on-dark       { background: #fff; }
+.cursor-ring.on-dark      { border-color: rgba(255,255,255,0.5); }
+.cursor-dot.on-dark.hov   { background: #fff; }
+.cursor-ring.on-dark.hov  { border-color: #fff; }
+
+/* NAV */
+#navbar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000; height: 64px;
+  display: flex; align-items: center; padding: 0 3rem;
+  background: rgba(255,255,255,0.96);
+  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-inner { width: 100%; display: flex; align-items: center; justify-content: space-between; }
+.nav-brand { display: flex; align-items: center; gap: .75rem; flex-shrink: 0; }
+.nav-logo { width: 36px; height: 36px; object-fit: contain; }
+.nav-brand-name { font-family: 'Bebas Neue', sans-serif; font-size: 1.05rem; letter-spacing: .08em; color: var(--blue); }
+.nav-links { display: flex; align-items: center; gap: .1rem; margin-left: auto; }
+.nav-links > li { position: relative; list-style: none; }
+.nav-links > li > a { font-size: .72rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; padding: .5rem .85rem; border-radius: 6px; color: var(--text-mid); display: flex; align-items: center; gap: .3rem; transition: color .2s, background .2s; white-space: nowrap; }
+.nav-links > li > a:hover { color: var(--blue); background: var(--blue-pale); }
+.nav-links > li > a.active { color: var(--blue); }
+.nav-has-dropdown > a::after { content: ''; display: inline-block; width: 5px; height: 5px; border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; transform: rotate(45deg) translateY(-2px); transition: transform .2s; }
+.nav-has-dropdown:hover > a::after { transform: rotate(225deg) translateY(-2px); }
+.nav-dropdown { position: absolute; top: calc(100% + 8px); left: 0; min-width: 190px; background: #fff; border: 1px solid var(--border); border-radius: 10px; padding: .4rem; box-shadow: 0 8px 32px rgba(0,0,0,.1); opacity: 0; visibility: hidden; transform: translateY(6px); transition: opacity .2s var(--ease), transform .2s var(--ease), visibility .2s; z-index: 200; list-style: none; }
+.nav-has-dropdown:hover .nav-dropdown, .nav-has-dropdown:focus-within .nav-dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+.nav-dropdown li a { display: block; padding: .55rem 1rem; font-size: .73rem; font-weight: 600; letter-spacing: .07em; text-transform: uppercase; color: var(--text-mid); border-radius: 6px; transition: color .18s, background .18s; }
+.nav-dropdown li a:hover { color: var(--blue); background: var(--blue-pale); }
+.nav-dropdown::before { content: ''; position: absolute; top: -1px; left: 14px; right: 14px; height: 2px; background: #fff; border-radius: 2px; }
+.nav-actions { display: flex; align-items: center; gap: .75rem; margin-left: 1rem; }
+.btn-register { font-size: .72rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; padding: .6rem 1.4rem; border-radius: 6px; background: var(--blue); color: #fff; border: 2px solid var(--blue); transition: background .2s, transform .15s; }
+.btn-register:hover { background: var(--blue-dark); border-color: var(--blue-dark); transform: translateY(-1px); }
+.hamburger { display: none; flex-direction: column; gap: 5px; width: 36px; height: 36px; align-items: center; justify-content: center; background: transparent; border: 1px solid var(--border); border-radius: 6px; }
+.hamburger span { display: block; width: 18px; height: 1.5px; background: var(--text); border-radius: 2px; transition: all .3s; }
+.hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(4.5px,4.5px); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(4.5px,-4.5px); }
+.mobile-menu { display: none; position: fixed; top: 64px; left: 0; right: 0; background: rgba(255,255,255,.98); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); padding: 1rem 2rem 1.5rem; z-index: 999; flex-direction: column; gap: .1rem; }
+.mobile-menu.open { display: flex; }
+.mobile-menu a { padding: .8rem 0; font-size: .9rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--text-mid); border-bottom: 1px solid var(--border); transition: color .2s; }
+.mobile-menu a:hover { color: var(--blue); }
+.mobile-accordion-btn { width: 100%; display: flex; align-items: center; justify-content: space-between; padding: .8rem 0; font-size: .9rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--text-mid); background: none; border: none; border-bottom: 1px solid var(--border); transition: color .2s; }
+.mobile-accordion-btn:hover { color: var(--blue); }
+.mobile-accordion-chevron { width: 6px; height: 6px; border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; transform: rotate(45deg); transition: transform .25s; }
+.mobile-accordion-btn[aria-expanded="true"] .mobile-accordion-chevron { transform: rotate(225deg); }
+.mobile-accordion-body { display: none; flex-direction: column; padding: .25rem 0 .25rem 1rem; }
+.mobile-accordion-body.open { display: flex; }
+.mobile-sub-link { padding: .55rem 0 !important; font-size: .8rem !important; color: var(--text-muted) !important; border-bottom: none !important; }
+.mobile-sub-link:hover { color: var(--blue) !important; }
+.mobile-menu .btn-register { margin-top: 1rem; text-align: center; width: 100%; display: block; }
+@media (max-width: 1000px) { .nav-links { display: none; } .nav-actions .btn-register { display: none; } .hamburger { display: flex; } }
+
+/* REVEAL */
+.reveal { opacity: 0; transform: translateY(40px); transition: opacity .9s var(--ease), transform .9s var(--ease); }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-delay-1 { transition-delay: .1s; }
+.reveal-delay-2 { transition-delay: .2s; }
+.reveal-right { opacity: 0; transform: translateX(40px); transition: opacity .9s var(--ease), transform .9s var(--ease); }
+.reveal-right.visible { opacity: 1; transform: translateX(0); }
+
+/* PAGE HEADER */
+.contact-header {
+  padding: 9rem 3rem 5rem;
+  background: #fff;
+  border-bottom: 1px solid rgba(0,0,0,0.07);
+}
+.contact-header-inner {
+  max-width: 1200px; margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 3rem;
+}
+.contact-label { font-size: .68rem; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; color: var(--blue); margin-bottom: .75rem; display: block; }
+.contact-heading { font-family: 'Bebas Neue', sans-serif; font-size: clamp(3.5rem, 8vw, 7rem); line-height: .9; letter-spacing: .02em; color: var(--text); }
+.contact-header-crest {
+  width: clamp(160px, 20vw, 280px);
+  flex-shrink: 0;
+}
+@media (max-width: 640px) { .contact-header-inner { grid-template-columns: 1fr; } .contact-header-crest { display: none; } }
+
+/* ============================================================
+   CONTACT INFO SECTION, clean minimal layout
+   ============================================================ */
+.contact-section {
+  padding: 3rem 3rem 4rem;
+  background: var(--blue);
+}
+.contact-intro {
+  max-width: 1200px; margin: 0 auto;
+  padding: 3rem 0 3.5rem;
+  border-bottom: 1px solid rgba(0,0,0,0.07);
+}
+.contact-intro p {
+  font-size: 1rem; line-height: 1.75; color: var(--text-muted);
+  max-width: 52ch;
+}
+
+/* 2-col info grid */
+.contact-info-grid {
+  max-width: 1200px; margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: start;
+}
+.contact-left-col {
+  padding-right: 5rem;
+  border-right: 1px solid rgba(255,255,255,0.15);
+}
+.contact-info-block {
+  padding: 3rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.15);
+}
+.contact-info-block:last-child { border-bottom: none; }
+.contact-right-col {
+  padding-left: 5rem;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+.ci-label {
+  font-size: .62rem; font-weight: 700; letter-spacing: .22em;
+  text-transform: uppercase; color: rgba(255,255,255,0.5);
+  display: block; margin-bottom: 1rem;
+}
+.ci-value {
+  font-family: 'DM Sans', sans-serif;
+  font-size: clamp(1.5rem, 2.8vw, 2.2rem);
+  font-weight: 700; letter-spacing: -.03em;
+  color: #fff; line-height: 1.15;
+  display: block; margin-bottom: .5rem;
+}
+.ci-value a { color: #fff; transition: color .2s; }
+.ci-value a:hover { color: rgba(255,255,255,0.7); }
+.ci-sub {
+  font-size: .875rem; color: rgba(255,255,255,0.6);
+  line-height: 1.6; display: block; margin-bottom: .85rem;
+}
+.ci-link {
+  display: inline-flex; align-items: center; gap: .35rem;
+  font-size: .8rem; font-weight: 600;
+  color: #fff;
+  border-bottom: 1px solid rgba(255,255,255,0.4);
+  padding-bottom: 1px;
+  transition: color .2s, border-color .2s;
+}
+.ci-link:hover { color: rgba(255,255,255,0.7); border-color: rgba(255,255,255,0.7); }
+.ci-link::after { content: '→'; }
+
+/* Profile card — club manager */
+.profile-card-wrap {
+  display: flex;
+  align-items: center;
+  position: relative;
+  gap: 0;
+}
+.profile-card-img {
+  width: 200px; height: 200px;
+  border-radius: 20px;
+  object-fit: cover;
+  flex-shrink: 0;
+  background: var(--blue-pale);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--text-muted); font-size: .75rem; letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.profile-card-img-placeholder {
+  width: 200px; height: 200px;
+  border-radius: 20px;
+  flex-shrink: 0;
+  background: var(--blue-pale);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--text-muted); font-size: .7rem; letter-spacing: .1em;
+  text-transform: uppercase; font-weight: 600;
+}
+.profile-card-info {
+  background: #fff;
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: 20px;
+  padding: 1.5rem 1.75rem;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+  margin-left: -32px;
+  z-index: 1;
+  flex: 1;
+}
+.profile-card-name {
+  font-size: 1.1rem; font-weight: 700;
+  color: var(--text); letter-spacing: -.02em;
+  margin-bottom: .2rem;
+}
+.profile-card-role {
+  font-size: .65rem; font-weight: 700; letter-spacing: .15em;
+  text-transform: uppercase; color: var(--text-muted);
+  margin-bottom: .85rem;
+}
+.profile-card-bio {
+  font-size: .82rem; line-height: 1.7;
+  color: var(--text-mid); margin-bottom: 1rem;
+}
+.profile-card-contacts { display: flex; flex-direction: column; gap: .35rem; }
+.profile-card-contact-link {
+  font-size: .8rem; font-weight: 500; color: var(--text-mid);
+  border-bottom: 1px solid rgba(0,0,0,0.12); padding-bottom: 1px;
+  width: fit-content;
+  transition: color .2s, border-color .2s;
+}
+.profile-card-contact-link:hover { color: var(--blue); border-color: var(--blue); }
+
+/* Social */
+.ci-social { display: flex; gap: .6rem; margin-top: .5rem; }
+.social-btn {
+  display: inline-flex; align-items: center;
+  padding: .45rem .9rem; border-radius: 6px;
+  font-size: .68rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+  border: 1.5px solid rgba(0,0,0,0.1); color: var(--text-mid);
+  transition: border-color .2s, color .2s, background .2s;
+}
+.social-btn:hover { border-color: var(--blue); color: var(--blue); background: var(--blue-pale); }
+
+/* ============================================================
+   CONTACT FORM SECTION
+   ============================================================ */
+.contact-form-section {
+  padding: 3.5rem 3rem 3.5rem;
+  background: #fff;
+}
+.contact-form-inner {
+  max-width: 1200px; margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: start;
+  border-top: 1px solid var(--border);
+  padding-top: 3rem;
+}
+.cf-heading {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(2.2rem, 3.5vw, 3.2rem);
+  letter-spacing: .02em; color: var(--text);
+  line-height: .95; margin-bottom: .75rem;
+}
+.cf-sub {
+  font-size: .82rem; line-height: 1.7; color: var(--text-muted);
+  margin-bottom: 1.5rem;
+}
+.cf-left { display: flex; flex-direction: column; }
+.cf-map {
+  width: 100%; flex: 1; min-height: 220px;
+  border: none; border-radius: 12px;
+  display: block; filter: grayscale(10%);
+}
+
+/* Form */
+.form-group { margin-bottom: .75rem; }
+.form-group label {
+  display: block; font-size: .65rem; font-weight: 700;
+  letter-spacing: .15em; text-transform: uppercase;
+  color: var(--text-muted); margin-bottom: .45rem;
+}
+.form-group input,
+.form-group textarea {
+  width: 100%; background: #fff;
+  border: 1.5px solid var(--border); border-radius: 8px;
+  padding: .65rem .9rem; font-size: .85rem;
+  font-family: 'DM Sans', sans-serif;
+  color: var(--text); outline: none;
+  transition: border-color .2s, box-shadow .2s;
+}
+.form-group input::placeholder,
+.form-group textarea::placeholder { color: var(--text-muted); opacity: .6; }
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px rgba(43,63,160,0.08);
+}
+.form-group textarea { resize: vertical; min-height: 130px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: .85rem; }
+.btn-submit {
+  width: 100%; padding: 1rem; border-radius: 8px;
+  background: var(--blue); color: #fff; border: none;
+  font-family: 'DM Sans', sans-serif;
+  font-size: .8rem; font-weight: 700;
+  letter-spacing: .12em; text-transform: uppercase;
+  transition: background .2s, transform .15s;
+  margin-top: .5rem;
+}
+.btn-submit:hover { background: var(--blue-dark); transform: translateY(-2px); }
+.form-success {
+  display: none; margin-top: 1rem; padding: 1rem;
+  background: var(--blue-pale); border: 1px solid rgba(43,63,160,.2);
+  border-radius: 8px; font-size: .85rem; color: var(--blue); text-align: center;
+}
+
+@media (max-width: 900px) {
+  .contact-info-grid { grid-template-columns: 1fr; }
+  .contact-info-block:nth-child(even) { padding-left: 0; border-left: none; }
+  .contact-info-block { padding-right: 0; }
+  .contact-form-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+  .contact-section, .contact-form-section { padding-left: 1.5rem; padding-right: 1.5rem; }
+  .contact-header { padding: 7rem 1.5rem 3rem; }
+  .form-row { grid-template-columns: 1fr; }
+}
+@media (max-width: 640px) {
+  .contact-header-inner { flex-direction: column; gap: 2rem; text-align: center; }
+  .contact-header-crest { width: 100px; }
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+#footer { position: relative; z-index: 1; background: #0D1220; padding: 4rem 2.5rem 2rem; color: rgba(255,255,255,0.55); }
+.footer-inner { max-width: 1200px; margin: 0 auto; }
+.footer-top { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 3rem; padding-bottom: 3rem; border-bottom: 1px solid rgba(255,255,255,0.08); }
+.footer-brand { display: flex; flex-direction: column; gap: 1rem; }
+.footer-logo { width: 48px; }
+.footer-club-name { font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem; letter-spacing: 0.1em; color: #fff; }
+.footer-tagline { font-size: 0.78rem; line-height: 1.6; color: rgba(255,255,255,0.4); }
+.footer-col h4 { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 1rem; }
+.footer-col ul { display: flex; flex-direction: column; gap: 0.6rem; }
+.footer-col ul a { font-size: 0.82rem; font-weight: 500; color: rgba(255,255,255,0.55); transition: color 0.2s; }
+.footer-col ul a:hover { color: #fff; }
+.footer-contact-line { font-size: 0.82rem; margin-bottom: 0.5rem; }
+.footer-bottom { padding-top: 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem; }
+.footer-copy { font-size: 0.75rem; color: rgba(255,255,255,0.25); }
+.footer-credit { font-size: 0.75rem; color: rgba(255,255,255,0.25); }
+.footer-credit a { color: rgba(255,255,255,0.4); }
+.footer-credit a:hover { color: #fff; }
+.footer-social { display: flex; gap: 0.75rem; }
+.footer-social a { width: 34px; height: 34px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.15); display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.5); transition: border-color 0.2s, color 0.2s, background 0.2s; }
+.footer-social a:hover { border-color: #fff; color: #fff; background: rgba(255,255,255,0.08); }
+@media (max-width: 768px) { .footer-top { grid-template-columns: 1fr 1fr; gap: 2rem; } }
+@media (max-width: 480px) { .footer-top { grid-template-columns: 1fr; } .footer-bottom { flex-direction: column; text-align: center; } }
+</style>
+</head>
+<body>
+
+
+<!-- SIDE NAV -->
+<nav id="side-nav">
+  <div id="side-nav-track"></div>
+  <div id="side-nav-thumb"></div>
+  <div class="side-nav-item" data-section="contact-section"><a href="#contact-section" class="side-nav-dot"></a><span class="side-nav-label">Contact</span></div>
+</nav>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand">
+      <img src="crest.png" alt="Eden Roskill CC" class="nav-logo">
+      <span class="nav-brand-name">Eden Roskill CC</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="about.html">About</a></li>
+      <li class="nav-has-dropdown">
+        <a href="programs.html">Play Cricket</a>
+        <ul class="nav-dropdown">
+          <li><a href="teams.html">Teams</a></li>
+          <li><a href="programs.html">Programs</a></li>
+          <li><a href="programs.html#junior">Junior Cricket</a></li>
+          <li><a href="programs.html#senior">Senior Cricket</a></li>
+        </ul>
+      </li>
+      <li><a href="the-baggy.html">The Baggy</a></li>
+      <li><a href="contact.html" class="active">Contact</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a href="https://www.playhq.com/new-zealand-cricket/org/eden-roskill-cricket-club/0c54ceb4" target="_blank" class="btn-register">Register</a>
+      <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html" class="mobile-link">Home</a>
+  <a href="about.html" class="mobile-link">About</a>
+  <div class="mobile-accordion">
+    <button class="mobile-accordion-btn" aria-expanded="false">Play Cricket <span class="mobile-accordion-chevron"></span></button>
+    <div class="mobile-accordion-body">
+      <a href="teams.html" class="mobile-sub-link">Teams</a>
+      <a href="programs.html" class="mobile-sub-link">Programs</a>
+    </div>
+  </div>
+  <a href="the-baggy.html" class="mobile-link">The Baggy</a>
+  <a href="contact.html" class="mobile-link active">Contact</a>
+  <a href="https://www.playhq.com/new-zealand-cricket/org/eden-roskill-cricket-club/0c54ceb4" target="_blank" class="btn-register" style="display:block;text-align:center;margin-top:1rem;">Register</a>
+</div>
+
+<!-- HEADER -->
+<header class="contact-header">
+  <div class="contact-header-inner">
+    <div>
+      <span class="contact-label">Get in Touch</span>
+      <h1 class="contact-heading">We'd love<br>to hear<br>from you.</h1>
+    </div>
+    <img src="crest.png" alt="" class="contact-header-crest" aria-hidden="true">
+  </div>
+</header>
+
+<!-- CONTACT INFO -->
+<section id="contact-section" class="contact-section">
+  <div class="contact-info-grid">
+
+    <!-- LEFT: address + nets stacked -->
+    <div class="contact-left-col">
+      <div class="contact-info-block">
+        <span class="ci-label">Ground &amp; Clubrooms</span>
+        <span class="ci-value">13 Noton Road<br>Mount Roskill, Auckland 1041</span>
+        <a href="https://www.google.com/maps/dir/?api=1&destination=13+Noton+Road,+Mount+Roskill,+Auckland+1041,+New+Zealand" target="_blank" class="ci-link">Get directions </a>
+      </div>
+      <div class="contact-info-block">
+        <span class="ci-label">Indoor Nets</span>
+        <span class="ci-sub" style="margin-top:.25rem;">Bookable indoor facilities for members and teams.</span>
+        <a href="mailto:erdcc.cricket@gmail.com" class="ci-link">Enquire to book </a>
+      </div>
+    </div>
+
+    <!-- RIGHT: profile card -->
+    <div class="contact-right-col">
+      <span class="ci-label">Club Manager</span>
+      <div class="profile-card-wrap">
+        <div class="profile-card-img-placeholder">Photo<br>coming<br>soon</div>
+        <div class="profile-card-info">
+          <div class="profile-card-name">Nitin Kaushik</div>
+          <div class="profile-card-role">Club Administrator &amp; Manager</div>
+          <p class="profile-card-bio">Nitin has been part of the Eden Roskill family for over a decade, helping keep the club running smoothly behind the scenes. From registrations to ground bookings, he's the first point of contact for anything club-related.</p>
+          <div class="profile-card-contacts">
+            <a href="tel:0276259932" class="profile-card-contact-link">027 625 9932</a>
+            <a href="mailto:erdcc.cricket@gmail.com" class="profile-card-contact-link">erdcc.cricket@gmail.com</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- CONTACT FORM -->
+<section class="contact-form-section">
+  <div class="contact-form-inner">
+    <div class="cf-left">
+      <h2 class="cf-heading">Send us<br>a message.</h2>
+      <p class="cf-sub">Fill out the form and we'll get back to you as soon as possible, usually within one business day.</p>
+      <iframe
+        src="https://maps.google.com/maps?q=13+Noton+Road,+Mount+Roskill,+Auckland+1041,+New+Zealand&z=16&output=embed"
+        allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+        title="Eden Roskill Cricket Club, Keith Hay Park, Mt Roskill"
+        class="cf-map">
+      </iframe>
+    </div>
+    <div>
+      <form id="contactForm">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="firstName">First Name</label>
+            <input type="text" id="firstName" name="firstName" placeholder="John" required>
+          </div>
+          <div class="form-group">
+            <label for="lastName">Last Name</label>
+            <input type="text" id="lastName" name="lastName" placeholder="Smith" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" name="email" placeholder="john@example.com" required>
+        </div>
+        <div class="form-group">
+          <label for="phone">Phone Number</label>
+          <input type="tel" id="phone" name="phone" placeholder="021 000 0000">
+        </div>
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" placeholder="Tell us how we can help..." required></textarea>
+        </div>
+        <button type="submit" class="btn-submit">Send Message</button>
+        <div class="form-success" id="formSuccess">
+          Thanks for reaching out. We will get back to you shortly.
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img src="crest.png" alt="Eden Roskill CC" class="footer-logo">
+        <div class="footer-club-name">Eden Roskill CC</div>
+        <p class="footer-tagline">Auckland cricket since 1903.<br>Keith Hay Park, Mt Roskill.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Club</h4>
+        <ul>
+          <li><a href="about.html">About</a></li>
+          <li><a href="the-baggy.html">The Baggy</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Play</h4>
+        <ul>
+          <li><a href="teams.html">Teams</a></li>
+          <li><a href="programs.html">Programs</a></li>
+          <li><a href="https://www.playhq.com/new-zealand-cricket/org/eden-roskill-cricket-club/0c54ceb4" target="_blank">Register</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <p class="footer-contact-line">13 Noton Road<br>Mt Roskill, Auckland 1041</p>
+        <p class="footer-contact-line"><a href="mailto:erdcc.cricket@gmail.com" style="color:inherit;">erdcc.cricket@gmail.com</a></p>
+        <p class="footer-contact-line"><a href="tel:0276259932" style="color:inherit;">027 625 9932</a></p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">&copy; 2026 Eden Roskill Cricket Club. Established 1903.</span>
+      <div class="footer-social">
+        <a href="https://www.instagram.com/roskillcricket/" target="_blank" aria-label="Instagram">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+            <circle cx="12" cy="12" r="4"/>
+            <circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/>
+          </svg>
+        </a>
+        <a href="https://www.facebook.com/EdenRoskilPrems" target="_blank" aria-label="Facebook">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+          </svg>
+        </a>
+      </div>
+      <span class="footer-credit">Website by <a href="https://webtag.co.nz" target="_blank">webtag.co.nz</a></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  /* CURSOR */
+  const dot = document.getElementById('cursorDot');
+  const ring = document.getElementById('cursorRing');
+  let mx = -100, my = -100, rx = -100, ry = -100;
+
+  function getCursorBg(x, y) {
+    dot.style.visibility = 'hidden'; ring.style.visibility = 'hidden';
+    const el = document.elementFromPoint(x, y);
+    dot.style.visibility = ''; ring.style.visibility = '';
+    let node = el;
+    while (node && node !== document.documentElement) {
+      const bg = getComputedStyle(node).backgroundColor;
+      if (bg && bg !== 'rgba(0, 0, 0, 0)' && bg !== 'transparent') return bg;
+      node = node.parentElement;
+    }
+    return getComputedStyle(document.body).backgroundColor;
+  }
+  function isDark(rgb) {
+    const m = rgb.match(/\d+/g);
+    if (!m) return false;
+    return (0.299 * +m[0] + 0.587 * +m[1] + 0.114 * +m[2]) / 255 < 0.45;
+  }
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    const dark = isDark(getCursorBg(e.clientX, e.clientY));
+    dot.classList.toggle('on-dark', dark);
+    ring.classList.toggle('on-dark', dark);
+  });
+  (function anim() { dot.style.left = mx+'px'; dot.style.top = my+'px'; rx += (mx-rx)*0.12; ry += (my-ry)*0.12; ring.style.left = rx+'px'; ring.style.top = ry+'px'; requestAnimationFrame(anim); })();
+  document.querySelectorAll('a,button,input,textarea').forEach(el => {
+    el.addEventListener('mouseenter', () => { dot.classList.add('hov'); ring.classList.add('hov'); });
+    el.addEventListener('mouseleave', () => { dot.classList.remove('hov'); ring.classList.remove('hov'); });
+  });
+
+  /* 3D TILT BUTTONS */
+  (function () {
+    function tilt3D(selector) {
+      document.querySelectorAll(selector).forEach(el => {
+        let tx=0,ty=0,cx=0,cy=0,raf;
+        el.style.willChange='transform';
+        el.addEventListener('mousemove',e=>{
+          const r=el.getBoundingClientRect();
+          tx=((e.clientY-r.top)/r.height-0.5)*-22;
+          ty=((e.clientX-r.left)/r.width-0.5)*22;
+          cancelAnimationFrame(raf);
+          (function spring(){cx+=(tx-cx)*0.18;cy+=(ty-cy)*0.18;el.style.transform=`perspective(700px) rotateX(${cx}deg) rotateY(${cy}deg) translateZ(18px)`;if(Math.abs(tx-cx)>0.05||Math.abs(ty-cy)>0.05)raf=requestAnimationFrame(spring);})();
+        });
+        el.addEventListener('mouseleave',()=>{tx=0;ty=0;cancelAnimationFrame(raf);(function back(){cx+=(0-cx)*0.12;cy+=(0-cy)*0.12;el.style.transform=`perspective(700px) rotateX(${cx}deg) rotateY(${cy}deg) translateZ(${Math.abs(cx)+Math.abs(cy)>0.05?18:0}px)`;if(Math.abs(cx)>0.05||Math.abs(cy)>0.05)raf=requestAnimationFrame(back);else el.style.transform='';})();});
+      });
+    }
+    tilt3D('.btn-submit, .btn-register, .social-btn');
+  })();
+
+  /* HAMBURGER */
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => {
+    const open = mobileMenu.classList.toggle('open');
+    hamburger.classList.toggle('open', open);
+    hamburger.setAttribute('aria-expanded', String(open));
+  });
+  document.querySelectorAll('.mobile-link, .mobile-sub-link').forEach(el =>
+    el.addEventListener('click', () => { mobileMenu.classList.remove('open'); hamburger.classList.remove('open'); hamburger.setAttribute('aria-expanded','false'); })
+  );
+  document.querySelectorAll('.mobile-accordion-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const exp = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!exp));
+      btn.nextElementSibling.classList.toggle('open', !exp);
+    });
+  });
+
+  /* REVEAL */
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+  }, { threshold: 0.05 });
+  document.querySelectorAll('.reveal, .reveal-right').forEach(el => obs.observe(el));
+
+  /* CONTACT FORM */
+  const form = document.getElementById('contactForm');
+  const success = document.getElementById('formSuccess');
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    success.style.display = 'block';
+    form.reset();
+    setTimeout(() => { success.style.display = 'none'; }, 6000);
+  });
+})();
+</script>
+</body>
+</html>

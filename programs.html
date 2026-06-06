@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Programs | Eden Roskill Cricket Club</title>
+<meta name="description" content="Cricket programs at Eden Roskill, junior development, senior grades, indoor training, and coaching. Auckland Cricket, Mt Roskill.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; cursor: none !important; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body { font-family: 'DM Sans', sans-serif; background: #fff; color: #0D1220; -webkit-font-smoothing: antialiased; }
+a { text-decoration: none; color: inherit; }
+ul { list-style: none; }
+img { display: block; max-width: 100%; }
+
+:root {
+  --blue:       #2B3FA0;
+  --blue-light: #3D52B8;
+  --blue-dark:  #1A2870;
+  --blue-pale:  #EEF1FB;
+  --blue-mid:   #4A90E2;
+  --off-white:  #F7F8FC;
+  --text:       #0D1220;
+  --text-mid:   #3A4560;
+  --text-muted: #7A85A3;
+  --border:     rgba(0,0,0,0.08);
+  --ease:       cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* CURSOR */
+.cursor-dot { position: fixed; top: 0; left: 0; width: 4px; height: 4px; background: #E02020; border-radius: 50%; pointer-events: none; z-index: 99999; transform: translate(-50%,-50%); transition: width .2s, height .2s, background .2s; }
+.cursor-ring { position: fixed; top: 0; left: 0; width: 26px; height: 26px; border: 1.5px solid rgba(224,32,32,0.5); border-radius: 50%; pointer-events: none; z-index: 99998; transform: translate(-50%,-50%); transition: width .25s, height .25s, border-color .2s; }
+.cursor-dot.hov { width: 8px; height: 8px; background: #E02020; }
+.cursor-ring.hov { width: 40px; height: 40px; border-color: #E02020; }
+.cursor-dot.on-dark       { background: #fff; }
+.cursor-ring.on-dark      { border-color: rgba(255,255,255,0.5); }
+.cursor-dot.on-dark.hov   { background: #fff; }
+.cursor-ring.on-dark.hov  { border-color: #fff; }
+
+/* NAV */
+#navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; height: 64px; display: flex; align-items: center; padding: 0 3rem; background: rgba(255,255,255,0.96); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); }
+.nav-inner { width: 100%; display: flex; align-items: center; justify-content: space-between; }
+.nav-brand { display: flex; align-items: center; gap: .75rem; flex-shrink: 0; }
+.nav-logo { width: 36px; height: 36px; object-fit: contain; }
+.nav-brand-name { font-family: 'Bebas Neue', sans-serif; font-size: 1.05rem; letter-spacing: .08em; color: var(--blue); }
+.nav-links { display: flex; align-items: center; gap: .1rem; margin-left: auto; }
+.nav-links > li { position: relative; list-style: none; }
+.nav-links > li > a { font-size: .72rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; padding: .5rem .85rem; border-radius: 6px; color: var(--text-mid); display: flex; align-items: center; gap: .3rem; transition: color .2s, background .2s; white-space: nowrap; }
+.nav-links > li > a:hover { color: var(--blue); background: var(--blue-pale); }
+.nav-links > li > a.active { color: var(--blue); }
+.nav-has-dropdown > a::after { content: ''; display: inline-block; width: 5px; height: 5px; border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; transform: rotate(45deg) translateY(-2px); transition: transform .2s; }
+.nav-has-dropdown:hover > a::after { transform: rotate(225deg) translateY(-2px); }
+.nav-dropdown { position: absolute; top: calc(100% + 8px); left: 0; min-width: 190px; background: #fff; border: 1px solid var(--border); border-radius: 10px; padding: .4rem; box-shadow: 0 8px 32px rgba(0,0,0,.1); opacity: 0; visibility: hidden; transform: translateY(6px); transition: opacity .2s var(--ease), transform .2s var(--ease), visibility .2s; z-index: 200; list-style: none; }
+.nav-has-dropdown:hover .nav-dropdown, .nav-has-dropdown:focus-within .nav-dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+.nav-dropdown li a { display: block; padding: .55rem 1rem; font-size: .73rem; font-weight: 600; letter-spacing: .07em; text-transform: uppercase; color: var(--text-mid); border-radius: 6px; transition: color .18s, background .18s; }
+.nav-dropdown li a:hover { color: var(--blue); background: var(--blue-pale); }
+.nav-dropdown::before { content: ''; position: absolute; top: -1px; left: 14px; right: 14px; height: 2px; background: #fff; border-radius: 2px; }
+.nav-actions { display: flex; align-items: center; gap: .75rem; margin-left: 1rem; }
+.btn-register { font-size: .72rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; padding: .6rem 1.4rem; border-radius: 6px; background: var(--blue); color: #fff; border: 2px solid var(--blue); transition: background .2s, transform .15s; }
+.btn-register:hover { background: var(--blue-dark); border-color: var(--blue-dark); transform: translateY(-1px); }
+.hamburger { display: none; flex-direction: column; gap: 5px; width: 36px; height: 36px; align-items: center; justify-content: center; background: transparent; border: 1px solid var(--border); border-radius: 6px; }
+.hamburger span { display: block; width: 18px; height: 1.5px; background: var(--text); border-radius: 2px; transition: all .3s; }
+.hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(4.5px,4.5px); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(4.5px,-4.5px); }
+.mobile-menu { display: none; position: fixed; top: 64px; left: 0; right: 0; background: rgba(255,255,255,.98); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); padding: 1rem 2rem 1.5rem; z-index: 999; flex-direction: column; gap: .1rem; }
+.mobile-menu.open { display: flex; }
+.mobile-menu a { padding: .8rem 0; font-size: .9rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--text-mid); border-bottom: 1px solid var(--border); transition: color .2s; }
+.mobile-menu a:hover { color: var(--blue); }
+.mobile-accordion-btn { width: 100%; display: flex; align-items: center; justify-content: space-between; padding: .8rem 0; font-size: .9rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--text-mid); background: none; border: none; border-bottom: 1px solid var(--border); transition: color .2s; }
+.mobile-accordion-btn:hover { color: var(--blue); }
+.mobile-accordion-chevron { width: 6px; height: 6px; border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; transform: rotate(45deg); transition: transform .25s; }
+.mobile-accordion-btn[aria-expanded="true"] .mobile-accordion-chevron { transform: rotate(225deg); }
+.mobile-accordion-body { display: none; flex-direction: column; padding: .25rem 0 .25rem 1rem; }
+.mobile-accordion-body.open { display: flex; }
+.mobile-sub-link { padding: .55rem 0 !important; font-size: .8rem !important; color: var(--text-muted) !important; border-bottom: none !important; }
+.mobile-sub-link:hover { color: var(--blue) !important; }
+.mobile-menu .btn-register { margin-top: 1rem; text-align: center; width: 100%; display: block; }
+@media (max-width: 1000px) { .nav-links { display: none; } .nav-actions .btn-register { display: none; } .hamburger { display: flex; } }
+
+/* REVEAL */
+.reveal { opacity: 0; transform: translateY(40px); transition: opacity .9s var(--ease), transform .9s var(--ease); }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-delay-1 { transition-delay: .12s; }
+.reveal-delay-2 { transition-delay: .24s; }
+.reveal-delay-3 { transition-delay: .36s; }
+.reveal-right { opacity: 0; transform: translateX(40px); transition: opacity .9s var(--ease), transform .9s var(--ease); }
+.reveal-right.visible { opacity: 1; transform: translateX(0); }
+
+/* PAGE HEADER */
+.page-header {
+  padding: 5rem 3rem 3rem;
+  background: #fff;
+  border-bottom: 1px solid var(--border);
+}
+.page-header-inner { max-width: 1200px; margin: 0 auto; }
+.page-label { font-size: .68rem; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; color: var(--blue); margin-bottom: .75rem; display: block; }
+.page-heading { font-family: 'Bebas Neue', sans-serif; font-size: clamp(3.5rem, 8vw, 7rem); line-height: .9; letter-spacing: .02em; color: var(--text); }
+.page-sub { font-size: 1rem; color: var(--text-muted); line-height: 1.75; margin-top: 1.5rem; max-width: 52ch; }
+
+/* PROGRAM NAV PILLS */
+.program-nav {
+  background: var(--off-white);
+  border-bottom: 1px solid var(--border);
+  padding: 0 3rem;
+  position: sticky;
+  top: 64px;
+  z-index: 100;
+}
+.program-nav-inner { max-width: 1200px; margin: 0 auto; display: flex; gap: 0; }
+.program-nav-link {
+  display: flex; align-items: center; gap: .5rem;
+  padding: 1.1rem 1.5rem;
+  font-size: .72rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--text-muted);
+  border-bottom: 2px solid transparent;
+  transition: color .2s, border-color .2s;
+  white-space: nowrap;
+}
+.program-nav-link:hover { color: var(--blue); }
+.program-nav-link.active { color: var(--blue); border-bottom-color: var(--blue); }
+@media (max-width: 600px) { .program-nav { padding: 0 1.25rem; overflow-x: auto; } .program-nav-link { padding: 1rem .85rem; font-size: .65rem; } }
+
+/* SECTION SHARED */
+.prog-section {
+  padding: 7rem 3rem;
+  scroll-margin-top: 110px;
+}
+.prog-section:nth-child(even) { background: var(--off-white); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.prog-inner { max-width: 1200px; margin: 0 auto; }
+
+/* HERO ROW — image + text side by side */
+.prog-hero-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  align-items: center;
+  margin-bottom: 5rem;
+}
+.prog-hero-row.flip { direction: rtl; }
+.prog-hero-row.flip > * { direction: ltr; }
+.prog-label { font-size: .68rem; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; color: var(--blue); margin-bottom: .75rem; display: block; }
+.prog-heading { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.8rem, 5vw, 4.5rem); line-height: .92; letter-spacing: .02em; color: var(--text); margin-bottom: 1.25rem; }
+.prog-body { font-size: .95rem; line-height: 1.8; color: var(--text-mid); margin-bottom: 1rem; }
+.prog-body strong { color: var(--text); font-weight: 700; }
+
+.prog-photo {
+  border-radius: 16px;
+  overflow: hidden;
+  aspect-ratio: 4/3;
+  background: var(--blue-pale);
+  position: relative;
+}
+.prog-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.prog-photo-placeholder {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: .75rem;
+  background: linear-gradient(135deg, var(--blue-pale) 0%, #dce3f8 100%);
+}
+.prog-photo-placeholder span { font-family: 'Bebas Neue', sans-serif; font-size: 1.2rem; letter-spacing: .1em; color: var(--blue); opacity: .4; text-align: center; padding: 0 2rem; }
+
+/* PATHWAY STEPS */
+.pathway-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin: 2.5rem 0;
+  position: relative;
+}
+.pathway-steps::before {
+  content: '';
+  position: absolute;
+  left: 18px; top: 0; bottom: 0;
+  width: 2px;
+  background: var(--blue-pale);
+}
+.pathway-step {
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+  padding: 1.25rem 0;
+  position: relative;
+}
+.pathway-num {
+  width: 38px; height: 38px; flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--blue);
+  color: #fff;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1rem; letter-spacing: .06em;
+  display: flex; align-items: center; justify-content: center;
+  position: relative; z-index: 1;
+}
+.pathway-step-text h4 { font-family: 'Bebas Neue', sans-serif; font-size: 1.3rem; letter-spacing: .04em; color: var(--text); margin-bottom: .2rem; }
+.pathway-step-text p { font-size: .85rem; line-height: 1.65; color: var(--text-muted); }
+
+/* FEATURE CARDS GRID */
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+  margin-top: 3.5rem;
+}
+.feature-card {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  aspect-ratio: 3/4;
+  will-change: transform;
+  cursor: default;
+  background: var(--text);
+}
+.feature-card-bg {
+  position: absolute; inset: 0;
+  background-size: cover;
+  background-position: center;
+  transform: scale(1.08);
+  transition: transform .4s var(--ease);
+}
+.feature-card:hover .feature-card-bg { transform: scale(1.13); }
+.feature-card-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(13,18,32,.85) 0%, rgba(13,18,32,.3) 50%, transparent 100%);
+}
+.feature-card-inner {
+  position: absolute; inset: 0;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  transform: translateZ(40px);
+}
+.feature-card-glass {
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(255,255,255,.07);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 12px;
+  padding: 1rem 1.1rem;
+}
+.feature-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.25rem;
+  letter-spacing: .07em;
+  color: #fff;
+  margin-bottom: .25rem;
+  display: block;
+  line-height: 1.1;
+}
+.feature-desc { font-size: .8rem; line-height: 1.6; color: rgba(255,255,255,.65); }
+.feature-card-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 7rem;
+  line-height: 1;
+  letter-spacing: .02em;
+  color: rgba(255,255,255,.08);
+  position: absolute;
+  bottom: 1rem; right: 1.25rem;
+  pointer-events: none;
+}
+
+/* SCHEDULE TABLE */
+.schedule-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 2rem;
+  font-size: .875rem;
+}
+.schedule-table th {
+  font-size: .65rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase;
+  color: var(--text-muted); padding: .75rem 1rem;
+  border-bottom: 2px solid var(--border);
+  text-align: left;
+}
+.schedule-table td {
+  padding: 1rem 1rem;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-mid);
+  vertical-align: top;
+}
+.schedule-table tr:last-child td { border-bottom: none; }
+.schedule-table tr:hover td { background: var(--blue-pale); }
+.schedule-team { font-weight: 600; color: var(--text); }
+.schedule-badge { display: inline-block; font-size: .6rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; padding: .2rem .6rem; border-radius: 99px; background: var(--blue-pale); color: var(--blue); margin-top: .2rem; }
+
+/* ARROW LINK */
+.arrow-link { display: inline-flex; align-items: center; gap: .4rem; font-size: .8rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--blue); transition: gap .2s; margin-top: 1.5rem; }
+.arrow-link::before { content: '↗'; font-size: .9rem; }
+.arrow-link:hover { gap: .65rem; }
+
+/* CTA STRIP */
+#cta-strip { background: var(--blue); padding: 6rem 3rem; text-align: center; }
+.cta-strip-inner { max-width: 700px; margin: 0 auto; }
+.cta-heading { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.5rem, 5vw, 4.5rem); color: #fff; letter-spacing: .03em; margin-bottom: 1.25rem; }
+.cta-sub { font-size: 1rem; color: rgba(255,255,255,.65); line-height: 1.7; margin-bottom: 2.5rem; }
+.btn-white { display: inline-flex; align-items: center; gap: .5rem; font-size: .8rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; padding: 1rem 2.5rem; border-radius: 6px; background: #fff; color: var(--blue); transition: background .2s, transform .15s; }
+.btn-white:hover { background: var(--blue-pale); transform: translateY(-2px); }
+
+/* SIDE NAV */
+#side-nav { position: fixed; right: 20px; top: 50%; transform: translateY(-50%); z-index: 900; display: flex; flex-direction: column; align-items: center; height: 200px; }
+#side-nav-track { position: absolute; top: 0; bottom: 0; left: 50%; transform: translateX(-50%); width: 1px; background: rgba(0,0,0,0.12); border-radius: 1px; }
+#side-nav-thumb { position: absolute; left: 50%; transform: translate(-50%,-50%); width: 8px; height: 8px; border-radius: 50%; background: var(--blue); box-shadow: 0 0 8px rgba(43,63,160,.6); transition: top .4s cubic-bezier(.22,1,.36,1); top: 0%; pointer-events: none; }
+.side-nav-item { position: absolute; left: 50%; transform: translate(-50%,-50%); width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; }
+.side-nav-item:hover .side-nav-label { opacity: 1; transform: translateX(0); }
+.side-nav-label { position: absolute; right: 20px; font-size: .62rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--text); background: rgba(255,255,255,.95); border: 1px solid var(--border); padding: .2rem .55rem; border-radius: 4px; white-space: nowrap; opacity: 0; transform: translateX(6px); transition: opacity .2s, transform .2s; pointer-events: none; box-shadow: 0 2px 8px rgba(0,0,0,.08); }
+.side-nav-dot { display: block; width: 4px; height: 4px; border-radius: 50%; background: rgba(0,0,0,.2); transition: background .2s; }
+.side-nav-item:hover .side-nav-dot { background: var(--blue); }
+@media (max-width: 900px) { #side-nav { display: none; } }
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+#footer { position: relative; z-index: 1; background: #0D1220; padding: 4rem 2.5rem 2rem; color: rgba(255,255,255,0.55); }
+.footer-inner { max-width: 1200px; margin: 0 auto; }
+.footer-top { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 3rem; padding-bottom: 3rem; border-bottom: 1px solid rgba(255,255,255,0.08); }
+.footer-brand { display: flex; flex-direction: column; gap: 1rem; }
+.footer-logo { width: 48px; }
+.footer-club-name { font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem; letter-spacing: 0.1em; color: #fff; }
+.footer-tagline { font-size: 0.78rem; line-height: 1.6; color: rgba(255,255,255,0.4); }
+.footer-col h4 { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 1rem; }
+.footer-col ul { display: flex; flex-direction: column; gap: 0.6rem; }
+.footer-col ul a { font-size: 0.82rem; font-weight: 500; color: rgba(255,255,255,0.55); transition: color 0.2s; }
+.footer-col ul a:hover { color: #fff; }
+.footer-contact-line { font-size: 0.82rem; margin-bottom: 0.5rem; }
+.footer-bottom { padding-top: 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem; }
+.footer-copy { font-size: 0.75rem; color: rgba(255,255,255,0.25); }
+.footer-credit { font-size: 0.75rem; color: rgba(255,255,255,0.25); }
+.footer-credit a { color: rgba(255,255,255,0.4); }
+.footer-credit a:hover { color: #fff; }
+.footer-social { display: flex; gap: 0.75rem; }
+.footer-social a { width: 34px; height: 34px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.15); display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.5); transition: border-color 0.2s, color 0.2s, background 0.2s; }
+.footer-social a:hover { border-color: #fff; color: #fff; background: rgba(255,255,255,0.08); }
+@media (max-width: 768px) { .footer-top { grid-template-columns: 1fr 1fr; gap: 2rem; } }
+@media (max-width: 480px) { .footer-top { grid-template-columns: 1fr; } .footer-bottom { flex-direction: column; text-align: center; } }
+</style>
+</head>
+<body>
+
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- SIDE NAV -->
+<nav id="side-nav">
+  <div id="side-nav-track"></div>
+  <div id="side-nav-thumb"></div>
+  <div class="side-nav-item" data-section="junior"><a href="#junior" class="side-nav-dot"></a><span class="side-nav-label">Junior</span></div>
+  <div class="side-nav-item" data-section="senior"><a href="#senior" class="side-nav-dot"></a><span class="side-nav-label">Senior</span></div>
+  <div class="side-nav-item" data-section="training"><a href="#training" class="side-nav-dot"></a><span class="side-nav-label">Training</span></div>
+  <div class="side-nav-item" data-section="cta-strip"><a href="#cta-strip" class="side-nav-dot"></a><span class="side-nav-label">Register</span></div>
+</nav>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand">
+      <img src="crest.png" alt="Eden Roskill CC" class="nav-logo">
+      <span class="nav-brand-name">Eden Roskill CC</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="about.html">About</a></li>
+      <li class="nav-has-dropdown">
+        <a href="programs.html" class="active">Play Cricket</a>
+        <ul class="nav-dropdown">
+          <li><a href="teams.html">Teams</a></li>
+          <li><a href="programs.html">Programs</a></li>
+          <li><a href="programs.html#junior">Junior Cricket</a></li>
+          <li><a href="programs.html#senior">Senior Cricket</a></li>
+        </ul>
+      </li>
+      <li><a href="the-baggy.html">The Baggy</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a href="https://www.playhq.com/new-zealand-cricket/org/eden-roskill-cricket-club/0c54ceb4" target="_blank" class="btn-register">Register</a>
+      <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html" class="mobile-link">Home</a>
+  <a href="about.html" class="mobile-link">About</a>
+  <div class="mobile-accordion">
+    <button class="mobile-accordion-btn" aria-expanded="false">Play Cricket <span class="mobile-accordion-chevron"></span></button>
+    <div class="mobile-accordion-body">
+      <a href="teams.html" class="mobile-sub-link">Teams</a>
+      <a href="programs.html" class="mobile-sub-link">Programs</a>
+      <a href="programs.html#junior" class="mobile-sub-link">Junior Cricket</a>
+      <a href="programs.html#senior" class="mobile-sub-link">Senior Cricket</a>
+    </div>
+  </div>
+  <a href="the-baggy.html" class="mobile-link">The Baggy</a>
+  <a href="contact.html" class="mobile-link">Contact</a>
+  <a href="https://www.playhq.com/new-zealand-cricket/org/eden-roskill-cricket-club/0c54ceb4" target="_blank" class="btn-register" style="display:block;text-align:center;margin-top:1rem;">Register</a>
+</div>
+
+<!-- PAGE HEADER -->
+<header class="page-header">
+  <div class="page-header-inner">
+    <span class="page-label reveal">Programs</span>
+    <h1 class="page-heading reveal reveal-delay-1">From your first over<br>to Premier grade.</h1>
+    <p class="page-sub reveal reveal-delay-2">Every cricketer starts somewhere. Eden Roskill has structured programs for every age and ability, junior development, senior competition, and year-round indoor training.</p>
+  </div>
+</header>
+
+<!-- PROGRAM NAV -->
+<nav class="program-nav" aria-label="Programs navigation">
+  <div class="program-nav-inner">
+    <a href="#junior"   class="program-nav-link active">Junior Cricket</a>
+    <a href="#senior"   class="program-nav-link">Senior Cricket</a>
+    <a href="#training" class="program-nav-link">Indoor Training</a>
+  </div>
+</nav>
+
+<!-- ============================================================
+     JUNIOR CRICKET
+     ============================================================ -->
+<section id="junior" class="prog-section">
+  <div class="prog-inner">
+
+    <div class="prog-hero-row">
+      <div>
+        <span class="prog-label reveal">Junior Cricket</span>
+        <h2 class="prog-heading reveal reveal-delay-1">Where the club<br>starts.</h2>
+        <p class="prog-body reveal reveal-delay-2">Junior cricket at Eden Roskill runs from <strong>Under-11 through to Under-19</strong>, offering structured pathways in the Auckland Cricket Association age-grade competitions. We provide professional coaching, quality equipment, and a welcoming environment for every young cricketer.</p>
+        <p class="prog-body reveal reveal-delay-2">We believe junior cricket should be fun first, building skills, confidence, and friendships that last a lifetime. Many of our Premier Men started in these junior programs.</p>
+        <a href="https://www.playhq.com/new-zealand-cricket/org/eden-roskill-cricket-club/0c54ceb4" target="_blank" class="arrow-link reveal reveal-delay-3">Register via PlayHQ</a>
+      </div>
+      <div class="prog-photo reveal-right">
+        <div class="prog-photo-placeholder">
+          <span>Junior Cricket Photo</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pathway steps -->
+    <div class="reveal">
+      <span class="prog-label">Development Pathway</span>
+      <h3 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(1.8rem,3vw,2.5rem);letter-spacing:.03em;color:var(--text);margin-bottom:.5rem;">Age-grade competition</h3>
+    </div>
+    <div class="pathway-steps">
+      <div class="pathway-step reveal">
+        <div class="pathway-num">U11</div>
+        <div class="pathway-step-text">
+          <h4>Under-11, Fundamentals</h4>
+          <p>Modified cricket introducing the basics of batting, bowling, and fielding. Focus on fun, participation, and developing a love of the game.</p>
+        </div>
+      </div>
+      <div class="pathway-step reveal reveal-delay-1">
+        <div class="pathway-num">U13</div>
+        <div class="pathway-step-text">
+          <h4>Under-13, Development</h4>
+          <p>Age-grade competition in the ACA Junior competitions. Players develop core skills and begin learning team tactics and game awareness.</p>
+        </div>
+      </div>
+      <div class="pathway-step reveal reveal-delay-2">
+        <div class="pathway-num">U15</div>
+        <div class="pathway-step-text">
+          <h4>Under-15, Competition</h4>
+          <p>Full ACA competition format. Players are introduced to the demands of the game, longer formats, strategy, and the importance of preparation.</p>
+        </div>
+      </div>
+      <div class="pathway-step reveal reveal-delay-3">
+        <div class="pathway-num">U17</div>
+        <div class="pathway-step-text">
+          <h4>Under-17, Representative pathway</h4>
+          <p>High-level junior competition. Strong performers are encouraged to trial for Auckland age-group representative sides.</p>
+        </div>
+      </div>
+      <div class="pathway-step reveal reveal-delay-4">
+        <div class="pathway-num">U19</div>
+        <div class="pathway-step-text">
+          <h4>Under-19, Senior transition</h4>
+          <p>The bridge to senior cricket. U19s experience the culture and expectations of the club and are introduced to senior players and coaches.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="feature-grid">
+      <div class="feature-card reveal">
+        <div class="feature-card-bg" style="background-image:url('https://images.unsplash.com/photo-1531415074968-036ba1b575da?w=800&q=80')"></div>
+        <div class="feature-card-overlay"></div>
+        <div class="feature-card-inner">
+          <div class="feature-card-glass">
+            <span class="feature-title">Qualified Coaching</span>
+            <p class="feature-desc">Our junior coaches hold NZC accreditations and are committed to player development at every level.</p>
+          </div>
+        </div>
+        <span class="feature-card-num">01</span>
+      </div>
+      <div class="feature-card reveal reveal-delay-1">
+        <div class="feature-card-bg" style="background-image:url('https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?w=800&q=80')"></div>
+        <div class="feature-card-overlay"></div>
+        <div class="feature-card-inner">
+          <div class="feature-card-glass">
+            <span class="feature-title">Full Season Competition</span>
+            <p class="feature-desc">ACA age-grade competitions run through the full cricket season, October to March, with weekly matches on weekends.</p>
+          </div>
+        </div>
+        <span class="feature-card-num">02</span>
+      </div>
+      <div class="feature-card reveal reveal-delay-2">
+        <div class="feature-card-bg" style="background-image:url('https://images.unsplash.com/photo-1624526267942-ab0ff8a3e972?w=800&q=80')"></div>
+        <div class="feature-card-overlay"></div>
+        <div class="feature-card-inner">
+          <div class="feature-card-glass">
+            <span class="feature-title">Inclusive Environment</span>
+            <p class="feature-desc">All abilities are welcome. Whether your child has never played or has been in nets since age six, they will find their place here.</p>
+          </div>
+        </div>
+        <span class="feature-card-num">03</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================================
+     SENIOR CRICKET
+     ============================================================ -->
+<section id="senior" class="prog-section">
+  <div class="prog-inner">
+
+    <div class="prog-hero-row flip">
+      <div>
+        <span class="prog-label reveal">Senior Cricket</span>
+        <h2 class="prog-heading reveal reveal-delay-1">Five sides.<br>Every level.</h2>
+        <p class="prog-body reveal reveal-delay-2">Eden Roskill fields multiple senior teams across the Auckland Cricket Association competitions, from <strong>Premier Men</strong> at the top level through to club grade and social sides. Whatever your standard, there is a team for you.</p>
+        <p class="prog-body reveal reveal-delay-2">Senior cricket at ERDCC runs <strong>October to March</strong> with training starting in September. New players are always welcome, come to a training session and we'll find the right team for you.</p>
+        <a href="teams.html" class="arrow-link reveal reveal-delay-3">View all teams</a>
+      </div>
+      <div class="prog-photo reveal-right">
+        <div class="prog-photo-placeholder">
+          <span>Senior Cricket Photo</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Schedule -->
+    <div class="reveal">
+      <span class="prog-label">Season Overview</span>
+      <h3 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(1.8rem,3vw,2.5rem);letter-spacing:.03em;color:var(--text);margin-bottom:.5rem;">Who plays when</h3>
+    </div>
+    <table class="schedule-table reveal">
+      <thead>
+        <tr>
+          <th>Team</th>
+          <th>Competition</th>
+          <th>Format</th>
+          <th>Day</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="schedule-team">Premier Men</span><br><span class="schedule-badge">Premier Grade</span></td>
+          <td>ACA Premier Men's</td>
+          <td>50-over &amp; T20</td>
+          <td>Saturdays</td>
+        </tr>
+        <tr>
+          <td><span class="schedule-team">Premier Three</span><br><span class="schedule-badge">Premier 3</span></td>
+          <td>ACA Premier 3</td>
+          <td>50-over</td>
+          <td>Saturdays</td>
+        </tr>
+        <tr>
+          <td><span class="schedule-team">Punjabi Tuskers</span><br><span class="schedule-badge">Club Grade</span></td>
+          <td>ACA Club Competition</td>
+          <td>40-over</td>
+          <td>Saturdays</td>
+        </tr>
+        <tr>
+          <td><span class="schedule-team">Telugu Leaders</span><br><span class="schedule-badge">Club Grade</span></td>
+          <td>ACA Club Competition</td>
+          <td>40-over</td>
+          <td>Saturdays</td>
+        </tr>
+        <tr>
+          <td><span class="schedule-team">T20 Men's</span><br><span class="schedule-badge">T20</span></td>
+          <td>ACA T20 Competition</td>
+          <td>T20</td>
+          <td>Weeknights</td>
+        </tr>
+        <tr>
+          <td><span class="schedule-team">Women's XI</span><br><span class="schedule-badge">Women's</span></td>
+          <td>ACA Women's Competition</td>
+          <td>40-over &amp; T20</td>
+          <td>Sundays</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="feature-grid" style="margin-top:3.5rem;">
+      <div class="feature-card reveal">
+        <div class="feature-card-bg" style="background-image:url('https://images.unsplash.com/photo-1593766788306-28561086694e?w=800&q=80')"></div>
+        <div class="feature-card-overlay"></div>
+        <div class="feature-card-inner">
+          <div class="feature-card-glass">
+            <span class="feature-title">Structured Pathways</span>
+            <p class="feature-desc">Clear progression from club grade through to Premier cricket. Our coaches actively identify and support players ready to step up.</p>
+          </div>
+        </div>
+        <span class="feature-card-num">01</span>
+      </div>
+      <div class="feature-card reveal reveal-delay-1">
+        <div class="feature-card-bg" style="background-image:url('https://images.unsplash.com/photo-1529900748604-07564a03e7a6?w=800&q=80')"></div>
+        <div class="feature-card-overlay"></div>
+        <div class="feature-card-inner">
+          <div class="feature-card-glass">
+            <span class="feature-title">Multicultural Club</span>
+            <p class="feature-desc">Our senior sides represent dozens of nationalities and cultures. You will find your people at Eden Roskill regardless of where you are from.</p>
+          </div>
+        </div>
+        <span class="feature-card-num">02</span>
+      </div>
+      <div class="feature-card reveal reveal-delay-2">
+        <div class="feature-card-bg" style="background-image:url('https://images.unsplash.com/photo-1612872087720-bb876e2e67d1?w=800&q=80')"></div>
+        <div class="feature-card-overlay"></div>
+        <div class="feature-card-inner">
+          <div class="feature-card-glass">
+            <span class="feature-title">PlayHQ Registration</span>
+            <p class="feature-desc">All senior registrations are through PlayHQ. Registration opens September each year. Fees vary by grade.</p>
+          </div>
+        </div>
+        <span class="feature-card-num">03</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================================
+     INDOOR TRAINING
+     ============================================================ -->
+<section id="training" class="prog-section">
+  <div class="prog-inner">
+
+    <div class="prog-hero-row">
+      <div>
+        <span class="prog-label reveal">Indoor Training</span>
+        <h2 class="prog-heading reveal reveal-delay-1">Train all year.<br>Stay sharp.</h2>
+        <p class="prog-body reveal reveal-delay-2">The off-season doesn't have to mean no cricket. Eden Roskill offers <strong>bookable indoor net sessions</strong> and structured skills coaching throughout the year at our indoor facilities.</p>
+        <p class="prog-body reveal reveal-delay-2">Whether you're preparing for the upcoming season, working on a specific skill, or just keeping your eye in, our nets are available for individuals, groups, and teams.</p>
+        <a href="contact.html" class="arrow-link reveal reveal-delay-3">Enquire about indoor nets</a>
+      </div>
+      <div class="prog-photo reveal-right">
+        <div class="prog-photo-placeholder">
+          <span>Indoor Training Photo</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="feature-grid">
+      <div class="feature-card reveal">
+        <span class="feature-icon">🏟️</span>
+        <div class="feature-title">Bookable Nets</div>
+        <p class="feature-desc">Indoor net lanes available for individual or group bookings. Contact us to check availability and rates for the current period.</p>
+      </div>
+      <div class="feature-card reveal reveal-delay-1">
+        <span class="feature-icon">🧢</span>
+        <div class="feature-title">Expert Coaching</div>
+        <p class="feature-desc">One-on-one and small group coaching with our qualified coaches. Batting, bowling, fielding, and wicketkeeping all available.</p>
+      </div>
+      <div class="feature-card reveal reveal-delay-2">
+        <span class="feature-icon">📆</span>
+        <div class="feature-title">Year-Round Availability</div>
+        <p class="feature-desc">Available throughout the year, off-season, pre-season, and in-season. Ideal for players wanting extra practice time.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="cta-strip">
+  <div class="cta-strip-inner reveal">
+    <h2 class="cta-heading">Ready to play?</h2>
+    <p class="cta-sub">Register for the 2025/26 season through PlayHQ or get in touch with the club and we'll help find the right program for you.</p>
+    <div style="display:flex;flex-wrap:wrap;gap:.75rem;justify-content:center;">
+      <a href="https://www.playhq.com/new-zealand-cricket/org/eden-roskill-cricket-club/0c54ceb4" target="_blank" class="btn-white">Register to Play ↗</a>
+      <a href="contact.html" class="btn-white" style="background:transparent;color:#fff;border:2px solid rgba(255,255,255,.4);">Get in Touch</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img src="crest.png" alt="Eden Roskill CC" class="footer-logo">
+        <div class="footer-club-name">Eden Roskill CC</div>
+        <p class="footer-tagline">Auckland cricket since 1903.<br>Keith Hay Park, Mt Roskill.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Club</h4>
+        <ul>
+          <li><a href="about.html">About</a></li>
+          <li><a href="the-baggy.html">The Baggy</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Play</h4>
+        <ul>
+          <li><a href="teams.html">Teams</a></li>
+          <li><a href="programs.html">Programs</a></li>
+          <li><a href="https://www.playhq.com/new-zealand-cricket/org/eden-roskill-cricket-club/0c54ceb4" target="_blank">Register</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <p class="footer-contact-line">13 Noton Road<br>Mt Roskill, Auckland 1041</p>
+        <p class="footer-contact-line"><a href="mailto:erdcc.cricket@gmail.com" style="color:inherit;">erdcc.cricket@gmail.com</a></p>
+        <p class="footer-contact-line"><a href="tel:0276259932" style="color:inherit;">027 625 9932</a></p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">&copy; 2026 Eden Roskill Cricket Club. Established 1903.</span>
+      <div class="footer-social">
+        <a href="https://www.instagram.com/roskillcricket/" target="_blank" aria-label="Instagram">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+            <circle cx="12" cy="12" r="4"/>
+            <circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/>
+          </svg>
+        </a>
+        <a href="https://www.facebook.com/EdenRoskilPrems" target="_blank" aria-label="Facebook">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+          </svg>
+        </a>
+      </div>
+      <span class="footer-credit">Website by <a href="https://webtag.co.nz" target="_blank">webtag.co.nz</a></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  /* CURSOR */
+  const dot = document.getElementById('cursorDot');
+  const ring = document.getElementById('cursorRing');
+  let mx = -100, my = -100, rx = -100, ry = -100;
+  function getCursorBg(x, y) {
+    dot.style.visibility = 'hidden'; ring.style.visibility = 'hidden';
+    const el = document.elementFromPoint(x, y);
+    dot.style.visibility = ''; ring.style.visibility = '';
+    let node = el;
+    while (node && node !== document.documentElement) {
+      const bg = getComputedStyle(node).backgroundColor;
+      if (bg && bg !== 'rgba(0, 0, 0, 0)' && bg !== 'transparent') return bg;
+      node = node.parentElement;
+    }
+    return getComputedStyle(document.body).backgroundColor;
+  }
+  function isDark(rgb) {
+    const m = rgb.match(/\d+/g);
+    if (!m) return false;
+    return (0.299 * +m[0] + 0.587 * +m[1] + 0.114 * +m[2]) / 255 < 0.45;
+  }
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    const dark = isDark(getCursorBg(e.clientX, e.clientY));
+    dot.classList.toggle('on-dark', dark);
+    ring.classList.toggle('on-dark', dark);
+  });
+  (function anim() { dot.style.left = mx+'px'; dot.style.top = my+'px'; rx += (mx-rx)*0.12; ry += (my-ry)*0.12; ring.style.left = rx+'px'; ring.style.top = ry+'px'; requestAnimationFrame(anim); })();
+  document.querySelectorAll('a,button').forEach(el => {
+    el.addEventListener('mouseenter', () => { dot.classList.add('hov'); ring.classList.add('hov'); });
+    el.addEventListener('mouseleave', () => { dot.classList.remove('hov'); ring.classList.remove('hov'); });
+  });
+
+  /* 3D TILT BUTTONS */
+  (function(){function tilt3D(s){document.querySelectorAll(s).forEach(el=>{let tx=0,ty=0,cx=0,cy=0,raf;el.style.willChange='transform';el.addEventListener('mousemove',e=>{const r=el.getBoundingClientRect();tx=((e.clientY-r.top)/r.height-0.5)*-22;ty=((e.clientX-r.left)/r.width-0.5)*22;cancelAnimationFrame(raf);(function sp(){cx+=(tx-cx)*0.18;cy+=(ty-cy)*0.18;el.style.transform=`perspective(700px) rotateX(${cx}deg) rotateY(${cy}deg) translateZ(18px)`;if(Math.abs(tx-cx)>0.05||Math.abs(ty-cy)>0.05)raf=requestAnimationFrame(sp);})();});el.addEventListener('mouseleave',()=>{tx=0;ty=0;cancelAnimationFrame(raf);(function bk(){cx+=(0-cx)*0.12;cy+=(0-cy)*0.12;el.style.transform=`perspective(700px) rotateX(${cx}deg) rotateY(${cy}deg) translateZ(${Math.abs(cx)+Math.abs(cy)>0.05?18:0}px)`;if(Math.abs(cx)>0.05||Math.abs(cy)>0.05)raf=requestAnimationFrame(bk);else el.style.transform='';})();});});}tilt3D('.btn-white, .btn-register, .arrow-link');})();
+
+  /* 3D TILT — FEATURE CARDS */
+  (function(){
+    document.querySelectorAll('.feature-card').forEach(el => {
+      let tx=0,ty=0,cx=0,cy=0,raf;
+      el.style.willChange='transform';
+      el.addEventListener('mousemove', e => {
+        const r = el.getBoundingClientRect();
+        tx = ((e.clientY - r.top)  / r.height - 0.5) * -8;
+        ty = ((e.clientX - r.left) / r.width  - 0.5) *  8;
+        cancelAnimationFrame(raf);
+        (function sp(){
+          cx += (tx-cx)*0.14; cy += (ty-cy)*0.14;
+          el.style.transform = `perspective(1000px) rotateX(${cx}deg) rotateY(${cy}deg) scale3d(1.03,1.03,1.03)`;
+          if(Math.abs(tx-cx)>0.05||Math.abs(ty-cy)>0.05) raf=requestAnimationFrame(sp);
+        })();
+      });
+      el.addEventListener('mouseleave', () => {
+        tx=0; ty=0; cancelAnimationFrame(raf);
+        (function bk(){
+          cx += (0-cx)*0.1; cy += (0-cy)*0.1;
+          el.style.transform = `perspective(1000px) rotateX(${cx}deg) rotateY(${cy}deg) scale3d(1,1,1)`;
+          if(Math.abs(cx)>0.05||Math.abs(cy)>0.05) raf=requestAnimationFrame(bk);
+          else el.style.transform='';
+        })();
+      });
+    });
+  })();
+
+  /* HAMBURGER */
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => {
+    const open = mobileMenu.classList.toggle('open');
+    hamburger.classList.toggle('open', open);
+    hamburger.setAttribute('aria-expanded', String(open));
+  });
+  document.querySelectorAll('.mobile-link, .mobile-sub-link').forEach(el =>
+    el.addEventListener('click', () => { mobileMenu.classList.remove('open'); hamburger.classList.remove('open'); hamburger.setAttribute('aria-expanded','false'); })
+  );
+  document.querySelectorAll('.mobile-accordion-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const exp = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!exp));
+      btn.nextElementSibling.classList.toggle('open', !exp);
+    });
+  });
+
+  /* REVEAL */
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+  }, { threshold: 0.05 });
+  document.querySelectorAll('.reveal, .reveal-right').forEach(el => obs.observe(el));
+
+  /* PROGRAM NAV — active state on scroll */
+  const progNavLinks = document.querySelectorAll('.program-nav-link');
+  const progSections = Array.from(document.querySelectorAll('.prog-section[id]'));
+  function updateProgNav() {
+    const scrollY = window.scrollY + 140;
+    let current = progSections[0];
+    progSections.forEach(s => { if (s.offsetTop <= scrollY) current = s; });
+    progNavLinks.forEach(l => {
+      l.classList.toggle('active', l.getAttribute('href') === '#' + current.id);
+    });
+  }
+  window.addEventListener('scroll', updateProgNav, { passive: true });
+  updateProgNav();
+
+  /* SIDE NAV */
+  const sideItems = Array.from(document.querySelectorAll('.side-nav-item'));
+  const sideThumb = document.getElementById('side-nav-thumb');
+  const count = sideItems.length;
+  sideItems.forEach((item, i) => { item.style.top = (count===1?50:(i/(count-1))*100)+'%'; });
+  function setThumb(i) { sideThumb.style.top = (count===1?50:(i/(count-1))*100)+'%'; }
+  setThumb(0);
+  const sections = Array.from(document.querySelectorAll('section[id]'));
+  function updateNav() {
+    const mid = window.scrollY + window.innerHeight * 0.4;
+    let best = 0;
+    sections.forEach((s, i) => { if (s.offsetTop <= mid) best = i; });
+    const si = sideItems.findIndex(el => el.dataset.section === sections[best]?.id);
+    if (si !== -1) setThumb(si);
+  }
+  window.addEventListener('scroll', updateNav, { passive: true });
+  updateNav();
+})();
+</script>
+</body>
+</html>
