@@ -13,9 +13,9 @@
         { "key": "club.city", "label": "City / suburb", "type": "text", "required": true },
         { "key": "club.founded", "label": "Year founded", "type": "text", "required": true },
         { "key": "club.ground", "label": "Home ground", "type": "text", "required": true },
-        { "key": "club.instagram", "label": "Instagram URL", "type": "url" },
-        { "key": "club.facebook", "label": "Facebook URL", "type": "url" },
-        { "key": "club.playhq", "label": "PlayHQ registration URL", "type": "url", "required": true }
+        { "key": "club.instagram", "label": "Instagram URL", "type": "text" },
+        { "key": "club.facebook", "label": "Facebook URL", "type": "text" },
+        { "key": "club.playhq", "label": "PlayHQ registration URL", "type": "text", "required": true }
       ]
     },
     {
@@ -23,13 +23,13 @@
       "label": "Homepage",
       "fields": [
         { "key": "homepage.hero_heading", "label": "Hero heading", "type": "text", "required": true },
-        { "key": "homepage.hero_sub", "label": "Hero subheading", "type": "longtext", "required": true },
+        { "key": "homepage.hero_sub", "label": "Hero subheading", "type": "text", "required": true },
         { "key": "homepage.stats_years", "label": "Stat — years of history", "type": "text" },
         { "key": "homepage.stats_players", "label": "Stat — registered players", "type": "text" },
         { "key": "homepage.stats_teams", "label": "Stat — teams", "type": "text" },
         { "key": "homepage.stats_grades", "label": "Stat — competition grades", "type": "text" },
         { "key": "homepage.cta_heading", "label": "CTA banner heading", "type": "text" },
-        { "key": "homepage.cta_sub", "label": "CTA banner body", "type": "longtext" }
+        { "key": "homepage.cta_sub", "label": "CTA banner body", "type": "text" }
       ]
     },
     {
@@ -37,16 +37,16 @@
       "label": "About Page",
       "fields": [
         { "key": "about.heading", "label": "Page heading", "type": "text", "required": true },
-        { "key": "about.intro", "label": "Intro paragraph", "type": "longtext", "required": true },
-        { "key": "about.history", "label": "History paragraph", "type": "longtext" },
-        { "key": "about.value_1_title", "label": "Value 1 — title", "type": "text" },
-        { "key": "about.value_1_desc", "label": "Value 1 — description", "type": "longtext" },
-        { "key": "about.value_2_title", "label": "Value 2 — title", "type": "text" },
-        { "key": "about.value_2_desc", "label": "Value 2 — description", "type": "longtext" },
-        { "key": "about.value_3_title", "label": "Value 3 — title", "type": "text" },
-        { "key": "about.value_3_desc", "label": "Value 3 — description", "type": "longtext" },
-        { "key": "about.value_4_title", "label": "Value 4 — title", "type": "text" },
-        { "key": "about.value_4_desc", "label": "Value 4 — description", "type": "longtext" }
+        { "key": "about.intro", "label": "Intro paragraph", "type": "text", "required": true },
+        { "key": "about.history", "label": "History paragraph", "type": "text" },
+        { "key": "about.value_1_title", "label": "Value 1 title", "type": "text" },
+        { "key": "about.value_1_desc", "label": "Value 1 description", "type": "text" },
+        { "key": "about.value_2_title", "label": "Value 2 title", "type": "text" },
+        { "key": "about.value_2_desc", "label": "Value 2 description", "type": "text" },
+        { "key": "about.value_3_title", "label": "Value 3 title", "type": "text" },
+        { "key": "about.value_3_desc", "label": "Value 3 description", "type": "text" },
+        { "key": "about.value_4_title", "label": "Value 4 title", "type": "text" },
+        { "key": "about.value_4_desc", "label": "Value 4 description", "type": "text" }
       ]
     },
     {
@@ -54,13 +54,13 @@
       "label": "Programs Page",
       "fields": [
         { "key": "programs.heading", "label": "Page heading", "type": "text", "required": true },
-        { "key": "programs.sub", "label": "Page subheading", "type": "longtext" },
+        { "key": "programs.sub", "label": "Page subheading", "type": "text" },
         { "key": "programs.junior_heading", "label": "Junior section heading", "type": "text" },
-        { "key": "programs.junior_body", "label": "Junior section body", "type": "longtext" },
+        { "key": "programs.junior_body", "label": "Junior section body", "type": "text" },
         { "key": "programs.senior_heading", "label": "Senior section heading", "type": "text" },
-        { "key": "programs.senior_body", "label": "Senior section body", "type": "longtext" },
+        { "key": "programs.senior_body", "label": "Senior section body", "type": "text" },
         { "key": "programs.training_heading", "label": "Indoor training heading", "type": "text" },
-        { "key": "programs.training_body", "label": "Indoor training body", "type": "longtext" },
+        { "key": "programs.training_body", "label": "Indoor training body", "type": "text" },
         { "key": "programs.season_start", "label": "Season start month", "type": "text" },
         { "key": "programs.season_end", "label": "Season end month", "type": "text" }
       ]
@@ -70,9 +70,9 @@
       "label": "Teams Page",
       "fields": [
         { "key": "teams.heading", "label": "Page heading", "type": "text", "required": true },
-        { "key": "teams.sub", "label": "Page subheading", "type": "longtext" },
+        { "key": "teams.sub", "label": "Page subheading", "type": "text" },
         { "key": "teams.premier_name", "label": "Premier team name", "type": "text" },
-        { "key": "teams.premier_desc", "label": "Premier team description", "type": "longtext" }
+        { "key": "teams.premier_desc", "label": "Premier team description", "type": "text" }
       ]
     },
     {
@@ -82,9 +82,9 @@
         { "key": "contact.heading", "label": "Page heading", "type": "text", "required": true },
         { "key": "contact.manager_name", "label": "Club manager name", "type": "text", "required": true },
         { "key": "contact.manager_title", "label": "Club manager title", "type": "text", "required": true },
-        { "key": "contact.manager_bio", "label": "Club manager bio", "type": "longtext" },
+        { "key": "contact.manager_bio", "label": "Club manager bio", "type": "text" },
         { "key": "contact.nets_heading", "label": "Indoor nets heading", "type": "text" },
-        { "key": "contact.nets_body", "label": "Indoor nets description", "type": "longtext" }
+        { "key": "contact.nets_body", "label": "Indoor nets description", "type": "text" }
       ]
     },
     {
@@ -92,15 +92,15 @@
       "label": "The Baggy Page",
       "fields": [
         { "key": "baggy.hero_heading", "label": "Hero heading", "type": "text", "required": true },
-        { "key": "baggy.hero_body", "label": "Hero body", "type": "longtext" },
-        { "key": "baggy.quote", "label": "Legacy quote", "type": "longtext", "required": true },
-        { "key": "baggy.what_heading", "label": "What Is It — heading", "type": "text" },
-        { "key": "baggy.what_body_1", "label": "What Is It — paragraph 1", "type": "longtext" },
-        { "key": "baggy.what_body_2", "label": "What Is It — paragraph 2", "type": "longtext" },
-        { "key": "baggy.earned_heading", "label": "How It's Earned — heading", "type": "text" },
-        { "key": "baggy.earned_sub", "label": "How It's Earned — subtext", "type": "longtext" },
+        { "key": "baggy.hero_body", "label": "Hero body", "type": "text" },
+        { "key": "baggy.quote", "label": "Legacy quote", "type": "text", "required": true },
+        { "key": "baggy.what_heading", "label": "What Is It heading", "type": "text" },
+        { "key": "baggy.what_body_1", "label": "What Is It paragraph 1", "type": "text" },
+        { "key": "baggy.what_body_2", "label": "What Is It paragraph 2", "type": "text" },
+        { "key": "baggy.earned_heading", "label": "How Its Earned heading", "type": "text" },
+        { "key": "baggy.earned_sub", "label": "How Its Earned subtext", "type": "text" },
         { "key": "baggy.cta_heading", "label": "CTA heading", "type": "text" },
-        { "key": "baggy.cta_sub", "label": "CTA body", "type": "longtext" }
+        { "key": "baggy.cta_sub", "label": "CTA body", "type": "text" }
       ]
     }
   ]
